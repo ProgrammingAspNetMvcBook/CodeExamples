@@ -14,8 +14,10 @@ namespace CustomExtensions.Controllers
 
         public static ControllerActions Current
         {
-            get { return CurrentActionsThunk.Value; }
+            get { return _current = _current ?? CurrentActionsThunk.Value; }
+            set { _current = value; }
         }
+        private static ControllerActions _current;
 
 
         public ControllerActions() : this(null)
@@ -28,7 +30,7 @@ namespace CustomExtensions.Controllers
         }
 
 
-        private static ControllerActions DiscoverControllerActions()
+        public static ControllerActions DiscoverControllerActions()
         {
             var referencedAssemblies = 
                 BuildManager

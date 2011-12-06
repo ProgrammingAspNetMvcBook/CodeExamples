@@ -1,10 +1,14 @@
-﻿using System.Linq;
+﻿using System.Data.Entity;
 
 namespace Ebuy.DataAccess
 {
-    public interface IEbuyDataContext
+    public class EbuyDataContext : DbContext
     {
-        IQueryable<Product> Products { get; }
-        IQueryable<User> Users { get; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<User> Users { get; set; }
+    }
+
+    public class EbuyDataContextInitializer : DropCreateDatabaseIfModelChanges<EbuyDataContext>
+    {
     }
 }
