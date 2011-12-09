@@ -4,14 +4,11 @@ using System.ComponentModel.DataAnnotations;
 namespace Ebuy
 {
     [MetadataType(typeof(Category.Metadata))]
-    public class Product : Entity
+    public class Category : Entity
     {
         public string Name { get; private set; }
-        public string Description { get; private set; }
-        public string ImageUrl { get; private set; }
 
-        public virtual IEnumerable<Category> Categories { get; private set; }
-        public virtual IEnumerable<Review> Reviews { get; private set; }
+        public virtual IEnumerable<Product> Products { get; private set; }
 
 
         protected override string GenerateKey()
@@ -25,14 +22,8 @@ namespace Ebuy
 
         public class Metadata : EntityMetadata
         {
-            [Required, StringLength(500)]
+            [Required, StringLength(100)]
             public object Name { get; set; }
-
-            [Required]
-            public object Description { get; set; }
-
-            [Required, StringLength(2000)]
-            public object ImageUrl { get; set; }
         }
     }
 }
