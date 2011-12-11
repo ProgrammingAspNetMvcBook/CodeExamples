@@ -6,9 +6,9 @@ namespace Ebuy
     [MetadataType(typeof(Category.Metadata))]
     public class Product : Entity
     {
-        public string Name { get; private set; }
-        public string Description { get; private set; }
-        public string ImageUrl { get; private set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string ImageUrl { get; set; }
 
         public virtual IEnumerable<Category> Categories { get; private set; }
         public virtual IEnumerable<Review> Reviews { get; private set; }

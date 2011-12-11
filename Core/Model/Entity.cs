@@ -5,7 +5,7 @@ namespace Ebuy
     public abstract class Entity
     {
         [Key]
-        internal virtual int Id { get; private set; }
+        public virtual int Id { get; set; }
 
         /// <summary>
         /// A unique (URL-safe) identifier
@@ -22,7 +22,6 @@ namespace Ebuy
         {
             return KeyGenerator.Generate();
         }
-
     }
 
     /// <summary>

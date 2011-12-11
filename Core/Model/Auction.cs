@@ -7,9 +7,9 @@ namespace Ebuy
     [MetadataType(typeof(Auction.Metadata))]
     public class Auction : Entity
     {
-        public DateTime StartTime { get; private set; }
-        public DateTime EndTime { get; private set; }
-        public Bid WinningBid { get; private set; }
+        public bool IsTest { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
 
         public bool IsCompleted
         {
@@ -18,7 +18,7 @@ namespace Ebuy
 
         public virtual IEnumerable<Bid> Bids { get; private set; }
         public virtual Product Product { get; private set; }
-        public virtual User User { get; private set; }
+        public virtual User Owner { get; private set; }
 
 
         public class Metadata : EntityMetadata

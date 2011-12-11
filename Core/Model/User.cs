@@ -6,9 +6,15 @@ namespace Ebuy
     [MetadataType(typeof(User.Metadata))]
     public class User : Entity
     {
-        public string DisplayName { get; private set; }
-        public string EmailAddress { get; private set; }
-        public string FullName { get; private set; }
+        public string DisplayName
+        {
+            get { return _displayName ?? FullName; }
+            set { _displayName = value; }
+        }
+        private string _displayName;
+
+        public string EmailAddress { get; set; }
+        public string FullName { get; set; }
 
         public virtual IEnumerable<Bid> Bids { get; private set; }
         public virtual IEnumerable<Payment> Payments { get; private set; }
@@ -26,7 +32,7 @@ namespace Ebuy
 
         public class Metadata : EntityMetadata
         {
-            [Required, StringLength(50, MinimumLength = 3)]
+            [StringLength(50)]
             public object DisplayName { get; set; }
 
             [Required, StringLength(100, MinimumLength = 5)]
