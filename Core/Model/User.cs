@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using CustomExtensions.DataAnnotations;
 
 namespace Ebuy
 {
@@ -13,7 +14,9 @@ namespace Ebuy
         }
         private string _displayName;
 
+        [Unique]
         public string EmailAddress { get; set; }
+
         public string FullName { get; set; }
 
         public virtual IEnumerable<Bid> Bids { get; private set; }
@@ -35,7 +38,7 @@ namespace Ebuy
             [StringLength(50)]
             public object DisplayName { get; set; }
 
-            [Required, StringLength(100, MinimumLength = 5)]
+            [StringLength(100, MinimumLength = 5)]
             public object EmailAddress { get; set; }
 
             [Required, StringLength(100, MinimumLength = 3)]

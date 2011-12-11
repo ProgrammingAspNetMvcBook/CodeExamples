@@ -61,7 +61,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\KeyGenerator.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\CustomExtensions\CustomExtensions.csproj">
+      <Project>{6F8D99D7-A303-4BA7-9E29-7CCCD510FE78}</Project>
+      <Name>CustomExtensions</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
