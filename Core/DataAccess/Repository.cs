@@ -10,7 +10,7 @@ namespace Ebuy.DataAccess
     public class Repository<TModel> : IRepository<TModel> 
         where TModel : Entity
     {
-        private readonly EbuyDataContext _context;
+        private readonly DataContext _context;
         private readonly bool _isSharedContext;
 
         protected DbSet<TModel> DataSource
@@ -25,11 +25,11 @@ namespace Ebuy.DataAccess
 
 
         public Repository() 
-            : this(new EbuyDataContext(), false)
+            : this(new DataContext(), false)
         {
         }
 
-        public Repository(EbuyDataContext context, bool isSharedContext = true)
+        public Repository(DataContext context, bool isSharedContext = true)
         {
             Contract.Requires(context != null);
 

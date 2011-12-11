@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using CustomExtensions.DataAnnotations;
 
 namespace Ebuy.DataAccess
 {
-    public class EbuyDataContext : DbContext
+    public class DataContext : DbContext
     {
         public DbSet<Auction> Auctions { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -13,9 +12,11 @@ namespace Ebuy.DataAccess
         public DbSet<User> Users { get; set; }
 
 
-        public class Initializer : DropCreateDatabaseAlways<EbuyDataContext> //DropCreateDatabaseIfModelChanges<EbuyDataContext>
+        public class Initializer
+            //: DropCreateDatabaseIfModelChanges<EbuyDataContext>
+            : DropCreateDatabaseAlways<DataContext> 
         {
-            protected override void Seed(EbuyDataContext context)
+            protected override void Seed(DataContext context)
             {
                 new UniqueConstraintApplier().ApplyUniqueConstraints(context);
 

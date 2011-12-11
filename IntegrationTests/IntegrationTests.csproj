@@ -67,7 +67,10 @@
   <ItemGroup>
     <Compile Include="App_Start\EntityFramework.SqlServerCompact.cs" />
     <Compile Include="AssertException.cs" />
-    <Compile Include="Core\DataAccess\RepositoryTests.cs" />
+    <Compile Include="Core\DataAccess\AuctionRepositoryTests.cs" />
+    <Compile Include="Core\DataAccess\ProductRepositoryTests.cs" />
+    <Compile Include="Core\DataAccess\RepositoryTestFixture.cs" />
+    <Compile Include="Core\DataAccess\UserRepositoryTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
