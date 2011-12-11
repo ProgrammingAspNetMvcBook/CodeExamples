@@ -20,15 +20,6 @@ namespace IntegrationTests.Core.DataAccess
             Assert.AreEqual(EntityState.Unchanged, DataContext.Entry(entity).State);
         }
 
-        protected void AssertCanUpdateEntity()
-        {
-            var entity = CreateValidEntity();
-
-            Repository.Save(entity);
-
-            DataContext.Entry(entity).
-        }
-
         [TestInitialize]
         public void TestInitialize()
         {
