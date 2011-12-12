@@ -54,6 +54,7 @@
     <Compile Include="Model\Currency.cs" />
     <Compile Include="Model\Entity.cs" />
     <Compile Include="Model\EntityKeyGenerationException.cs" />
+    <Compile Include="Model\KeyedEntity.cs" />
     <Compile Include="Model\Payment.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Review.cs" />

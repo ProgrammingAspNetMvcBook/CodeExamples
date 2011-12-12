@@ -21,4 +21,11 @@ namespace Ebuy.DataAccess
         void Save(TModel instance);
         void Save(IEnumerable<TModel> instances);
     }
+
+    public interface IKeyedRepository<TModel> : IRepository<TModel>
+        where TModel : IKeyedEntity
+    {
+        void DeleteByKey(string key);
+        TModel FindByKey(string key);
+    }
 }

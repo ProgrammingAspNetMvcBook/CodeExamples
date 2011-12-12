@@ -5,7 +5,7 @@ using CustomExtensions.DataAnnotations;
 namespace Ebuy
 {
     [MetadataType(typeof(User.Metadata))]
-    public class User : Entity
+    public class User : KeyedEntity
     {
         public string DisplayName
         {
@@ -19,10 +19,10 @@ namespace Ebuy
 
         public string FullName { get; set; }
 
-        public virtual IEnumerable<Bid> Bids { get; set; }
-        public virtual IEnumerable<Payment> Payments { get; set; }
-        public virtual IEnumerable<Review> Reviews { get; set; }
-        public virtual IEnumerable<Auction> WatchedAuctions { get; set; }
+        public virtual ICollection<Bid> Bids { get; set; }
+        public virtual ICollection<Payment> Payments { get; set; }
+        public virtual ICollection<Review> Reviews { get; set; }
+        public virtual ICollection<Auction> WatchedAuctions { get; set; }
 
         protected override string GenerateKey()
         {

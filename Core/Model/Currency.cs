@@ -1,5 +1,8 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace Ebuy
 {
+    [ComplexType]
     public class Currency
     {
         public string Code { get; set; }

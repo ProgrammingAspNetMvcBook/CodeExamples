@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace IntegrationTests.Core.DataAccess
 {
     public abstract class RepositoryTestFixture<T> : DataContextTestFixture<T>
-        where T : Entity
+        where T : Entity, IKeyedEntity
     {
         protected Repository<T> Repository { get; set; }
 

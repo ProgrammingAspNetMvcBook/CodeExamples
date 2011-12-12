@@ -8,8 +8,8 @@ using System.Linq.Expressions;
 
 namespace Ebuy.DataAccess
 {
-    public class Repository<TModel> : IRepository<TModel> 
-        where TModel : class, IEntity
+    public class Repository<TModel> : IKeyedRepository<TModel>
+        where TModel : class, IKeyedEntity
     {
         private readonly DataContext _context;
         private readonly bool _isSharedContext;
@@ -55,6 +55,14 @@ namespace Ebuy.DataAccess
             Delete(item);
         }
 
+        public void DeleteByKey(string key)
+        {
+            Contract.Requires(!string.IsNullOrWhiteSpace(key));
+
+            var entity = FindByKey(key);
+            Delete(entity);
+        }
+
         public void Delete(TModel instance)
         {
             Contract.Requires(instance != null);
@@ -78,12 +86,13 @@ namespace Ebuy.DataAccess
             return Find(x => x.Id == id);
         }
 
-/*
         public TModel FindByKey(string key)
         {
-            return Find(x => x.Key.Equals(key, StringComparison.OrdinalIgnoreCase));
+            Contract.Requires(!string.IsNullOrWhiteSpace(key));
+
+            var entity = Find(x => x.Key == key);
+            return entity;
         }
-*/
 
         public TModel Find(Expression<Func<TModel, bool>> predicate)
         {

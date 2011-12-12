@@ -5,6 +5,8 @@ namespace Ebuy
 {
     public class Bid
     {
+        public Guid Id { get; set; }
+
         public Currency Price { get; set; }
         public DateTime Timestamp { get; set; }
 
@@ -15,7 +17,6 @@ namespace Ebuy
         }
 */
 
-        public virtual int AuctionId { get; set; }
         public virtual Auction Auction { get; set; }
         public virtual User User { get; set; }
 
