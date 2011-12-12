@@ -19,10 +19,10 @@ namespace Ebuy
 
         public string FullName { get; set; }
 
-        public virtual IEnumerable<Bid> Bids { get; private set; }
-        public virtual IEnumerable<Payment> Payments { get; private set; }
-        public virtual IEnumerable<Review> Reviews { get; private set; }
-        public virtual IEnumerable<Auction> WatchedAuctions { get; private set; }
+        public virtual IEnumerable<Bid> Bids { get; set; }
+        public virtual IEnumerable<Payment> Payments { get; set; }
+        public virtual IEnumerable<Review> Reviews { get; set; }
+        public virtual IEnumerable<Auction> WatchedAuctions { get; set; }
 
         protected override string GenerateKey()
         {
@@ -33,7 +33,7 @@ namespace Ebuy
             return KeyGenerator.Generate(DisplayName);
         }
 
-        public class Metadata : EntityMetadata
+        public class Metadata
         {
             [StringLength(50)]
             public object DisplayName { get; set; }

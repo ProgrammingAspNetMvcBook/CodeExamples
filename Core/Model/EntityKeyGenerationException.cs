@@ -4,7 +4,7 @@ namespace Ebuy
 {
     public class EntityKeyGenerationException : Exception
     {
-        public Type EntityType { get; private set; }
+        public Type EntityType { get; set; }
 
         public EntityKeyGenerationException(Type entityType, string message)
             : base(message)

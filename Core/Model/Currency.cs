@@ -2,7 +2,7 @@ namespace Ebuy
 {
     public class Currency
     {
-        public string Code { get; private set; }
-        public decimal Amount { get; private set; }
+        public string Code { get; set; }
+        public decimal Amount { get; set; }
     }
 }

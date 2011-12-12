@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 namespace Ebuy.DataAccess
 {
     public class Repository<TModel> : IRepository<TModel> 
-        where TModel : Entity
+        where TModel : class, IEntity
     {
         private readonly DataContext _context;
         private readonly bool _isSharedContext;
@@ -48,36 +48,54 @@ namespace Ebuy.DataAccess
             _context.Dispose();
         }
 
-        public void Delete(string key)
+        public void DeleteById(long id)
         {
-            var item = Find(key);
+            var item = FindById(id);
             Delete(item);
         }
 
         public void Delete(TModel instance)
         {
+            Contract.Requires(instance != null);
+
             if (instance != null)
                 DataSource.Remove(instance);
         }
 
         public void Delete(Expression<Func<TModel, bool>> predicate)
         {
-            var items = Find(predicate);
+            Contract.Requires(predicate != null);
+
+            var entity = Find(predicate);
+            Delete(entity);
         }
 
-        public TModel Find(string key)
+        public TModel FindById(long id)
+        {
+            Contract.Requires(id > 0);
+
+            return Find(x => x.Id == id);
+        }
+
+/*
+        public TModel FindByKey(string key)
         {
             return Find(x => x.Key.Equals(key, StringComparison.OrdinalIgnoreCase));
         }
+*/
 
         public TModel Find(Expression<Func<TModel, bool>> predicate)
         {
+            Contract.Requires(predicate != null);
+
             var instance = DataSource.SingleOrDefault(predicate);
             return instance;
         }
 
         public IQueryable<TModel> Query(Expression<Func<TModel, bool>> predicate)
         {
+            Contract.Requires(predicate != null);
+
             IQueryable<TModel> items = DataSource;
 
             if (predicate != null)
@@ -88,6 +106,7 @@ namespace Ebuy.DataAccess
 
         public IQueryable<TModel> Query(Expression<Func<TModel, bool>> predicate, out int count, int pageIndex = 0, int pageSize = 25)
         {
+            Contract.Requires(predicate != null);
             Contract.Requires(pageIndex >= 0);
             Contract.Requires(pageSize >= 0);
 
@@ -111,7 +130,7 @@ namespace Ebuy.DataAccess
 
             var entry = _context.Entry(instance);
 
-            if(instance.Id == 0)
+            if(instance.Id == default(long))
                 entry.State = EntityState.Added;
             else
                 entry.State = EntityState.Modified;

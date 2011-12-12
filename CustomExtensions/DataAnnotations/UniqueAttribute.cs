@@ -9,7 +9,7 @@ namespace CustomExtensions.DataAnnotations
 {
     public class UniqueConstraintApplier
     {
-        private const string UniqueConstraintQuery = "ALTER TABLE [{0}s] ADD CONSTRAINT [{0}s_{1}_unique] UNIQUE ([{1}])";
+        private const string UniqueConstraintQuery = "ALTER TABLE [{0}] ADD CONSTRAINT [{0}_{1}_unique] UNIQUE ([{1}])";
 
         public void ApplyUniqueConstraints(DbContext context)
         {
@@ -36,10 +36,21 @@ namespace CustomExtensions.DataAnnotations
             {
                 foreach (var property in model.Properties)
                 {
-                    string query = string.Format(UniqueConstraintQuery, model.Model.Name, property);
+                    string tableName = GetTableName(model.Model);
+                    string query = string.Format(UniqueConstraintQuery, tableName, property);
                     context.Database.ExecuteSqlCommand(query);
                 }
             }
+        }
+
+        private string GetTableName(Type model)
+        {
+            var modelName = model.Name;
+
+            if (modelName.EndsWith("y"))
+                modelName = modelName.Substring(0, modelName.Length - 1) + "ie";
+
+            return modelName + "s";
         }
     }
 

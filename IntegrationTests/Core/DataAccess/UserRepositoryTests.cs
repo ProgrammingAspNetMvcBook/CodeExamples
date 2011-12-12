@@ -16,30 +16,16 @@ namespace IntegrationTests.Core.DataAccess
         [TestMethod]
         public void ShouldNotAllowDuplicateEmailAddresses()
         {
-            var user1 = CreateValidEntity();
+            var user1 = CreateNewEntity();
             Repository.Save(user1);
 
-            var user2 = CreateValidEntity();
+            var user2 = CreateNewEntity();
             user2.EmailAddress = user1.EmailAddress;
 
             AssertException.Throws<DbUpdateException>(() =>
-                                                      Repository.Save(user2),
-                                                      "Expected unique constraint exception but it did not get thrown"
+                    Repository.Save(user2),
+                    "Expected unique constraint exception but it did not get thrown"
                 );
-        }
-
-
-        private volatile static int _lastUserId = 0;
-
-        protected override User CreateValidEntity()
-        {
-            var userId = _lastUserId++;
-
-            return new User()
-                       {
-                           EmailAddress = string.Format("user_{0}@email.com", userId),
-                           FullName = "Test User #" + userId,
-                       };
         }
     }
 }

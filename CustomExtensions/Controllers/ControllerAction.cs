@@ -7,15 +7,15 @@ namespace CustomExtensions.Controllers
 {
     public class ControllerAction
     {
-        public MethodInfo Action { get; private set; }
+        public MethodInfo Action { get; set; }
 
-        public IEnumerable<Attribute> ActionAttributes { get; private set; }
+        public IEnumerable<Attribute> ActionAttributes { get; set; }
         
-        public Type Controller { get; private set; }
+        public Type Controller { get; set; }
         
-        public IEnumerable<Attribute> ControllerAttributes { get; private set; }
+        public IEnumerable<Attribute> ControllerAttributes { get; set; }
         
-        public string ControllerShortName { get; private set; }
+        public string ControllerShortName { get; set; }
 
         public IEnumerable<Attribute> Attributes
         {

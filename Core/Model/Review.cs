@@ -5,14 +5,14 @@ namespace Ebuy
     [MetadataType(typeof(Review.Metadata))]
     public class Review : Entity
     {
-        public string Description { get; private set; }
-        public int Rating { get; private set; }
+        public string Description { get; set; }
+        public int Rating { get; set; }
 
-        public virtual Product Product { get; private set; }
-        public virtual User User { get; private set; }
+        public virtual Product Product { get; set; }
+        public virtual User User { get; set; }
 
 
-        public class Metadata : EntityMetadata
+        public class Metadata
         {
             [StringLength(1000)]
             public object Description { get; set; }

@@ -6,9 +6,9 @@ namespace Ebuy
     [MetadataType(typeof(Category.Metadata))]
     public class Category : Entity
     {
-        public string Name { get; private set; }
+        public string Name { get; set; }
 
-        public virtual IEnumerable<Product> Products { get; private set; }
+        public virtual IEnumerable<Product> Products { get; set; }
 
 
         protected override string GenerateKey()
@@ -20,7 +20,7 @@ namespace Ebuy
             return KeyGenerator.Generate(Name);
         }
 
-        public class Metadata : EntityMetadata
+        public class Metadata
         {
             [Required, StringLength(100)]
             public object Name { get; set; }

@@ -1,19 +1,25 @@
 using System.ComponentModel.DataAnnotations;
+using CustomExtensions.DataAnnotations;
 
 namespace Ebuy
 {
-    public abstract class Entity
+    public interface IEntity
     {
-        [Key]
-        public virtual int Id { get; set; }
+        long Id { get; }
+    }
+
+    public abstract class Entity : IEntity
+    {
+        public virtual long Id { get; set; }
 
         /// <summary>
         /// A unique (URL-safe) identifier
         /// </summary>
+        [Unique, StringLength(50)]
         public virtual string Key
         {
             get { return _key = _key ?? GenerateKey(); }
-            private set { _key = value; }
+            set { _key = value; }
         }
         private string _key;
 
@@ -22,15 +28,5 @@ namespace Ebuy
         {
             return KeyGenerator.Generate();
         }
-    }
-
-    /// <summary>
-    /// Base class for Entity Metadata classes that
-    /// holds the validation logic for each entity type
-    /// </summary>
-    public abstract class EntityMetadata
-    {
-        [Required]
-        public object Key { get; set; }
     }
 }

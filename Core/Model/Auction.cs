@@ -7,7 +7,6 @@ namespace Ebuy
     [MetadataType(typeof(Auction.Metadata))]
     public class Auction : Entity
     {
-        public bool IsTest { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
 
@@ -16,18 +15,24 @@ namespace Ebuy
             get { return EndTime <= DateTime.Now; }
         }
 
-        public virtual IEnumerable<Bid> Bids { get; private set; }
-        public virtual Product Product { get; private set; }
-        public virtual User Owner { get; private set; }
+        public virtual IEnumerable<Bid> Bids { get; set; }
+        public virtual Product Product { get; set; }
+        public virtual User Owner { get; set; }
 
 
-        public class Metadata : EntityMetadata
+        public class Metadata
         {
             [Required]
             public object StartTime { get; set; }
 
             [Required]
             public object EndTime { get; set; }
+
+            [Required]
+            public object Product { get; set; }
+
+            [Required]
+            public object Owner { get; set; }
         }
     }
 }
