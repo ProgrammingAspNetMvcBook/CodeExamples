@@ -4,23 +4,23 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IntegrationTests.Core.DataAccess
 {
-    public partial class RepositoryTestFixture<T> : DataContextTestFixture<T>
+    public abstract class RepositoryTestFixture<T> : DataContextTestFixture<T>
         where T : Entity
     {
         protected Repository<T> Repository { get; set; }
-
-        protected void AssertCanSaveNewEntity()
-        {
-            var entity = CreateNewEntity();
-            Repository.Save(entity);
-            AssertEntitySaved(entity.Id);
-        }
 
         [TestInitialize]
         public override void TestInitialize()
         {
             base.TestInitialize();
             Repository = new Repository<T>(DataContext, false);
+        }
+
+        protected void AssertCanSaveNewEntity()
+        {
+            var entity = CreateNewEntity();
+            Repository.Save(entity);
+            AssertSavedEntityExists(entity);
         }
 
         protected virtual void AssertCanFindById()

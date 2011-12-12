@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -18,5 +19,6 @@ namespace Ebuy.DataAccess
         IQueryable<TModel> Query(Expression<Func<TModel, bool>> predicate, out int count, int pageIndex = 0, int pageSize = 25);
 
         void Save(TModel instance);
+        void Save(IEnumerable<TModel> instances);
     }
 }

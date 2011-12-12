@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Diagnostics.Contracts;
@@ -137,6 +138,16 @@ namespace Ebuy.DataAccess
 
             if (_isSharedContext == false)
                 _context.SaveChanges();
+        }
+
+        public void Save(IEnumerable<TModel> instances)
+        {
+            Contract.Requires(instances != null);
+
+            foreach (var instance in instances)
+            {
+                Save(instance);
+            }
         }
     }
 }

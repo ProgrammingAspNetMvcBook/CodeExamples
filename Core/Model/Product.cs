@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using CustomExtensions.DataAnnotations;
 
 namespace Ebuy
 {
@@ -10,9 +11,12 @@ namespace Ebuy
         public string Description { get; set; }
         public string ImageUrl { get; set; }
 
-        public virtual IEnumerable<Auction> Auctions { get; set; }
-        public virtual IEnumerable<Category> Categories { get; set; }
-        public virtual IEnumerable<Review> Reviews { get; set; }
+        public virtual ICollection<Auction> Auctions { get; set; }
+        
+        [IsNotEmpty]
+        public virtual ICollection<Category> Categories { get; set; }
+
+        public virtual ICollection<Review> Reviews { get; set; }
 
 
         protected override string GenerateKey()
@@ -26,7 +30,7 @@ namespace Ebuy
 
         public class Metadata
         {
-            [Required]
+            [Required, IsNotEmpty]
             public object Categories { get; set; }
 
             [Required]

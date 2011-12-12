@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using Ebuy;
 using Ebuy.DataAccess;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -14,26 +16,36 @@ namespace IntegrationTests.Core.DataAccess
             DataContext = new DataContext();
         }
 
-
-        protected void AssertEntitySaved(long id, Func<T, bool> predicate = null)
+        protected void ImmediatelyExecute(Action<DataContext> action)
         {
-            AssertEntitySaved<T>(id, predicate);
+            using (var context = new DataContext())
+                action(context);
         }
 
-        protected void AssertEntitySaved<TEntity>(long id, Func<TEntity, bool> predicate = null)
+
+        protected void AssertSavedEntityExists<TEntity>(TEntity entity)
+            where TEntity : class, IEntity
+        {
+            AssertSavedEntityExists<TEntity>(entity.Id);
+        }
+
+        protected void AssertSavedEntityExists<TEntity>(long id)
             where TEntity : class
         {
             Assert.AreNotEqual(default(long), id);
 
-            using (var context = new DataContext())
-            {
+            ImmediatelyExecute(context => {
                 var saved = context.Set<TEntity>().Find(id);
-
                 Assert.IsNotNull(saved);
+            });
+        }
 
-                if (predicate != null)
-                    Assert.IsTrue(predicate(saved));
-            }
+
+        protected void AssertNoSavedEntitiesMatching<TEntity>(Func<TEntity, bool> predicate) 
+            where TEntity : class
+        {
+            ImmediatelyExecute(context => 
+                Assert.IsFalse(context.Set<TEntity>().Any(predicate)));
         }
 
 
@@ -46,11 +58,10 @@ namespace IntegrationTests.Core.DataAccess
         {
             var entity = TestDataGenerator.Current.GenerateValid<T>();
 
-            using (var context = new DataContext())
-            {
+            ImmediatelyExecute(context => {
                 context.Set<T>().Add(entity);
                 context.SaveChanges();
-            }
+            });
 
             return entity;
         }

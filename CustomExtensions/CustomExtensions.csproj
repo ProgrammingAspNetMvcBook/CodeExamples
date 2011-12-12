@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ControllerAction.cs" />
     <Compile Include="Controllers\ControllerActions.cs" />
+    <Compile Include="DataAnnotations\IsNotEmptyAttribute.cs" />
     <Compile Include="DataAnnotations\UniqueAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\RouteAttribute.cs" />
