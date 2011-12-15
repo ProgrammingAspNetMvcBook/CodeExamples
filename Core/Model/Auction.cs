@@ -9,6 +9,7 @@ namespace Ebuy
     {
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
+        public Currency StartingPrice { get; set; }
 
         public virtual Bid WinningBid { get; set; }
 
@@ -25,6 +26,9 @@ namespace Ebuy
 
         public class Metadata
         {
+            [Required]
+            public object StartingPrice { get; set; }
+
             [Required]
             public object StartTime { get; set; }
 

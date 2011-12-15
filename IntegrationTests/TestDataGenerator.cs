@@ -5,7 +5,7 @@ namespace IntegrationTests
 {
     public class TestDataGenerator
     {
-        private volatile static int _lastRandomNumber = 0;
+        private volatile static int _lastRandomNumber;
 
         public static TestDataGenerator Current
         {
@@ -37,6 +37,7 @@ namespace IntegrationTests
         {
             return new Auction()
                        {
+                           StartingPrice = "$1",
                            StartTime = DateTime.Now,
                            EndTime = DateTime.Now.AddDays(7),
                            Owner = GenerateValid<User>(),

@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using CustomExtensions.DataAnnotations;
 
 namespace Ebuy
@@ -10,6 +12,12 @@ namespace Ebuy
         public string Name { get; set; }
         public string Description { get; set; }
         public string ImageUrl { get; set; }
+        
+        public double Rating
+        {
+            get { return _rating.Value; }
+        }
+        private readonly Lazy<double> _rating;
 
         public virtual ICollection<Auction> Auctions { get; set; }
         
@@ -18,6 +26,10 @@ namespace Ebuy
 
         public virtual ICollection<Review> Reviews { get; set; }
 
+        public Product()
+        {
+            _rating = new Lazy<double>(() => Reviews.Average(x => x.Rating));
+        }
 
         protected override string GenerateKey()
         {

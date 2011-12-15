@@ -6,7 +6,7 @@ namespace Ebuy
     public class Review : KeyedEntity
     {
         public string Description { get; set; }
-        public int Rating { get; set; }
+        public double Rating { get; set; }
 
         public virtual Product Product { get; set; }
         public virtual User User { get; set; }

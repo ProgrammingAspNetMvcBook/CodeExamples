@@ -5,17 +5,20 @@ namespace Ebuy
 {
     public class Bid
     {
-        public Guid Id { get; set; }
+        public virtual Guid Id
+        {
+            get { return _id ?? Guid.NewGuid(); }
+            set { _id = value; }
+        }
+        private Guid? _id;
 
         public Currency Price { get; set; }
         public DateTime Timestamp { get; set; }
 
-/*
         public bool IsWinningBid
         {
             get { return this == Auction.WinningBid; }
         }
-*/
 
         public virtual Auction Auction { get; set; }
         public virtual User User { get; set; }
