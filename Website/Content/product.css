@@ -1,0 +1,54 @@
+﻿
+ul.list
+{
+    width: 99%;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+li.listitem
+{
+    overflow: hidden;
+    width: 100%;
+    border-bottom: solid 1px #dad6d3;
+    padding: 6px 0 6px 0;
+    background-color: white;
+}
+
+    li.listitem a
+    {
+        text-decoration: none;
+    }
+
+    li.listitem div.thumbnail
+    {
+        float: left;
+        width: 17%;
+        vertical-align: top;
+    }
+
+    li.listitem div.data
+    {
+        float: right;
+        width: 83%;
+        vertical-align: top;
+    }
+
+        li.listitem div.data a
+        {
+            color: #004B91;
+        }
+
+
+        li.listitem div.data p.desc
+        {
+            font-size: 77%;
+            margin: 0;
+            padding: 0 0 6px 0;
+        }
+
+    li.listitem div.thumbnail img
+    {
+        border: none;
+    }

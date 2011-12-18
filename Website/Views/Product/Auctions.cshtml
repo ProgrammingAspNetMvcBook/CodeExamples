@@ -1,23 +1,27 @@
-﻿@{
+﻿@model Website.Models.AuctionViewModel
+
+        <link href="@Url.Content("~/Content/product.css")" rel="stylesheet" type="text/css" />
+
+@{
     ViewBag.Title = "Auctions";
 }
 <h2>
     Auctions</h2>
 <div class="container">
     <header>
-<h3>Recent Auctions</h3>
-<hr />
-</header>
-    <ul id="newAuctions">
-        <div class="container">
-            <ul id="newProducts">
-                @foreach (var product in Model.Products)
-                {
-                    <li>
-                        @Html.RenderPartial("_Product", product)
-                    </li>
-                }
-            </ul>
+        <h3>Recent Auctions</h3>
+        <hr />
+    </header>
+    <div class="container clear-fix">
+        <ul id="newAuctions" class="list">
+            @foreach (var auction in Model.Auctions)
+            {
+                <li class="listitem">
+                    @{
+                        Html.RenderPartial("_Product", auction.Product);
+                    }
+                </li>
+            }
+        </ul>
         </div>
-    </ul>
 </div>

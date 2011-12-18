@@ -47,7 +47,7 @@ nav, section {
 }
 
 .clear-fix:after {
-    content: ".";
+    content: " ";
     clear: both;
     display: block;
     height: 0;

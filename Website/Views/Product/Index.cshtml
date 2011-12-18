@@ -1,0 +1,161 @@
+﻿        <link href="@Url.Content("~/Content/product.css")" rel="stylesheet" type="text/css" />
+
+
+@{
+    ViewBag.Title = Model.Title;
+}
+<div class="prodpage-top">
+    <div class="prod-title">
+        <h1>
+            Nevada SOG Countertop Knife Sharpener</h1>
+    </div>
+    <div class="prod-image">
+            <a href="javascript:enlarge(gMultiViewImageName, 'vximg/')">
+                <img border="0" src=""
+                    id="image_enlarge" name="bigPhoto" alt="MAIN PRODUCT IMAGE">
+            </a>
+        </div>        
+    </div>
+    <div class="prod-bidtable">
+        <!--bidtable-mid-->
+        <div class="bidtable-mid">
+            <div class="bidtable-title-all">
+                <span id="numWinners">0</span>Winning Bidder(s)</div>
+            <div class="bidtable-title-all2">
+                <span id="numBids">0</span>Bids Total</div>
+            <div style="display: none;" class="bidtable-losers" id="UbuyitListHead">
+                <span class="bought-list-title">Already Bought It</span>s
+                <div id="UbuyitList">
+                    <ul class="nonwinning-list">
+                    </ul>
+                </div>
+            </div>
+            <div class="bidtable-thelist">
+                <div style="display: none;" class="bidtable-winners" id="BidListWinnersHead">
+                    <span class="win-list-title">Current Winning Bidder(s)</span>
+                    <div id="BidListWinners">
+                        <ul>
+                        </ul>
+                    </div>
+                </div>
+                <div style="display: none;" class="bidtable-losers" id="BidListLosersHead">
+                    <span class="lose-list-title">Top Losing Bid(s)</span>
+                    <div id="BidListLosers">
+                        <ul class="nonwinning-list">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!--bidtable-mid-->
+            <!--bidtable-additionalinfo-->
+            <div style="display: none;" class="bidtable-additionalinfo">
+                <dl style="display: none;">
+                    <dt>
+                        <img style="margin: -1px 5px 0 0;" alt="Help" src="/img/v5/helpiconpp.gif"><a onclick="document.getElementById('conditionpopup').style.display='block';document.getElementById('conditionpopupfade').style.display='block'" href="javascript:void(0)">Condition:</a></dt>
+                    <dd>
+                        New
+                        <!--<a href=""><img src="http://ubid.com/img/icon.gif" alt="What's this?" /></a>-->
+                    </dd>
+                    <dt>Bid Increment:</dt>
+                    <dd>
+                        $5.00</dd>
+                    <dt>Reserve Price:</dt>
+                    <dd class="no-reserve">
+                        No Reserve!</dd>
+                    <dt>Starting Bid:</dt>
+                    <dd>
+                        $20.00</dd>
+                    <dt>Starting Stock:</dt>
+                    <dd>
+                        10 units
+                    </dd>
+                </dl>
+            </div>
+            <!--bidtable-additionalinfo-->
+        </div>
+    </div>
+    <div class="prod-bidding" id="ctl00_ContentPlaceHolder1_prodBiddingSection">
+        <div class="prod-time" id="ctl00_ContentPlaceHolder1_prodBiddingSectionTime">
+            <span class="countdownwrap">
+                <div id="countdown">
+                    01:05:53</div>
+            </span><span class="prod-small">Auction Close Time:&nbsp; <span id="ctl00_ContentPlaceHolder1_planCloseTimeFormatted">
+                Dec 16, 2011 3:15PM PDT</span> </span>
+            <div class="productpagedivider">
+            </div>
+        </div>
+        <div class="prod-bidbox" id="ctl00_ContentPlaceHolder1_prodBiddingSectionBox">
+            <div class="prod-qty">
+                I want:<span id="qtyDropDown"><select class="prod-select-qty" id="qtyDDList" name="qtyDDList"><option
+                    value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                </select><span class="prod-inStock">10 in Stock!</span></span></div>
+            <div class="productpagedivider">
+            </div>
+            <div class="prod-buy" id="ctl00_ContentPlaceHolder1_ubuyitsection">
+                <input type="image" style="border-width: 0px;" alt="Buy using uBid's Checkout" src="/img/v5/bidbutton0811buy.png"
+                    class="prodbuybutton" id="ctl00_ContentPlaceHolder1_BuyItNow" name="ctl00$ContentPlaceHolder1$BuyItNow">
+                <span id="ctl00_ContentPlaceHolder1_uBuyItPrice">$26.00</span>/ea.
+                <br clear="all">
+                <div class="productpagedivider">
+                </div>
+            </div>
+            <div class="prod-price" id="ctl00_ContentPlaceHolder1_prodBiddingSectionPrice">
+                To Bid Enter $<span id="bidToWinPrice1">20</span> or more.
+            </div>
+            <div id="ctl00_ContentPlaceHolder1_UpdatePanel1">
+                <!--Bid:-->
+                <input type="image" style="border-width: 0px;" alt="Bid" src="/img/v5/bidbutton0811min.png"
+                    class="prod-bidButton" id="ctl00_ContentPlaceHolder1_PlaceBid" name="ctl00$ContentPlaceHolder1$PlaceBid">
+                <div class="priceboxinput">
+                    $<input type="text" onkeydown="javascript:if((event.which &amp;&amp; event.which == 13) || (event.keyCode &amp;&amp; event.keyCode ==13)){document.getElementById('ctl00_ContentPlaceHolder1_PlaceBid').click();return false;}else return true;"
+                        class="prod-bid-input" id="ctl00_ContentPlaceHolder1_BidPrice" name="ctl00$ContentPlaceHolder1$BidPrice">.00/ea.
+                </div>
+                <div class="bidmenuitems">
+                    <!--Bid:-->
+                    <strong>Starting Bid:&nbsp;$20.00<br>
+                        Bid Increment:&nbsp;$5.00<br>
+                        Reserve Price: No Reserve! </strong>
+                    <div style="display: none;" id="ctl00_ContentPlaceHolder1_UpdateProgressProdPage">
+                        <img alt="Loading" style="position: relative; top: -72px; left: 20px;" src="/img/waiting.gif">
+                    </div>
+                    <div class="productpagedivider">
+                    </div>
+                    <div class="bidmenuitems">
+                        Product Condition:&nbsp;<a onclick="document.getElementById('conditionpopup').style.display='block';document.getElementById('conditionpopupfade').style.display='block'"
+                            href="javascript:void(0)">New</a><br>
+                        Shipping:&nbsp;<span id="ctl00_ContentPlaceHolder1_ShippingDD"><a onclick="javascript:ShippingpopUp('/App/ShipEstimator/getshiprates.aspx?zip=&amp;aid=904834795')"
+                            href="#">Calculate Cost</a></span>
+                    </div>
+                    <div class="productpagedivider">
+                    </div>
+                    <div class="bidmenuitems">
+                        <a tabindex="0" href="javascript:st_affiliate.create({});st_affiliate.show()">
+                            <img style="float: right; margin: 0 0 1px 20px;" alt="Square Trade" src="/img/v5/squaretrade0911d.png"></a>
+                        <h2>
+                            The Best Warranty at the Best Price</h2>
+                        <p>
+                            Protect your <span style="color: #666; text-transform: uppercase; font-weight: bold;
+                                line-height: 95%;">Nevada SOG Countertop Knife Sharpener</span> with a extended
+                            warranty from Squaretrade.</p>
+                    </div>
+                    <div class="productpagedivider">
+                    </div>
+                    <div class="bidmenuitems">
+                        <a href="#fb-root">
+                            <img class="prod-bidButton" src="/img/v5/commentbutton0911.png"></a> Discuss
+                        this auction using your Facebook login.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
