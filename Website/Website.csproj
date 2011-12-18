@@ -110,10 +110,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-<<<<<<< HEAD
     <Compile Include="Controllers\ProductController.cs" />
-=======
->>>>>>> 43153960349c867fde4cf5ad88802511d4449b55
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -122,16 +119,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
     <Content Include="Content\images\kinect.jpg" />
     <Content Include="Content\images\ps3.jpg" />
     <Content Include="Content\images\psp.jpg" />
     <Content Include="Content\images\wii.jpg" />
     <Content Include="Content\images\xbox360Elite.jpg" />
     <Content Include="Content\product.css" />
-=======
     <Content Include="App_Readme\glimpse.mvc3.readme.txt" />
->>>>>>> 43153960349c867fde4cf5ad88802511d4449b55
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
