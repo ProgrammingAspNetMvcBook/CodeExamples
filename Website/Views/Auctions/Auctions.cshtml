@@ -1,6 +1,6 @@
-﻿@model Website.Models.AuctionViewModel
+﻿@model Ebuy.Website.Models.AuctionsViewModel
 
-        <link href="@Url.Content("~/Content/product.css")" rel="stylesheet" type="text/css" />
+<link href="@Url.Content("~/Content/product.css")" rel="stylesheet" type="text/css" />
 
 @{
     ViewBag.Title = "Auctions";
@@ -17,9 +17,7 @@
             @foreach (var auction in Model.Auctions)
             {
                 <li class="listitem">
-                    @{
-                        Html.RenderPartial("_Product", auction.Product);
-                    }
+                    @Html.ActionLink(auction.Product.Name, "Auction", "Auctions", new { id = auction.Key }, null)
                 </li>
             }
         </ul>

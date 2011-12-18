@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Ebuy
 {
     [MetadataType(typeof(Review.Metadata))]
-    public class Review : KeyedEntity
+    public class Review : Entity
     {
         public string Description { get; set; }
         public double Rating { get; set; }

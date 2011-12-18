@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.Contracts;
+using System.Web;
 
 namespace Ebuy
 {
@@ -7,14 +8,14 @@ namespace Ebuy
     {
         public static string Generate()
         {
-            return Guid.NewGuid().ToString("D");
+            return Generate(Guid.NewGuid().ToString("D"));
         }
 
         public static string Generate(string input)
         {
             Contract.Requires(!string.IsNullOrWhiteSpace(input));
 
-            return input.Replace(" ", "_");
+            return HttpUtility.UrlEncode(input.Replace(" ", "").Replace("-", ""));
         }
     }
 }

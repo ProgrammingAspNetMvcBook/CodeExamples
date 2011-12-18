@@ -11,21 +11,17 @@ namespace Ebuy.DataAccess
         void Delete(TModel instance);
         void Delete(Expression<Func<TModel, bool>> predicate);
         void DeleteById(long id);
+        void DeleteByKey(string key);
 
         TModel Find(Expression<Func<TModel, bool>> predicate);
         TModel FindById(long id);
+        TModel FindByKey(string key);
 
+        IQueryable<TModel> Query(int pageIndex = 0, int pageSize = 25);
         IQueryable<TModel> Query(Expression<Func<TModel, bool>> predicate);
-        IQueryable<TModel> Query(Expression<Func<TModel, bool>> predicate, out int count, int pageIndex = 0, int pageSize = 25);
+        IQueryable<TModel> Query(Expression<Func<TModel, bool>> predicate, out int count, int pageIndex, int pageSize);
 
         void Save(TModel instance);
         void Save(IEnumerable<TModel> instances);
-    }
-
-    public interface IKeyedRepository<TModel> : IRepository<TModel>
-        where TModel : IKeyedEntity
-    {
-        void DeleteByKey(string key);
-        TModel FindByKey(string key);
     }
 }

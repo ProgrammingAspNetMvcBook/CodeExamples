@@ -86,9 +86,9 @@
     <Folder Include="Website\Controllers\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Core\Core.csproj">
+    <ProjectReference Include="..\Core\Ebuy.Core.csproj">
       <Project>{EFD6F198-A4E8-419E-ABBC-8573B29ACC42}</Project>
-      <Name>Core</Name>
+      <Name>Ebuy.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

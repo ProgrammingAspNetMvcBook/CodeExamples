@@ -66,7 +66,7 @@ namespace Ebuy.DataAccess
                 {
                     Categories = new Collection<Category>() { electronics },
                     Description = "The Xbox 360 Elite gaming system is the ultimate in gaming",
-                    ImageUrl = "~/Content/images/xbox360elite.jpg",
+                    ImageUrl = "~/Content/images/products/xbox360elite.jpg",
                     Name = "Xbox 360 Elite",
                     Reviews = new Collection<Review> {
                                     new Review { User = frankSinatra, Description = "It's really awesome!", Rating = 4.5 },
@@ -80,7 +80,7 @@ namespace Ebuy.DataAccess
                                   Categories = new Collection<Category>() { electronics },
                                   Name = "Sony PSP Go",
                                   Description = "The smallest and mightiest PSP system yet.",
-                                  ImageUrl = "~/Content/images/psp.jpg",
+                                  ImageUrl = "~/Content/images/products/psp.jpg",
                                   Reviews = new Collection<Review>
                                                 {
                                                     new Review
@@ -105,7 +105,7 @@ namespace Ebuy.DataAccess
                     Categories = new Collection<Category>() { electronics },
                     Name = "Xbox 360 Kinect Sensor with Game Bundle",
                     Description = "You are the controller with Kinect for Xbox 360!",
-                    ImageUrl = "~/Content/images/kinect.jpg",
+                    ImageUrl = "~/Content/images/products/kinect.jpg",
                     Reviews = new Collection<Review>
                                                 {
                                                     new Review
@@ -130,7 +130,7 @@ namespace Ebuy.DataAccess
                     Categories = new Collection<Category>() { electronics },
                     Name = "Sony Playstation 3 120GB Slim Console",
                     Description = "The fourth generation of hardware released for the PlayStation 3 entertainment platform, the PlayStation 3 120GB system is the next stage in the evolution of Sony's console gaming powerhouse.",
-                    ImageUrl = "~/Content/images/ps3.jpg",
+                    ImageUrl = "~/Content/images/products/ps3.jpg",
                     Reviews = new Collection<Review>
                                                 {
                                                     new Review
@@ -155,7 +155,7 @@ namespace Ebuy.DataAccess
                     Categories = new Collection<Category>() { electronics },
                     Name = "Nintendo Wii Console Black",
                     Description = "Wii Sports Resort takes the inclusive, fun and intuitive controls of the original Wii Sports to the next level, introducing a whole new set of entertaining and physically immersive activities.",
-                    ImageUrl = "~/Content/images/wii.jpg",
+                    ImageUrl = "~/Content/images/products/wii.jpg",
                     Reviews = new Collection<Review>
                                                 {
                                                     new Review
