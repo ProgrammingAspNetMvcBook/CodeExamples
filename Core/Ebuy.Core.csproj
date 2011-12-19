@@ -57,6 +57,7 @@
     <Compile Include="Model\EntityKeyGenerationException.cs" />
     <Compile Include="Model\Payment.cs" />
     <Compile Include="Model\Product.cs" />
+    <Compile Include="Model\WebsiteImage.cs" />
     <Compile Include="Model\Review.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,6 +70,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\DataContext.Initializer.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

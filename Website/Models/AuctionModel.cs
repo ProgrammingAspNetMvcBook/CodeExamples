@@ -21,12 +21,14 @@ namespace Ebuy.Website.Models
         /// <summary>
         /// Current Bid Winner. Will keep changing till the Auction closes
         /// </summary>
-        public User Winner { get; set; }
+        public User WinningBidUser { get; set; }
 
         /// <summary>
         /// Price for next bid
         /// </summary>
         public Currency WinningBidPrice { get; set; }
+
+        public IEnumerable<WebsiteImage> Images { get; set; }
 
         /// <summary>
         /// Friendly Representation in days, hours, minutes
@@ -48,19 +50,8 @@ namespace Ebuy.Website.Models
 
         public string Key { get; set; }
 
-        public AuctionViewModel(Ebuy.Auction auctionDto)
-        {
-            Product = auctionDto.Product;
-            Winner = auctionDto.Owner;
-            WinningBidPrice = auctionDto.WinningBid.Price;
-            EndTime = auctionDto.EndTime;
-        }
+        public string Title { get; set; }
 
-        public AuctionViewModel()
-        {
-
-        }
-
-
+        public string Description { get; set; }
     }
 }

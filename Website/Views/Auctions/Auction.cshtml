@@ -1,12 +1,10 @@
-﻿@using Ebuy
-@model Auction
-
+﻿@model Ebuy.Website.Models.AuctionViewModel
 @{
-    ViewBag.Title = string.Format("Auction #{0} for {1}", Model.Key, Model.Product.Name);
+    ViewBag.Title = Model.Title;
 }
 
 <h2>@ViewBag.Title</h2>
 
 <div>
-    <img src="@Url.Content(Model.Product.ImageUrl)"/>
+    <img src="@Url.Content(Model.Images.First().ImageUrl)"/>
 </div>

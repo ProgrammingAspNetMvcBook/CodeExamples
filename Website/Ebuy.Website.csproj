@@ -282,10 +282,13 @@
     <Content Include="Views\Shared\_Layout.mobile.cshtml">
       <SubType>Code</SubType>
     </Content>
-    <Content Include="Views\Shared\_Product.cshtml">
-      <SubType>Code</SubType>
-    </Content>
     <Content Include="Views\Shared\_ViewSwitcher.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Auctions\Auctions.mobile.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Auctions\_Auction.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

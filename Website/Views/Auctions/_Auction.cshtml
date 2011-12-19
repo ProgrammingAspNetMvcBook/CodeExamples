@@ -1,0 +1,21 @@
+﻿@model Ebuy.Website.Models.AuctionViewModel
+@{
+    var auctionUrl = Url.RouteUrl("Auction", new { id = Model.Key, title = Model.Title });
+}
+<div>
+    <div class="thumbnail">
+        <a href="@auctionUrl">
+            <img src="@Url.Content(Model.Images.First().ImageUrl)" alt="@Model.Title"/>
+        </a>
+    </div>
+    <div class="data">
+        <h4 class="title"><a href="@auctionUrl">@Model.Title</a></h4>
+        <span class="">Auction closing in <span class="closingTime">00d:5h:45m</span></span>
+        <br />
+        <span><strong>Current Bid: </strong>$30.14
+            <br />
+            user1394 </span>
+        <br />
+        <span><a href="StartNewAuction()">Bid Now</a></span>
+    </div>
+</div>

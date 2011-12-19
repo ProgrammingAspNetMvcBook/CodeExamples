@@ -8,7 +8,7 @@ namespace Ebuy
     {
         public static string Generate()
         {
-            return Generate(Guid.NewGuid().ToString("D"));
+            return Generate(Guid.NewGuid().ToString("D").Substring(24));
         }
 
         public static string Generate(string input)
