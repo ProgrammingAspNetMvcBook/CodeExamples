@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Ebuy
 {
     [MetadataType(typeof(Category.Metadata))]
-    public class Category : KeyedEntity
+    public class Category : Entity
     {
         public string Name { get; set; }
 

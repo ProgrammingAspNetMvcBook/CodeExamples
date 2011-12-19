@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Ebuy
 {
     [MetadataType(typeof(Auction.Metadata))]
-    public class Auction : KeyedEntity
+    public class Auction : Entity
     {
         public DateTime StartTime { get; set; }
         public DateTime EndTime { get; set; }
@@ -17,7 +17,7 @@ namespace Ebuy
         {
             get { return EndTime <= DateTime.Now; }
         }
-
+        
         [InverseProperty("Auction")]
         public virtual ICollection<Bid> Bids { get; set; }
         public virtual Product Product { get; set; }

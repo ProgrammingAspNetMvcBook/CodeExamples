@@ -1,20 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Ebuy;
 
-namespace Website.Models
+namespace Ebuy.Website.Models
 {
-    public class AuctionViewModel
+    public class AuctionsViewModel
     {
-        public IEnumerable<Auction> Auctions { get; set; }
+        public IEnumerable<AuctionViewModel> Auctions { get; set; }
     }
 
     /// <summary>
     /// View Model for an Auction
     /// </summary>
-    public class Auction
+    public class AuctionViewModel
     {
         /// <summary>
         /// Product that is being auctioned
@@ -29,7 +26,7 @@ namespace Website.Models
         /// <summary>
         /// Price for next bid
         /// </summary>
-        public Currency BidPrice { get; set; }
+        public Currency WinningBidPrice { get; set; }
 
         /// <summary>
         /// Friendly Representation in days, hours, minutes
@@ -39,7 +36,7 @@ namespace Website.Models
         {
             get
             {
-                return ClosingTime.Subtract(DateTime.Now);
+                return EndTime.Subtract(DateTime.Now);
             }
         }
 
@@ -47,17 +44,19 @@ namespace Website.Models
         /// Closing Date in mm/dd/yyyy format
         /// </summary>
         /// <example>18th Oct, 2012 at 5:00 PM</example>
-        public DateTime ClosingTime { get; set; }
+        public DateTime EndTime { get; set; }
 
-        public Auction(Ebuy.Auction auctionDto)
+        public string Key { get; set; }
+
+        public AuctionViewModel(Ebuy.Auction auctionDto)
         {
             Product = auctionDto.Product;
             Winner = auctionDto.Owner;
-            BidPrice = auctionDto.WinningBid.Price;
-            ClosingTime = auctionDto.EndTime;
+            WinningBidPrice = auctionDto.WinningBid.Price;
+            EndTime = auctionDto.EndTime;
         }
 
-        public Auction()
+        public AuctionViewModel()
         {
 
         }

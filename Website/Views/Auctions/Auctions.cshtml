@@ -1,0 +1,49 @@
+﻿@model Website.Models.AuctionViewModel
+<link href="@Url.Content("~/Content/product.css")" rel="stylesheet" type="text/css" />
+@{
+    ViewBag.Title = "Auctions";
+}
+<h2>
+    Auctions</h2>
+<div class="container">
+    <header>
+        <h3>
+            Recent Auctions</h3>
+        <hr />
+    </header>
+    <div class="container clear-fix">
+        <ul id="auctions" class="list" data-role="listview">
+            @foreach (var auction in Model.Auctions)
+            {
+                <li class="listitem">
+                    @Html.Partial("_Product", auction.Product); 
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+﻿@model Ebuy.Website.Models.AuctionsViewModel
+
+<link href="@Url.Content("~/Content/product.css")" rel="stylesheet" type="text/css" />
+
+@{
+    ViewBag.Title = "Auctions";
+}
+<h2>
+    Auctions</h2>
+<div class="container">
+    <header>
+        <h3>Recent Auctions</h3>
+        <hr />
+    </header>
+    <div class="container clear-fix">
+        <ul id="newAuctions" class="list">
+            @foreach (var auction in Model.Auctions)
+            {
+                <li class="listitem">
+                    @Html.ActionLink(auction.Product.Name, "Auction", "Auctions", new { id = auction.Key }, null)
+                </li>
+            }
+        </ul>
+        </div>
+</div>

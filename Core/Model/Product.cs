@@ -7,7 +7,7 @@ using CustomExtensions.DataAnnotations;
 namespace Ebuy
 {
     [MetadataType(typeof(Category.Metadata))]
-    public class Product : KeyedEntity
+    public class Product : Entity
     {
         public string Name { get; set; }
         public string Description { get; set; }

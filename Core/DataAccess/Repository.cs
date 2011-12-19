@@ -8,8 +8,8 @@ using System.Linq.Expressions;
 
 namespace Ebuy.DataAccess
 {
-    public class Repository<TModel> : IKeyedRepository<TModel>
-        where TModel : class, IKeyedEntity
+    public class Repository<TModel> : IRepository<TModel>
+        where TModel : class, IEntity
     {
         private readonly DataContext _context;
         private readonly bool _isSharedContext;
@@ -102,6 +102,11 @@ namespace Ebuy.DataAccess
             return instance;
         }
 
+        public IQueryable<TModel> Query(int pageIndex = 0, int pageSize = 25)
+        {
+            return ApplyPaging(DataSource, pageIndex, pageSize);
+        }
+
         public IQueryable<TModel> Query(Expression<Func<TModel, bool>> predicate)
         {
             Contract.Requires(predicate != null);
@@ -122,15 +127,21 @@ namespace Ebuy.DataAccess
 
             var items = Query(predicate);
 
-            int skip = pageIndex * pageSize;
+            items = ApplyPaging(items, pageIndex, pageSize);
+
+            count = items.Count();
+
+            return items;
+        }
+
+        private static IQueryable<TModel> ApplyPaging(IQueryable<TModel> items, int pageIndex, int pageSize)
+        {
+            int skip = pageIndex*pageSize;
 
             if (skip > 0)
                 items = items.Skip(skip);
 
             items = items.Take(pageSize);
-
-            count = items.Count();
-
             return items;
         }
 
