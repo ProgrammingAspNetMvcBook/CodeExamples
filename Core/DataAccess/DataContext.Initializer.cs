@@ -1,10 +1,4 @@
-﻿using System;
-using System.Linq;
-using System.Collections.ObjectModel;
-using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
-using System.Text;
-using System.Xml;
+﻿using System.Data.Entity;
 using CustomExtensions.DataAnnotations;
 
 namespace Ebuy.DataAccess
@@ -27,169 +21,39 @@ namespace Ebuy.DataAccess
                 base.Seed(context);
 
 
-                var frankSinatra = new User()
-                                       {
-                                           DisplayName = "Old Blue Eyes",
-                                           EmailAddress = "frank@theratpack.com",
-                                           FullName = "Frank Sinatra",
-                                       };
-                context.Users.Add(frankSinatra);
-
-                var freddieMercury = new User()
-                                       {
-                                           DisplayName = "Freddie Mercury",
-                                           EmailAddress = "freddie@queenband.com",
-                                           FullName = "Farrokh Bulsara",
-                                       };
-                context.Users.Add(freddieMercury);
-
-                var johnLennon = new User()
-                                       {
-                                           DisplayName = "The Reverend Fred Gherkin",
-                                           EmailAddress = "lenny@thebeatles.com",
-                                           FullName = "John Lennon",
-                                       };
-                context.Users.Add(johnLennon);
-
-
-                var videoGameSystems = new Category("Video Game Systems");
-                var electronics = new Category("Electronics")
-                                      {
-                                          SubCategories = new[] {
-                                                new Category("Cameras & Photography"),
-                                                new Category("Computers & Networking"),
-                                                new Category("TV, Audio, and Video"),
-                                                new Category("Video Games & Systems")
-                                                    {
-                                                        SubCategories = new [] {
-                                                                videoGameSystems
-                                                            }
-                                                    },
-                                            }
-                                      };
-
-                var sports = new Category("Sports and Recreation");
-                var collectibles = new Category("Collectibles");
-
-
-                context.Products.Add(new Product {
-                    Categories = new [] { videoGameSystems },
-                    Name = "Xbox 360 Elite",
-                    Description = "The Xbox 360 Elite gaming system is the ultimate in gaming",
-                    Images = new  WebsiteImage[] { "~/Content/images/products/xbox360elite.jpg" },
-                    Reviews = new [] {
-                            new Review { User = frankSinatra, Description = "It's really awesome!", Rating = 4.5 },
-                            new Review { User = johnLennon, Description = "It's quite horrible", Rating = 2 },
-                            new Review { User = freddieMercury, Description = "I love mine so much I want another!", Rating = 4 },
-                        }
-                });
-
-                context.Products.Add(new Product {
-                    Categories = new [] { videoGameSystems },
-                    Name = "Sony PSP Go",
-                    Description = "The smallest and mightiest PSP system yet.",
-                    Images = new WebsiteImage[] { "~/Content/images/products/psp.jpg" },
-                    Reviews = new[] {
-                            new Review { User = frankSinatra, Description = "It's really awesome!", Rating = 4.5 },
-                            new Review { User = johnLennon, Description = "It's quite horrible", Rating = 2 },
-                        }
-                });
-
-                context.Products.Add(new Product {
-                    Categories = new [] { videoGameSystems },
-                    Name = "Xbox 360 Kinect Sensor with Game Bundle",
-                    Description = "You are the controller with Kinect for Xbox 360!",
-                    Images = new WebsiteImage[] { "~/Content/images/products/kinect.jpg" },
-                    Reviews = new [] {
-                            new Review { User = frankSinatra, Description = "It's really awesome!", Rating = 4.5 },
-                            new Review { User = johnLennon, Description = "It's quite horrible", Rating = 2 },
-                        }
-                });
-
-                context.Products.Add(new Product {
-                    Categories = new [] { videoGameSystems },
-                    Name = "Sony Playstation 3 120GB Slim Console",
-                    Description = "The fourth generation of hardware released for the PlayStation 3 entertainment platform, the PlayStation 3 120GB system is the next stage in the evolution of Sony's console gaming powerhouse.",
-                    Images = new WebsiteImage[] { "~/Content/images/products/ps3.jpg" },
-                    Reviews = new[] {
-                            new Review { User = frankSinatra, Description = "It's really awesome!", Rating = 4.5 },
-                            new Review { User = johnLennon, Description = "It's quite horrible", Rating = 2 },
-                        }
-                });
-
-                context.Products.Add(new Product
+                context.Users.Add(new User()
                 {
-                    Categories = new [] { videoGameSystems },
-                    Name = "Nintendo Wii Console Black",
-                    Description = "Wii Sports Resort takes the inclusive, fun and intuitive controls of the original Wii Sports to the next level, introducing a whole new set of entertaining and physically immersive activities.",
-                    Images = new WebsiteImage[] { "~/Content/images/products/wii.jpg" },
-                    Reviews = new[] {
-                            new Review { User = frankSinatra, Description = "It's really awesome!", Rating = 4.5 },
-                            new Review { User = johnLennon, Description = "It's quite horrible", Rating = 2 },
-                        }
-                });
-
-                context.Products.Add(new Product {
-                    Categories = new Collection<Category> { sports },
-                    Name = "Burton Mayhem snow board",
-                    Description = "Burton Mayhem snow board: 159cm wide",
-                    Images = new WebsiteImage[] { "~/Content/images/products/burtonMayhem.jpg" },
-                    Reviews = new[] {
-                            new Review { User = frankSinatra, Description = "It's really awesome!", Rating = 4.5 },
-                            new Review { User = johnLennon, Description = "It's quite horrible", Rating = 2 },
-                        }
-                });
-
-                context.Products.Add(new Product
-                {
-                    Categories = new Collection<Category> { collectibles },
-                    Name = "Lock of John Lennon's hair",
-                    Description = "Lock of John Lennon's hair",
-                    Images = new WebsiteImage[] { "~/Content/images/products/lockOfHair.jpg" },
-                    Reviews = new[] {
-                            new Review { User = frankSinatra, Description = "It's really awesome!", Rating = 4.5 },
-                            new Review { User = johnLennon, Description = "It's quite horrible", Rating = 2 },
-                        }
+                    DisplayName = "Uber Administrator",
+                    EmailAddress = "admin@ebuy.com",
+                    FullName = "Administrator",
                 });
 
 
-                var rand = new Random();
-                var users = context.Users.Local.ToArray();
+                context.Categories.Add(new Category("Collectibles"));
 
-                foreach (var product in context.Products.Local)
-                {
-                    var startTime = new DateTime(2011, rand.Next(1, 12), rand.Next(1, 28), rand.Next(0, 24), rand.Next(0, 60), 0);
+                context.Categories.Add(
+                    new Category("Electronics") {
+                        SubCategories = new[] {
+                            new Category("Cameras & Photography"),
+                            new Category("Computers & Networking"),
+                            new Category("TV, Audio, and Video"),
+                            new Category("Video Games & Systems") {
+                                    SubCategories = new [] {
+                                            new Category("Video Game Systems")
+                                        }
+                                },
+                        }
+                    });
 
-                    var auction = new Auction() {
-                        Bids = new Collection<Bid>(),
-                        Categories = product.Categories.ToArray(),
-                        Description = product.Description,
-                        EndTime = startTime.AddDays(rand.Next(3, 14)),
-                        Images = product.Images.ToArray(),
-                        Owner = users[rand.Next(users.Length)],
-                        Product = product,
-                        StartingPrice = "$1",
-                        StartTime = startTime,
-                        Title = product.Name,
-                    };
-
-
-                    var nonOwners = users.Except(new [] {auction.Owner}).ToArray();
-                    var lastBid = new Bid { Price = auction.StartingPrice, Timestamp = auction.StartTime };
-
-                    for(int x = 0; x < rand.Next(4, 20); x++)
+                context.Categories.Add(
+                    new Category("Home & Outdoors")
                     {
-                        var user = nonOwners[rand.Next(nonOwners.Length)];
-                        user.Bid(auction, 
-                                 new Currency { 
-                                     Amount = lastBid.Price.Amount + rand.Next(1, 20),
-                                     Code = lastBid.Price.Code,
-                                 }, 
-                                 lastBid.Timestamp.AddMinutes(rand.Next(1, 400)));
-                    }
-
-                    context.Auctions.Add(auction);
-                }
+                        SubCategories = new[] {
+                            new Category("Home & Garden"),
+                            new Category("Sporting Goods"),
+                            new Category("Toys & Hobbies"),
+                        }
+                    });
             }
         }
     }
