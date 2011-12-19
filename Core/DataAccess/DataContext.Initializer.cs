@@ -52,130 +52,104 @@ namespace Ebuy.DataAccess
                 context.Users.Add(johnLennon);
 
 
-                var electronics = new Category() { Name = "Electronics" };
-                var sports = new Category() { Name = "Sports and Recreation" };
-                var collectibles = new Category() { Name = "Collectibles" };
+                var videoGameSystems = new Category("Video Game Systems");
+                var electronics = new Category("Electronics")
+                                      {
+                                          SubCategories = new[] {
+                                                new Category("Cameras & Photography"),
+                                                new Category("Computers & Networking"),
+                                                new Category("TV, Audio, and Video"),
+                                                new Category("Video Games & Systems")
+                                                    {
+                                                        SubCategories = new [] {
+                                                                videoGameSystems
+                                                            }
+                                                    },
+                                            }
+                                      };
 
-                context.Products.Add(new Product()
-                {
-                    Categories = new Collection<Category>() { electronics },
+                var sports = new Category("Sports and Recreation");
+                var collectibles = new Category("Collectibles");
+
+
+                context.Products.Add(new Product {
+                    Categories = new [] { videoGameSystems },
+                    Name = "Xbox 360 Elite",
                     Description = "The Xbox 360 Elite gaming system is the ultimate in gaming",
                     Images = new  WebsiteImage[] { "~/Content/images/products/xbox360elite.jpg" },
-                    Name = "Xbox 360 Elite",
-                    Reviews = new Collection<Review> {
-                                    new Review { User = frankSinatra, Description = "It's really awesome!", Rating = 4.5 },
-                                    new Review { User = johnLennon, Description = "It's quite horrible", Rating = 2 },
-                                    new Review { User = freddieMercury, Description = "I love mine so much I want another!", Rating = 4 },
-                                }
+                    Reviews = new [] {
+                            new Review { User = frankSinatra, Description = "It's really awesome!", Rating = 4.5 },
+                            new Review { User = johnLennon, Description = "It's quite horrible", Rating = 2 },
+                            new Review { User = freddieMercury, Description = "I love mine so much I want another!", Rating = 4 },
+                        }
                 });
 
-                context.Products.Add(new Product()
-                              {
-                                  Categories = new Collection<Category>() { electronics },
-                                  Name = "Sony PSP Go",
-                                  Description = "The smallest and mightiest PSP system yet.",
-                                  Images = new WebsiteImage[] { "~/Content/images/products/psp.jpg" },
-                                  Reviews = new Collection<Review>
-                                                {
-                                                    new Review
-                                                        {
-                                                            User = frankSinatra,
-                                                            Description = "It's really awesome!",
-                                                            Rating = 4.5
-                                                        },
-                                                    new Review
-                                                        {
-                                                            User = johnLennon,
-                                                            Description = "It's quite horrible",
-                                                            Rating = 2
-                                                        },
-                                                   
-                                                }
+                context.Products.Add(new Product {
+                    Categories = new [] { videoGameSystems },
+                    Name = "Sony PSP Go",
+                    Description = "The smallest and mightiest PSP system yet.",
+                    Images = new WebsiteImage[] { "~/Content/images/products/psp.jpg" },
+                    Reviews = new[] {
+                            new Review { User = frankSinatra, Description = "It's really awesome!", Rating = 4.5 },
+                            new Review { User = johnLennon, Description = "It's quite horrible", Rating = 2 },
+                        }
+                });
 
-                              });
-
-                context.Products.Add(new Product()
-                {
-                    Categories = new Collection<Category>() { electronics },
+                context.Products.Add(new Product {
+                    Categories = new [] { videoGameSystems },
                     Name = "Xbox 360 Kinect Sensor with Game Bundle",
                     Description = "You are the controller with Kinect for Xbox 360!",
                     Images = new WebsiteImage[] { "~/Content/images/products/kinect.jpg" },
-                    Reviews = new Collection<Review>
-                                                {
-                                                    new Review
-                                                        {
-                                                            User = frankSinatra,
-                                                            Description = "It's really awesome!",
-                                                            Rating = 4.5
-                                                        },
-                                                    new Review
-                                                        {
-                                                            User = johnLennon,
-                                                            Description = "It's quite horrible",
-                                                            Rating = 2
-                                                        },
-                                                   
-                                                }
-
+                    Reviews = new [] {
+                            new Review { User = frankSinatra, Description = "It's really awesome!", Rating = 4.5 },
+                            new Review { User = johnLennon, Description = "It's quite horrible", Rating = 2 },
+                        }
                 });
 
-                context.Products.Add(new Product()
-                {
-                    Categories = new Collection<Category>() { electronics },
+                context.Products.Add(new Product {
+                    Categories = new [] { videoGameSystems },
                     Name = "Sony Playstation 3 120GB Slim Console",
                     Description = "The fourth generation of hardware released for the PlayStation 3 entertainment platform, the PlayStation 3 120GB system is the next stage in the evolution of Sony's console gaming powerhouse.",
                     Images = new WebsiteImage[] { "~/Content/images/products/ps3.jpg" },
-                    Reviews = new Collection<Review>
-                                                {
-                                                    new Review
-                                                        {
-                                                            User = frankSinatra,
-                                                            Description = "It's really awesome!",
-                                                            Rating = 4.5
-                                                        },
-                                                    new Review
-                                                        {
-                                                            User = johnLennon,
-                                                            Description = "It's quite horrible",
-                                                            Rating = 2
-                                                        },
-                                                   
-                                                }
-
+                    Reviews = new[] {
+                            new Review { User = frankSinatra, Description = "It's really awesome!", Rating = 4.5 },
+                            new Review { User = johnLennon, Description = "It's quite horrible", Rating = 2 },
+                        }
                 });
 
-                context.Products.Add(new Product()
+                context.Products.Add(new Product
                 {
-                    Categories = new Collection<Category>() { electronics },
+                    Categories = new [] { videoGameSystems },
                     Name = "Nintendo Wii Console Black",
                     Description = "Wii Sports Resort takes the inclusive, fun and intuitive controls of the original Wii Sports to the next level, introducing a whole new set of entertaining and physically immersive activities.",
                     Images = new WebsiteImage[] { "~/Content/images/products/wii.jpg" },
-                    Reviews = new Collection<Review>
-                                                {
-                                                    new Review
-                                                        {
-                                                            User = frankSinatra,
-                                                            Description = "It's really awesome!",
-                                                            Rating = 4.5
-                                                        },
-                                                    new Review
-                                                        {
-                                                            User = johnLennon,
-                                                            Description = "It's quite horrible",
-                                                            Rating = 2
-                                                        },
-                                                   
-                                                }
-
+                    Reviews = new[] {
+                            new Review { User = frankSinatra, Description = "It's really awesome!", Rating = 4.5 },
+                            new Review { User = johnLennon, Description = "It's quite horrible", Rating = 2 },
+                        }
                 });
 
-                context.Products.Add(new Product()
+                context.Products.Add(new Product {
+                    Categories = new Collection<Category> { sports },
+                    Name = "Burton Mayhem snow board",
+                    Description = "Burton Mayhem snow board: 159cm wide",
+                    Images = new WebsiteImage[] { "~/Content/images/products/burtonMayhem.jpg" },
+                    Reviews = new[] {
+                            new Review { User = frankSinatra, Description = "It's really awesome!", Rating = 4.5 },
+                            new Review { User = johnLennon, Description = "It's quite horrible", Rating = 2 },
+                        }
+                });
+
+                context.Products.Add(new Product
                 {
-                    Categories = new Collection<Category>() { collectibles },
+                    Categories = new Collection<Category> { collectibles },
                     Name = "Lock of John Lennon's hair",
                     Description = "Lock of John Lennon's hair",
                     Images = new WebsiteImage[] { "~/Content/images/products/lockOfHair.jpg" },
-                    Reviews = new Collection<Review> { }
+                    Reviews = new[] {
+                            new Review { User = frankSinatra, Description = "It's really awesome!", Rating = 4.5 },
+                            new Review { User = johnLennon, Description = "It's quite horrible", Rating = 2 },
+                        }
                 });
 
 

@@ -67,9 +67,6 @@ namespace Ebuy
             public object EndTime { get; set; }
 
             [Required]
-            public object Product { get; set; }
-
-            [Required]
             public object Owner { get; set; }
         }
     }
