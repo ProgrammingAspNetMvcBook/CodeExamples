@@ -35,13 +35,18 @@ namespace IntegrationTests
 
         protected virtual object GenerateValidAuction()
         {
+            var id = Random();
             return new Auction()
                        {
+                           Title = "Test Auction #" + id,
+                           Description = "Description for test auction #" + id,
                            StartingPrice = "$1",
                            StartTime = DateTime.Now,
                            EndTime = DateTime.Now.AddDays(7),
                            Owner = GenerateValid<User>(),
                            Product = GenerateValid<Product>(),
+                           Categories = new[] { GenerateValid<Category>(), GenerateValid<Category>() },
+                           Images = new WebsiteImage[] { string.Format("http://www.test.com/image_{0}.png", id) },
                        };
         }
 
@@ -56,10 +61,10 @@ namespace IntegrationTests
             var id = Random();
             return new Product()
             {
-                Categories = new [] { GenerateValid<Category>(), GenerateValid<Category>() },
+                Categories = new[] { GenerateValid<Category>(), GenerateValid<Category>() },
                 Name = "Test product " + id,
                 Description = "Test product " + id,
-                ImageUrl = "http://www.test.com/image.png",
+                Images = new WebsiteImage[] { "http://www.test.com/image.png" },
             };
         }
 

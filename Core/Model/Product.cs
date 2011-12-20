@@ -11,7 +11,6 @@ namespace Ebuy
     {
         public string Name { get; set; }
         public string Description { get; set; }
-        public string ImageUrl { get; set; }
         
         public double Rating
         {
@@ -23,6 +22,8 @@ namespace Ebuy
         
         [IsNotEmpty]
         public virtual ICollection<Category> Categories { get; set; }
+
+        public virtual ICollection<WebsiteImage> Images { get; set; }
 
         public virtual ICollection<Review> Reviews { get; set; }
 

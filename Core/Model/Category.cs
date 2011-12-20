@@ -8,7 +8,21 @@ namespace Ebuy
     {
         public string Name { get; set; }
 
+        public virtual ICollection<Auction> Auctions { get; set; }
+
+        public virtual ICollection<Category> SubCategories { get; set; }
+
         public virtual ICollection<Product> Products { get; set; }
+
+
+        public Category()
+        {
+        }
+
+        public Category(string name)
+        {
+            Name = name;
+        }
 
 
         protected override string GenerateKey()

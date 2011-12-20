@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using Ebuy.DataAccess;
 using Ebuy.Website.Models;
 
@@ -19,14 +20,8 @@ namespace Ebuy.Website.Controllers
             var auctions = _repository.Query(page, pageSize);
 
             var auctionViewModel = new AuctionsViewModel {
-                    Auctions = auctions.Select(x => new AuctionViewModel {
-                                                            Key = x.Key,
-                                                            Product = x.Product,
-                                                            Winner = x.WinningBid.User,
-                                                            WinningBidPrice = x.WinningBid.Price,
-                                                            EndTime = x.EndTime,
-                                                        })
-                };
+                Auctions = auctions.Select(Mapper.DynamicMap<AuctionViewModel>)
+            };
 
             return View("Auctions", auctionViewModel);
         }
@@ -38,7 +33,8 @@ namespace Ebuy.Website.Controllers
             if (auction == null)
                 return View("NotFound");
 
-            return View("Auction", auction);
+            var viewModel = Mapper.DynamicMap<AuctionViewModel>(auction);
+            return View("Auction", viewModel);
         }
     }
 }

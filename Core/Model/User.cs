@@ -1,5 +1,8 @@
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Contracts;
+using System.Linq;
 using CustomExtensions.DataAnnotations;
 
 namespace Ebuy
@@ -32,6 +35,22 @@ namespace Ebuy
 
             return KeyGenerator.Generate(DisplayName);
         }
+
+
+        public void Bid(Auction auction, Currency currency)
+        {
+            Bid(auction, currency, DateTime.Now);
+        }
+
+        protected internal virtual void Bid(Auction auction, Currency currency, DateTime timestamp)
+        {
+            Contract.Requires(auction != null);
+            Contract.Requires(currency != null);
+
+            var bid = new Bid { User = this, Price = currency, Timestamp = timestamp };
+            auction.PostBid(bid);
+        }
+
 
         public class Metadata
         {
