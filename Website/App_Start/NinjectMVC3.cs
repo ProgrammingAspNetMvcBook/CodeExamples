@@ -55,7 +55,11 @@ namespace Ebuy.Website.App_Start
         {
             public override void Load()
             {
-                Bind<IRepository>().To<Repository>();
+                Bind<DataContext>().ToSelf().InRequestScope()
+                    .OnDeactivation(x => x.SaveChanges());
+
+                Bind<IRepository>().To<Repository>()
+                    .WithConstructorArgument("isSharedContext", true);
             }
         }
     }
