@@ -13,19 +13,10 @@ namespace Ebuy.Website.Models
     /// </summary>
     public class AuctionViewModel
     {
-        /// <summary>
-        /// Product that is being auctioned
-        /// </summary>
-        public Product Product { get; set; }
+        public string ProductKey { get; set; }
+        public string ProductName { get; set; }
 
-        /// <summary>
-        /// Current Bid Winner. Will keep changing till the Auction closes
-        /// </summary>
-        public User WinningBidUser { get; set; }
-
-        /// <summary>
-        /// Price for next bid
-        /// </summary>
+        public string WinningBidUserDisplayName { get; set; }
         public Currency WinningBidPrice { get; set; }
 
         public IEnumerable<WebsiteImage> Images { get; set; }
@@ -34,11 +25,16 @@ namespace Ebuy.Website.Models
         /// Friendly Representation in days, hours, minutes
         /// </summary>
         /// <example>05d:12h:30m</example>
-        public TimeSpan ClosingIn
+        public string ClosingIn
         {
             get
             {
-                return EndTime.Subtract(DateTime.Now);
+                if (EndTime == null)
+                    return "Unknown";
+
+                var span = EndTime.Value.Subtract(DateTime.Now);
+
+                return span.ToString();
             }
         }
 
@@ -46,7 +42,13 @@ namespace Ebuy.Website.Models
         /// Closing Date in mm/dd/yyyy format
         /// </summary>
         /// <example>18th Oct, 2012 at 5:00 PM</example>
-        public DateTime EndTime { get; set; }
+        public DateTime? EndTime { get; set; }
+
+        public string EndTimeDisplay
+        {
+            get;
+            set;
+        }
 
         public string Key { get; set; }
 
