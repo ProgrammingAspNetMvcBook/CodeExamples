@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\DataContext.DemoDataInitializer.cs" />
     <Compile Include="DataAccess\DataContext.cs" />
     <Compile Include="DataAccess\IRepository.cs" />
     <Compile Include="DataAccess\Repository.cs" />

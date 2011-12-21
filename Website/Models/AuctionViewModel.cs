@@ -99,7 +99,7 @@ namespace Ebuy.Website.Models
             get
             {
                 if (HasWinningBid)
-                    return WinningBid.Price;
+                    return WinningBid.Amount;
 
                 return null;
             }

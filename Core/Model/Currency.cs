@@ -17,13 +17,13 @@ namespace Ebuy
                 };
 
         public string Code { get; private set; }
-        public decimal Amount { get; private set; }
+        public decimal Value { get; private set; }
 
 
-        public Currency(string code, decimal amount)
+        public Currency(string code, decimal value)
         {
             Code = code;
-            Amount = amount;
+            Value = value;
         }
 
         public Currency(string currency)
@@ -32,7 +32,7 @@ namespace Ebuy
             Contract.Requires(currency.Length > 1);
 
             Code = CurrencyCodesBySymbol[currency[0]];
-            Amount = decimal.Parse(currency.Substring(1));
+            Value = decimal.Parse(currency.Substring(1));
         }
 
         private Currency()
@@ -44,7 +44,7 @@ namespace Ebuy
         {
             if (ReferenceEquals(null, other)) return false;
             if (ReferenceEquals(this, other)) return true;
-            return Equals(other.Code, Code) && other.Amount == Amount;
+            return Equals(other.Code, Code) && other.Value == Value;
         }
 
         public override bool Equals(object obj)
@@ -58,7 +58,7 @@ namespace Ebuy
         public override string ToString()
         {
             var symbol = CurrencyCodesBySymbol.Single(x => x.Value == Code).Key;
-            return string.Format("{0}{1}", symbol, Amount);
+            return string.Format("{0}{1}", symbol, Value);
         }
 
         public static bool operator ==(Currency x, Currency y)
@@ -82,7 +82,7 @@ namespace Ebuy
         {
             unchecked
             {
-                return ((Code != null ? Code.GetHashCode() : 0)*397) ^ Amount.GetHashCode();
+                return ((Code != null ? Code.GetHashCode() : 0)*397) ^ Value.GetHashCode();
             }
         }
     }

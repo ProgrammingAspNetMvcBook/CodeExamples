@@ -90,6 +90,10 @@
       <Project>{EFD6F198-A4E8-419E-ABBC-8573B29ACC42}</Project>
       <Name>Ebuy.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Website\Ebuy.Website.csproj">
+      <Project>{D739D3C5-5C15-4D36-B177-818DC676D57A}</Project>
+      <Name>Ebuy.Website</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

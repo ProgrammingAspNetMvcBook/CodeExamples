@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.Contracts;
 
 namespace Ebuy
 {
@@ -29,7 +30,7 @@ namespace Ebuy
             }
         }
 
-        public Currency Price { get; private set; }
+        public Currency Amount { get; private set; }
 
         public DateTime Timestamp { get; private set; }
 
@@ -38,9 +39,13 @@ namespace Ebuy
 
         public Bid(User user, Auction auction, Currency price) 
         {
+            Contract.Requires(user != null);
+            Contract.Requires(auction != null);
+            Contract.Requires(price != null);
+
             User = user;
             Auction = auction;
-            Price = price;
+            Amount = price;
             Timestamp = Clock.Now;
         }
 

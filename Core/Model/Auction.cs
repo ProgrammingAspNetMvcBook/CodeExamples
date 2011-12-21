@@ -16,6 +16,8 @@ namespace Ebuy
         public virtual DateTime EndTime { get; set; }
         public virtual Currency StartingPrice { get; set; }
 
+        [ForeignKey("WinndingBid")]
+        protected internal Guid? WinningBidId { get; set; }
         public virtual Bid WinningBid { get; private set; }
 
         public bool IsCompleted
@@ -32,6 +34,7 @@ namespace Ebuy
         public virtual Product Product { get; set; }
 
         public virtual User Owner { get; set; }
+
 
 
         public Auction()
@@ -52,7 +55,7 @@ namespace Ebuy
             Bids.Add(bid);
 
             // TODO: Support multiple currencies
-            if (WinningBid == null || bidAmount.Amount > WinningBid.Price.Amount)
+            if (WinningBid == null || bidAmount.Value > WinningBid.Amount.Value)
             {
                 WinningBid = bid;
             }
