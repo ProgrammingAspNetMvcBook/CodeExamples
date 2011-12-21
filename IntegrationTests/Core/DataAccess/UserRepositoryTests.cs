@@ -16,10 +16,10 @@ namespace IntegrationTests.Core.DataAccess
         [TestMethod]
         public void ShouldNotAllowDuplicateEmailAddresses()
         {
-            var user1 = CreateNewEntity();
+            var user1 = CreateNewEntity<User>();
             Repository.Save(user1);
 
-            var user2 = CreateNewEntity();
+            var user2 = CreateNewEntity<User>();
             user2.EmailAddress = user1.EmailAddress;
 
             AssertException.Throws<DbUpdateException>(() =>

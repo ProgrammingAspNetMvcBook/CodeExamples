@@ -149,12 +149,10 @@ namespace Ebuy.DataAccess
         {
             Contract.Requires(instance != null);
 
-            var entry = _context.Entry(instance);
-
-            if(instance.Id == default(long))
-                entry.State = EntityState.Added;
+            if (instance.Id == default(long))
+                _context.Entry(instance).State = EntityState.Added;
             else
-                entry.State = EntityState.Modified;
+                return;
 
             if (_isSharedContext == false)
                 _context.SaveChanges();

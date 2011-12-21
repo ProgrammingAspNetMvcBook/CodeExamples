@@ -18,14 +18,14 @@ namespace IntegrationTests.Core.DataAccess
 
         protected void AssertCanSaveNewEntity()
         {
-            var entity = CreateNewEntity();
+            var entity = CreateNewEntity<T>();
             Repository.Save(entity);
             AssertSavedEntityExists(entity);
         }
 
         protected virtual void AssertCanFindById()
         {
-            var expectedEntity = CreateSaveAndRetrieveNewEntity();
+            var expectedEntity = CreateAndSaveNewEntity<T>();
 
             var saved = Repository.FindById(expectedEntity.Id);
 

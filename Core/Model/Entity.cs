@@ -27,8 +27,8 @@ namespace Ebuy
 
     public abstract class Entity : IEntity
     {
-        [Key]
-        public long Id { get; protected set; }
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public virtual long Id { get; protected set; }
 
         [Unique, StringLength(50)]
         public virtual string Key

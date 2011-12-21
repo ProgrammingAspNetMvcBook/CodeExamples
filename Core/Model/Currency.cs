@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Contracts;
+using System.Linq;
 
 namespace Ebuy
 {
@@ -14,12 +15,18 @@ namespace Ebuy
                     { '$', "USD" },
                 };
 
-        public string Code { get; set; }
-        public decimal Amount { get; set; }
+        public string Code { get; private set; }
+        public decimal Amount { get; private set; }
 
 
-        public Currency()
+        private Currency()
         {
+        }
+
+        public Currency(string code, decimal amount)
+        {
+            Code = code;
+            Amount = amount;
         }
 
         public Currency(string currency)
@@ -31,6 +38,12 @@ namespace Ebuy
             Amount = decimal.Parse(currency.Substring(1));
         }
 
+
+        public override string ToString()
+        {
+            var symbol = CurrencyCodesBySymbol.Single(x => x.Value == Code).Key;
+            return string.Format("{0}{1}", symbol, Amount);
+        }
 
         public static implicit operator Currency(string currency)
         {

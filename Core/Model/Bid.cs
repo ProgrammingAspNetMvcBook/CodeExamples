@@ -7,19 +7,30 @@ namespace Ebuy
     {
         public virtual Guid Id
         {
-            get { return _id ?? Guid.NewGuid(); }
-            set { _id = value; }
+            get
+            {
+                if (_id == null)
+                    _id = Guid.NewGuid();
+                
+                return _id.Value;
+            }
+            private set { _id = value; }
         }
         private Guid? _id;
 
-        public Currency Price { get; set; }
-        public DateTime Timestamp { get; set; }
+        public virtual Currency Price { get; set; }
+        public virtual DateTime Timestamp { get; set; }
 
-        public bool IsWinningBid
+        public virtual bool IsWinningBid
         {
-            get { return this == Auction.WinningBid; }
+            get
+            {
+                return Auction != null 
+                    && this == Auction.WinningBid;
+            }
         }
 
+        [InverseProperty("Bids")]
         public virtual Auction Auction { get; set; }
         public virtual User User { get; set; }
 

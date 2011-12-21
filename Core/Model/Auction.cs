@@ -15,17 +15,15 @@ namespace Ebuy
         public DateTime EndTime { get; set; }
         public Currency StartingPrice { get; set; }
 
-        public virtual Bid WinningBid { get; set; }
+        public virtual Bid WinningBid { get; private set; }
 
         public bool IsCompleted
         {
             get { return EndTime <= DateTime.Now; }
         }
 
-        [IsNotEmpty]
         public virtual ICollection<Category> Categories { get; set; }
 
-        [InverseProperty("Auction")]
         public virtual ICollection<Bid> Bids { get; set; }
 
         public virtual ICollection<WebsiteImage> Images { get; set; }
@@ -42,7 +40,7 @@ namespace Ebuy
             // TODO: Support multiple currencies
             if (WinningBid == null || bid.Price.Amount > WinningBid.Price.Amount)
             {
-//                WinningBid = bid;
+                WinningBid = bid;
             }
             
             Bids.Add(bid);
@@ -51,23 +49,29 @@ namespace Ebuy
 
         public class Metadata
         {
+            [InverseProperty("Auction")]
+            public object Bids;
+
+            [IsNotEmpty]
+            public object Categories;
+
             [Required, StringLength(500)]
-            public object Title { get; set; }
+            public object Title;
 
             [Required]
-            public object Description { get; set; }
+            public object Description;
 
             [Required]
-            public object StartingPrice { get; set; }
+            public object StartingPrice;
 
             [Required]
-            public object StartTime { get; set; }
+            public object StartTime;
 
             [Required]
-            public object EndTime { get; set; }
+            public object EndTime;
 
             [Required]
-            public object Owner { get; set; }
+            public object Owner;
         }
     }
 }

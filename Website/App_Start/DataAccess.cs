@@ -163,7 +163,12 @@ namespace Ebuy.Website.App_Start
                         Title = product.Name,
                     };
 
+                    context.Auctions.Add(auction);
+                }
 
+/*
+                foreach (var auction in context.Auctions)
+                {
                     var nonOwners = users.Except(new[] { auction.Owner }).ToArray();
                     var lastBid = new Bid { Price = auction.StartingPrice, Timestamp = auction.StartTime };
 
@@ -173,9 +178,8 @@ namespace Ebuy.Website.App_Start
                         var amount = new Currency(string.Format("${0}", lastBid.Price.Amount + rand.Next(1, 20)));
                         user.Bid(auction, amount);
                     }
-
-                    context.Auctions.Add(auction);
                 }
+*/
             }
         }
     }

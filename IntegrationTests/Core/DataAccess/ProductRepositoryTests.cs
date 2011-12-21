@@ -10,7 +10,7 @@ namespace IntegrationTests.Core.DataAccess
         [TestMethod]
         public void ShouldSaveNewProduct()
         {
-            var product = CreateNewEntity();
+            var product = CreateNewEntity<Product>();
 
             Repository.Save(product);
             AssertSavedEntityExists(product);
@@ -19,7 +19,7 @@ namespace IntegrationTests.Core.DataAccess
         [TestMethod]
         public void ShouldSaveNewProductCategories()
         {
-            var product = CreateNewEntity();
+            var product = CreateNewEntity<Product>();
 
             var categories = product.Categories.Select(x => x.Key).ToArray();
             AssertNoSavedEntitiesMatching<Category>(x => categories.Contains(x.Key));
