@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace IntegrationTests.Core.DataAccess
 {
     [TestClass]
-    public class ProductRepositoryTests : RepositoryTestFixture
+    public class ProductPersistenceTests : RepositoryTestFixture
     {
         [TestMethod]
         public void ShouldSaveNewProduct()

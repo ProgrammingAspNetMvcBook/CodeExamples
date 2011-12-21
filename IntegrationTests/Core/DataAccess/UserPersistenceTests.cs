@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace IntegrationTests.Core.DataAccess
 {
     [TestClass]
-    public class UserRepositoryTests : RepositoryTestFixture
+    public class UserPersistenceTests : RepositoryTestFixture
     {
         [TestMethod]
         public void ShouldSaveNewUser()

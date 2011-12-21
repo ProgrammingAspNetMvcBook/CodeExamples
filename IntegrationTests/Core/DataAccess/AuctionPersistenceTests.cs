@@ -1,10 +1,11 @@
+using System.Linq;
 using Ebuy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IntegrationTests.Core.DataAccess
 {
     [TestClass]
-    public class AuctionRepositoryTests : RepositoryTestFixture
+    public class AuctionPersistenceTests : RepositoryTestFixture
     {
         [TestMethod]
         public void ShouldSaveNewAuction()
@@ -22,7 +23,6 @@ namespace IntegrationTests.Core.DataAccess
         public void ShouldPersistBids()
         {
             var auction = CreateAndSaveNewEntity<Auction>();
-
             var user1 = CreateAndSaveNewEntity<User>();
             var user2 = CreateAndSaveNewEntity<User>();
 
@@ -36,6 +36,10 @@ namespace IntegrationTests.Core.DataAccess
                 var savedAuction = context.Auctions.Find(auction.Id);
                 Assert.AreEqual(3, savedAuction.Bids.Count);
                 Assert.AreEqual("$30", savedAuction.WinningBid.Price);
+
+                var savedUser = context.Users.Find(user1.Id);
+                Assert.AreEqual(2, savedUser.Bids.Count);
+                Assert.IsTrue(savedUser.Bids.OrderBy(x => x.Price.Amount).Last().IsWinningBid);
             });
         }
     }

@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace IntegrationTests.Core.DataAccess
 {
     [TestClass]
-    public class CategoryRepositoryTests : RepositoryTestFixture
+    public class CategoryPersistenceTests : RepositoryTestFixture
     {
         [TestMethod]
         public void ShouldSaveNewCategory()
