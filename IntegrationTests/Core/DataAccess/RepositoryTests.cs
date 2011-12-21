@@ -4,30 +4,29 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IntegrationTests.Core.DataAccess
 {
-    public abstract class RepositoryTestFixture<T> : DataContextTestFixture<T>
-        where T : Entity
+    public abstract class RepositoryTestFixture : DataContextTestFixture
     {
-        protected Repository<T> Repository { get; set; }
+        protected Repository Repository { get; set; }
 
         [TestInitialize]
         public override void TestInitialize()
         {
             base.TestInitialize();
-            Repository = new Repository<T>(DataContext, false);
+            Repository = new Repository(DataContext, false);
         }
 
-        protected void AssertCanSaveNewEntity()
+        protected void AssertCanSaveNewEntity<T>() where T : class, IEntity
         {
             var entity = CreateNewEntity<T>();
-            Repository.Save(entity);
+            Repository.Add(entity);
             AssertSavedEntityExists(entity);
         }
 
-        protected virtual void AssertCanFindById()
+        protected virtual void AssertCanFindById<T>() where T : class, IEntity
         {
             var expectedEntity = CreateAndSaveNewEntity<T>();
 
-            var saved = Repository.FindById(expectedEntity.Id);
+            var saved = Repository.Single<T>(x => x.Id == expectedEntity.Id);
 
             Assert.IsNotNull(saved);
             Assert.AreEqual(expectedEntity.Id, saved.Id);

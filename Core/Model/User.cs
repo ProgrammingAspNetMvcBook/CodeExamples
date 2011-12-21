@@ -47,7 +47,7 @@ namespace Ebuy
             Contract.Requires(auction != null);
             Contract.Requires(currency != null);
 
-            var bid = new Bid { User = this, Price = currency, Timestamp = timestamp };
+            var bid = new Bid(timestamp) { User = this, Price = currency };
             auction.PostBid(bid);
         }
 

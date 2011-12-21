@@ -8,16 +8,16 @@ namespace Ebuy.Website.Controllers
 {
     public class AuctionsController : Controller
     {
-        private readonly IRepository<Auction> _repository;
+        private readonly IRepository _repository;
 
-        public AuctionsController(IRepository<Auction> repository)
+        public AuctionsController(IRepository repository)
         {
             _repository = repository;
         }
 
         public ActionResult Index(int page = 0, int pageSize = 25)
         {
-            var auctions = _repository.Query(page, pageSize);
+            var auctions = _repository.All<Auction>(page, pageSize);
 
             var auctionViewModel = new AuctionsViewModel {
                 Auctions = auctions.Select(Mapper.DynamicMap<AuctionViewModel>)
@@ -28,7 +28,7 @@ namespace Ebuy.Website.Controllers
 
         public ActionResult Auction(string id)
         {
-            var auction = _repository.FindByKey(id);
+            var auction = _repository.Single<Auction>(id);
 
             if (auction == null)
                 return View("NotFound");

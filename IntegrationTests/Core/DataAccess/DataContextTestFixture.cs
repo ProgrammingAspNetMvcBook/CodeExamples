@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IntegrationTests.Core.DataAccess
 {
-    public abstract class DataContextTestFixture<T> where T : class
+    public abstract class DataContextTestFixture
     {
         protected DataContext DataContext { get; set; }
 

@@ -18,33 +18,44 @@ namespace Ebuy
         }
         private Guid? _id;
 
-        public virtual Currency Price { get; set; }
-        public virtual DateTime Timestamp { get; set; }
+        public virtual Auction Auction { get; set; }
 
         public virtual bool IsWinningBid
         {
             get
             {
                 return Auction != null 
-                    && this == Auction.WinningBid;
+                       && this == Auction.WinningBid;
             }
         }
 
-        [InverseProperty("Bids")]
-        public virtual Auction Auction { get; set; }
+        public virtual Currency Price { get; set; }
+
+        public virtual DateTime Timestamp { get; private set; }
+
         public virtual User User { get; set; }
 
 
+        public Bid() : this(DateTime.UtcNow)
+        {
+        }
+
+        protected internal Bid(DateTime timestamp)
+        {
+            Timestamp = timestamp;
+        }
+
         public class Metadata
         {
+            [Required]
+            [InverseProperty("Bids")]
+            public object Auction { get; set; }
+
             [Required]
             public object Price { get; set; }
 
             [Required]
             public object Timestamp { get; set; }
-
-            [Required]
-            public object Auction { get; set; }
 
             [Required]
             public object User { get; set; }

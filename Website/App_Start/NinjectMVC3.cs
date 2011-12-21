@@ -55,7 +55,7 @@ namespace Ebuy.Website.App_Start
         {
             public override void Load()
             {
-                Bind(typeof(IRepository<>)).To(typeof(Repository<>));
+                Bind<IRepository>().To<Repository>();
             }
         }
     }

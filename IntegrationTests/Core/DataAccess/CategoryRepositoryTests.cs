@@ -4,12 +4,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace IntegrationTests.Core.DataAccess
 {
     [TestClass]
-    public class CategoryRepositoryTests : RepositoryTestFixture<Category>
+    public class CategoryRepositoryTests : RepositoryTestFixture
     {
         [TestMethod]
         public void ShouldSaveNewCategory()
         {
-            AssertCanSaveNewEntity();
+            AssertCanSaveNewEntity<Category>();
         }
     }
 }

@@ -5,23 +5,20 @@ using System.Linq.Expressions;
 
 namespace Ebuy.DataAccess
 {
-    public interface IRepository<TModel> : IDisposable
-        where TModel : IEntity
+    public interface IRepository : IDisposable
     {
-        void Delete(TModel instance);
-        void Delete(Expression<Func<TModel, bool>> predicate);
-        void DeleteById(long id);
-        void DeleteByKey(string key);
+        IQueryable<TModel> All<TModel>(int pageIndex = 0, int pageSize = 25) where TModel : class, IEntity;
 
-        TModel Find(Expression<Func<TModel, bool>> predicate);
-        TModel FindById(long id);
-        TModel FindByKey(string key);
+        void Add<TModel>(TModel instance) where TModel : class, IEntity;
+        void Add<TModel>(IEnumerable<TModel> instances) where TModel : class, IEntity;
 
-        IQueryable<TModel> Query(int pageIndex = 0, int pageSize = 25);
-        IQueryable<TModel> Query(Expression<Func<TModel, bool>> predicate);
-        IQueryable<TModel> Query(Expression<Func<TModel, bool>> predicate, out int count, int pageIndex, int pageSize);
+        void Delete<TModel>(string key) where TModel : class, IEntity;
+        void Delete<TModel>(TModel instance) where TModel : class, IEntity;
+        void Delete<TModel>(Expression<Func<TModel, bool>> predicate) where TModel : class, IEntity;
 
-        void Save(TModel instance);
-        void Save(IEnumerable<TModel> instances);
+        TModel Single<TModel>(string key) where TModel : class, IEntity;
+        TModel Single<TModel>(Expression<Func<TModel, bool>> predicate) where TModel : class, IEntity;
+
+        IQueryable<TModel> Query<TModel>(Expression<Func<TModel, bool>> predicate) where TModel : class, IEntity;
     }
 }

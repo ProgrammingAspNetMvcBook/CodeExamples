@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Contracts;
 using CustomExtensions.DataAnnotations;
@@ -31,6 +32,14 @@ namespace Ebuy
         public virtual Product Product { get; set; }
 
         public virtual User Owner { get; set; }
+
+
+        public Auction()
+        {
+            Bids = new Collection<Bid>();
+            Categories = new Collection<Category>();
+            Images = new Collection<WebsiteImage>();
+        }
 
 
         internal void PostBid(Bid bid)

@@ -5,14 +5,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace IntegrationTests.Core.DataAccess
 {
     [TestClass]
-    public class ProductRepositoryTests : RepositoryTestFixture<Product>
+    public class ProductRepositoryTests : RepositoryTestFixture
     {
         [TestMethod]
         public void ShouldSaveNewProduct()
         {
             var product = CreateNewEntity<Product>();
 
-            Repository.Save(product);
+            Repository.Add(product);
             AssertSavedEntityExists(product);
         }
 
@@ -24,7 +24,7 @@ namespace IntegrationTests.Core.DataAccess
             var categories = product.Categories.Select(x => x.Key).ToArray();
             AssertNoSavedEntitiesMatching<Category>(x => categories.Contains(x.Key));
 
-            Repository.Save(product);
+            Repository.Add(product);
 
             foreach (var category in product.Categories)
             {

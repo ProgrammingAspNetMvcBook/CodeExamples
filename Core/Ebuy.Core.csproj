@@ -50,6 +50,7 @@
     <Compile Include="DataAccess\DataContext.cs" />
     <Compile Include="DataAccess\IRepository.cs" />
     <Compile Include="DataAccess\Repository.cs" />
+    <Compile Include="Extensions\QueryableExtensions.cs" />
     <Compile Include="Model\Auction.cs" />
     <Compile Include="Model\Bid.cs" />
     <Compile Include="Model\Category.cs" />

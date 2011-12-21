@@ -1,28 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.Entity;
 using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Linq.Expressions;
 
 namespace Ebuy.DataAccess
 {
-    public class Repository<TModel> : IRepository<TModel>
-        where TModel : class, IEntity
+    public class Repository : IRepository
     {
         private readonly DataContext _context;
         private readonly bool _isSharedContext;
-
-        protected DbSet<TModel> DataSource
-        {
-            get { return _context.Set<TModel>(); }
-        }
-
-        public IQueryable<TModel> Items
-        {
-            get { return DataSource.AsQueryable(); }
-        }
 
 
         public Repository() 
@@ -39,6 +27,12 @@ namespace Ebuy.DataAccess
         }
 
 
+        public IQueryable<TModel> All<TModel>(int pageIndex = 0, int pageSize = 25)
+            where TModel : class, IEntity
+        {
+            return _context.Set<TModel>().Page(pageIndex, pageSize);
+        }
+
         public void Dispose()
         {
             // If this is a shared (or null) context then
@@ -49,69 +43,58 @@ namespace Ebuy.DataAccess
             _context.Dispose();
         }
 
-        public void DeleteById(long id)
-        {
-            var item = FindById(id);
-            Delete(item);
-        }
-
-        public void DeleteByKey(string key)
+        public void Delete<TModel>(string key) 
+            where TModel : class, IEntity
         {
             Contract.Requires(!string.IsNullOrWhiteSpace(key));
 
-            var entity = FindByKey(key);
+            var entity = Single<TModel>(key);
             Delete(entity);
         }
 
-        public void Delete(TModel instance)
+        public void Delete<TModel>(TModel instance)
+            where TModel : class, IEntity
         {
             Contract.Requires(instance != null);
 
             if (instance != null)
-                DataSource.Remove(instance);
+                _context.Set<TModel>().Remove(instance);
         }
 
-        public void Delete(Expression<Func<TModel, bool>> predicate)
+        public void Delete<TModel>(Expression<Func<TModel, bool>> predicate)
+            where TModel : class, IEntity
         {
             Contract.Requires(predicate != null);
 
-            var entity = Find(predicate);
+            TModel entity = Single(predicate);
+
             Delete(entity);
         }
 
-        public TModel FindById(long id)
-        {
-            Contract.Requires(id > 0);
-
-            return Find(x => x.Id == id);
-        }
-
-        public TModel FindByKey(string key)
+        public TModel Single<TModel>(string key)
+            where TModel : class, IEntity
         {
             Contract.Requires(!string.IsNullOrWhiteSpace(key));
 
-            var entity = Find(x => x.Key == key);
+            var entity = Single<TModel>(x => x.Key == key);
             return entity;
         }
 
-        public TModel Find(Expression<Func<TModel, bool>> predicate)
+        public TModel Single<TModel>(Expression<Func<TModel, bool>> predicate)
+            where TModel : class, IEntity
         {
             Contract.Requires(predicate != null);
 
-            var instance = DataSource.SingleOrDefault(predicate);
+            var instance = _context.Set<TModel>().SingleOrDefault(predicate);
             return instance;
         }
 
-        public IQueryable<TModel> Query(int pageIndex = 0, int pageSize = 25)
-        {
-            return ApplyPaging(DataSource, pageIndex, pageSize);
-        }
-
-        public IQueryable<TModel> Query(Expression<Func<TModel, bool>> predicate)
+        public IQueryable<TModel> Query<TModel>(Expression<Func<TModel, bool>> predicate)
+            where TModel : class, IEntity
         {
             Contract.Requires(predicate != null);
 
-            IQueryable<TModel> items = DataSource;
+            IQueryable<TModel> items = _context.Set<TModel>();
 
             if (predicate != null)
                 items = items.Where(predicate);
@@ -119,33 +102,8 @@ namespace Ebuy.DataAccess
             return items;
         }
 
-        public IQueryable<TModel> Query(Expression<Func<TModel, bool>> predicate, out int count, int pageIndex = 0, int pageSize = 25)
-        {
-            Contract.Requires(predicate != null);
-            Contract.Requires(pageIndex >= 0);
-            Contract.Requires(pageSize >= 0);
-
-            var items = Query(predicate);
-
-            items = ApplyPaging(items, pageIndex, pageSize);
-
-            count = items.Count();
-
-            return items;
-        }
-
-        private static IQueryable<TModel> ApplyPaging(IQueryable<TModel> items, int pageIndex, int pageSize)
-        {
-            int skip = pageIndex*pageSize;
-
-            if (skip > 0)
-                items = items.Skip(skip);
-
-            items = items.Take(pageSize);
-            return items;
-        }
-
-        public void Save(TModel instance)
+        public void Add<TModel>(TModel instance)
+            where TModel : class, IEntity
         {
             Contract.Requires(instance != null);
 
@@ -158,13 +116,14 @@ namespace Ebuy.DataAccess
                 _context.SaveChanges();
         }
 
-        public void Save(IEnumerable<TModel> instances)
+        public void Add<TModel>(IEnumerable<TModel> instances)
+            where TModel : class, IEntity
         {
             Contract.Requires(instances != null);
 
             foreach (var instance in instances)
             {
-                Save(instance);
+                Add(instance);
             }
         }
     }
