@@ -5,6 +5,7 @@ namespace Ebuy
 {
     public class Bid
     {
+        [Key]
         public virtual Guid Id
         {
             get
@@ -18,7 +19,7 @@ namespace Ebuy
         }
         private Guid? _id;
 
-        public virtual Auction Auction { get; set; }
+        public virtual Auction Auction { get; private set; }
 
         public virtual bool IsWinningBid
         {
@@ -29,20 +30,28 @@ namespace Ebuy
             }
         }
 
-        public virtual Currency Price { get; set; }
+        public virtual Currency Price { get; private set; }
 
         public virtual DateTime Timestamp { get; private set; }
 
-        public virtual User User { get; set; }
+        public virtual User User { get; private set; }
 
 
-        public Bid() : this(DateTime.UtcNow)
+        public Bid(User user, Auction auction, Currency price) 
+            : this(user, auction, price, DateTime.UtcNow)
         {
         }
 
-        protected internal Bid(DateTime timestamp)
+        protected internal Bid(User user, Auction auction, Currency price, DateTime timestamp)
         {
+            User = user;
+            Auction = auction;
+            Price = price;
             Timestamp = timestamp;
+        }
+
+        private Bid()
+        {
         }
 
         public class Metadata

@@ -62,17 +62,19 @@ namespace IntegrationTests.Core.DataAccess
         protected virtual TEntity CreateAndSaveNewEntity<TEntity>() 
             where TEntity : class, IEntity
         {
-            var entity = TestDataGenerator.GenerateValid<TEntity>();
+            long entityId = 0;
 
             ExecuteInNewContext(context => {
+                var entity = TestDataGenerator.GenerateValid<TEntity>();
                 context.Set<TEntity>().Add(entity);
                 context.SaveChanges();
+
+                entityId = entity.Id;
             });
 
-            // Make sure the Id was updated!
-            Assert.AreNotEqual(0, entity.Id);
+            Assert.AreNotEqual(0, entityId);
 
-            return entity;
+            return DataContext.Set<TEntity>().Find(entityId);
         }
     }
 }

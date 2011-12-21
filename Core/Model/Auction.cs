@@ -42,17 +42,25 @@ namespace Ebuy
         }
 
 
-        internal void PostBid(Bid bid)
+        public void PostBid(User user, Currency bidAmount)
         {
-            Contract.Requires(bid != null);
+            PostBid(user, bidAmount, DateTime.UtcNow);
+        }
+
+        protected internal void PostBid(User user, Currency bidAmount, DateTime timestamp)
+        {
+            Contract.Requires(user != null);
+            Contract.Requires(bidAmount != null);
+
+            var bid = new Bid(user, this, bidAmount, timestamp);
+
+            Bids.Add(bid);
 
             // TODO: Support multiple currencies
-            if (WinningBid == null || bid.Price.Amount > WinningBid.Price.Amount)
+            if (WinningBid == null || bidAmount.Amount > WinningBid.Price.Amount)
             {
                 WinningBid = bid;
             }
-            
-            Bids.Add(bid);
         }
 
 

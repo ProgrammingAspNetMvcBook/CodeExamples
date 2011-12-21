@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Contracts;
-using System.Linq;
 using CustomExtensions.DataAnnotations;
 
 namespace Ebuy
@@ -37,18 +36,17 @@ namespace Ebuy
         }
 
 
-        public void Bid(Auction auction, Currency currency)
+        public void Bid(Auction auction, Currency bidAmount)
         {
-            Bid(auction, currency, DateTime.Now);
+            Bid(auction, bidAmount, DateTime.Now);
         }
 
-        protected internal virtual void Bid(Auction auction, Currency currency, DateTime timestamp)
+        protected internal virtual void Bid(Auction auction, Currency bidAmount, DateTime timestamp)
         {
             Contract.Requires(auction != null);
-            Contract.Requires(currency != null);
+            Contract.Requires(bidAmount != null);
 
-            var bid = new Bid(timestamp) { User = this, Price = currency };
-            auction.PostBid(bid);
+            auction.PostBid(this, bidAmount, timestamp);
         }
 
 
