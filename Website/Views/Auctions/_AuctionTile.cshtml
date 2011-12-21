@@ -1,0 +1,24 @@
+﻿@model AuctionViewModel
+@{
+    var auctionUrl = Url.Auction(Model);
+}
+<div class="auction-tile">
+    <div class="thumbnail">
+        <a href="@auctionUrl">@Html.Thumbnail(Model.Image, Model.Title)</a>
+    </div>
+    <div class="data">
+        <h4 class="title"><a href="@auctionUrl">@Model.Title</a></h4>
+        <p>
+            <span>Closing in: </span>
+            <span class="time-remaining" title="@Model.EndTimeDisplay">@Model.RemainingTimeDisplay</span>
+        </p>
+        <p>
+            <strong>Current Bid: </strong>
+            <span class="current-bid-amount">@Model.WinningBidPrice</span>
+            <span class="current-bidder">@Model.WinningBidUsername</span>
+        </p>
+        <p>
+            <span><a href="StartNewAuction()">Bid Now</a></span>
+        </p>
+    </div>
+</div>

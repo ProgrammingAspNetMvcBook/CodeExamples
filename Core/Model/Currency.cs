@@ -20,10 +20,6 @@ namespace Ebuy
         public decimal Amount { get; private set; }
 
 
-        private Currency()
-        {
-        }
-
         public Currency(string code, decimal amount)
         {
             Code = code;
@@ -37,6 +33,10 @@ namespace Ebuy
 
             Code = CurrencyCodesBySymbol[currency[0]];
             Amount = decimal.Parse(currency.Substring(1));
+        }
+
+        private Currency()
+        {
         }
 
 

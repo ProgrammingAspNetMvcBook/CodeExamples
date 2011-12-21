@@ -132,6 +132,8 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\AuctionsController.cs" />
     <Compile Include="Controllers\ViewSwitcherController.cs" />
+    <Compile Include="Extensions\HtmlHelperExtensions.cs" />
+    <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AuctionModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -289,7 +291,7 @@
     <Content Include="Views\Auctions\Auctions.mobile.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Auctions\_Auction.cshtml" />
+    <Content Include="Views\Auctions\_AuctionTile.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

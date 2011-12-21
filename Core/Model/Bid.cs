@@ -5,7 +5,7 @@ namespace Ebuy
 {
     public class Bid : IEquatable<Bid>
     {
-        public virtual Guid Id
+        public Guid Id
         {
             get
             {
@@ -18,22 +18,22 @@ namespace Ebuy
         }
         private Guid? _id;
 
-        public virtual Auction Auction { get; private set; }
+        public Auction Auction { get; private set; }
 
-        public virtual bool IsWinningBid
+        public bool IsWinningBid
         {
             get
             {
                 return Auction != null 
-                       && this == Auction.WinningBid;
+                    && this == Auction.WinningBid;
             }
         }
 
-        public virtual Currency Price { get; private set; }
+        public Currency Price { get; private set; }
 
-        public virtual DateTime Timestamp { get; private set; }
+        public DateTime Timestamp { get; private set; }
 
-        public virtual User User { get; private set; }
+        public User User { get; private set; }
 
 
         public Bid(User user, Auction auction, Currency price) 

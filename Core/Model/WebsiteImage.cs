@@ -8,12 +8,20 @@ namespace Ebuy
     {
         public virtual Guid Id
         {
-            get { return _id ?? Guid.NewGuid(); }
-            set { _id = value; }
+            get
+            {
+                if (_id == null)
+                    _id = Guid.NewGuid();
+
+                return _id.Value;
+            }
+            private set { _id = value; }
         }
         private Guid? _id;
 
         public virtual string ImageUrl { get; set; }
+
+        public virtual string Title { get; set; }
 
         public virtual string ThumbnailUrl { get; set; }
 

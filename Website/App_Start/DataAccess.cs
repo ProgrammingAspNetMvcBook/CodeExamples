@@ -147,7 +147,11 @@ namespace Ebuy.Website.App_Start
 
                 foreach (var product in context.Products.Local)
                 {
-                    var startTime = new DateTime(2011, rand.Next(1, 12), rand.Next(1, 28), rand.Next(0, 24), rand.Next(0, 60), 0);
+                    var startTime = 
+                        DateTime.UtcNow
+                            .AddDays(rand.Next(-2, 4))
+                            .AddHours(rand.Next(1, 24))
+                            .AddHours(rand.Next(1, 60));
 
                     var auction = new Auction()
                     {
