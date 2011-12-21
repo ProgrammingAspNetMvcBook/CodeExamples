@@ -19,11 +19,9 @@ namespace Ebuy.Website.Controllers
         {
             var auctions = _repository.All<Auction>(page, pageSize);
 
-            var auctionViewModel = new AuctionsViewModel {
-                Auctions = auctions.Select(Mapper.DynamicMap<AuctionViewModel>)
-            };
+            var viewModel = auctions.Select(Mapper.DynamicMap<AuctionViewModel>);
 
-            return View("Auctions", auctionViewModel);
+            return View("Auctions", viewModel);
         }
 
         public ActionResult Auction(string id)

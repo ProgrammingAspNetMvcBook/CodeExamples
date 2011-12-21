@@ -1,4 +1,4 @@
-﻿@model Ebuy.Website.Models.AuctionsViewModel
+﻿@model IEnumerable<AuctionViewModel>
 <link href="@Url.Content("~/Content/product.css")" rel="stylesheet" type="text/css" />
 @{
     ViewBag.Title = "Auctions";
@@ -13,7 +13,7 @@
     </header>
     <div class="container clear-fix">
         <ul id="auctions" class="list" data-role="listview">
-            @foreach (var auction in Model.Auctions)
+            @foreach (var auction in Model)
             {
                 <li class="listitem">
                     @Html.Partial("_AuctionTile", auction)

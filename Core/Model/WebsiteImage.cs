@@ -6,7 +6,7 @@ namespace Ebuy
     [MetadataType(typeof(WebsiteImage.Metadata))]
     public class WebsiteImage
     {
-        public virtual Guid Id
+        public Guid Id
         {
             get
             {
@@ -19,11 +19,11 @@ namespace Ebuy
         }
         private Guid? _id;
 
-        public virtual string ImageUrl { get; set; }
+        public string ImageUrl { get; set; }
 
-        public virtual string Title { get; set; }
+        public string Title { get; set; }
 
-        public virtual string ThumbnailUrl { get; set; }
+        public string ThumbnailUrl { get; set; }
 
 
         public WebsiteImage()
@@ -44,10 +44,13 @@ namespace Ebuy
         public class Metadata
         {
             [StringLength(2000)]
-            public object ImageUrl { get; set; }
+            public object ImageUrl;
 
             [StringLength(2000)]
-            public object ThumbnailUrl { get; set; }
+            public object ThumbnailUrl;
+
+            [StringLength(2000)]
+            public object Title;
         }
     }
 }

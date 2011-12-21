@@ -37,16 +37,11 @@ namespace Ebuy
 
 
         public Bid(User user, Auction auction, Currency price) 
-            : this(user, auction, price, DateTime.UtcNow)
-        {
-        }
-
-        protected internal Bid(User user, Auction auction, Currency price, DateTime timestamp)
         {
             User = user;
             Auction = auction;
             Price = price;
-            Timestamp = timestamp;
+            Timestamp = Clock.Now;
         }
 
         private Bid()
@@ -88,17 +83,17 @@ namespace Ebuy
         {
             [Required]
             [InverseProperty("Bids")]
-            public object Auction { get; set; }
+            public object Auction;
 
             [Required]
-            public object Price { get; set; }
+            public object Price;
 
             [Required]
-            public object Timestamp { get; set; }
+            public object Timestamp;
 
             [Required]
             [InverseProperty("Bids")]
-            public object User { get; set; }
+            public object User;
         }
     }
 }

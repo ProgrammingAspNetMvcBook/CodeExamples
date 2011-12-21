@@ -135,7 +135,7 @@
     <Compile Include="Extensions\HtmlHelperExtensions.cs" />
     <Compile Include="Extensions\UrlHelperExtensions.cs" />
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\AuctionModel.cs" />
+    <Compile Include="Models\AuctionViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

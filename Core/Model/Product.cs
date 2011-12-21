@@ -44,16 +44,16 @@ namespace Ebuy
         public class Metadata
         {
             [Required, IsNotEmpty]
-            public object Categories { get; set; }
+            public object Categories;
 
             [Required]
-            public object Description { get; set; }
+            public object Description;
 
             [Required, StringLength(2000)]
-            public object ImageUrl { get; set; }
+            public object ImageUrl;
 
             [Required, StringLength(500)]
-            public object Name { get; set; }
+            public object Name;
         }
     }
 }

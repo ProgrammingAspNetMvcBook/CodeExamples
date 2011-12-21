@@ -20,7 +20,7 @@ namespace Ebuy
 
         public bool IsCompleted
         {
-            get { return EndTime <= DateTime.Now; }
+            get { return EndTime <= Clock.Now; }
         }
 
         public virtual ICollection<Category> Categories { get; set; }
@@ -44,15 +44,10 @@ namespace Ebuy
 
         public void PostBid(User user, Currency bidAmount)
         {
-            PostBid(user, bidAmount, DateTime.UtcNow);
-        }
-
-        protected internal void PostBid(User user, Currency bidAmount, DateTime timestamp)
-        {
             Contract.Requires(user != null);
             Contract.Requires(bidAmount != null);
 
-            var bid = new Bid(user, this, bidAmount, timestamp);
+            var bid = new Bid(user, this, bidAmount);
 
             Bids.Add(bid);
 

@@ -20,7 +20,7 @@ namespace Ebuy
         private string _displayName;
 
         [Unique]
-        public virtual string EmailAddress { get; set; }
+        public string EmailAddress { get; set; }
 
         public virtual string FullName { get; set; }
 
@@ -52,28 +52,23 @@ namespace Ebuy
 
         public void Bid(Auction auction, Currency bidAmount)
         {
-            Bid(auction, bidAmount, DateTime.Now);
-        }
-
-        protected internal virtual void Bid(Auction auction, Currency bidAmount, DateTime timestamp)
-        {
             Contract.Requires(auction != null);
             Contract.Requires(bidAmount != null);
 
-            auction.PostBid(this, bidAmount, timestamp);
+            auction.PostBid(this, bidAmount);
         }
 
 
         public class Metadata
         {
             [StringLength(50)]
-            public object DisplayName { get; set; }
+            public object DisplayName;
 
             [StringLength(100, MinimumLength = 5)]
-            public object EmailAddress { get; set; }
+            public object EmailAddress;
 
             [Required, StringLength(100, MinimumLength = 3)]
-            public object FullName { get; set; }
+            public object FullName;
         }
     }
 }
