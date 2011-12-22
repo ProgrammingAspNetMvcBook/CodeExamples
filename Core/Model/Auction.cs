@@ -36,7 +36,6 @@ namespace Ebuy
         public virtual User Owner { get; set; }
 
 
-
         public Auction()
         {
             Bids = new Collection<Bid>();
@@ -50,15 +49,13 @@ namespace Ebuy
             Contract.Requires(user != null);
             Contract.Requires(bidAmount != null);
 
-            var bid = new Bid(user, this, bidAmount);
-
-            Bids.Add(bid);
-
             // TODO: Support multiple currencies
-            if (WinningBid == null || bidAmount.Value > WinningBid.Amount.Value)
-            {
-                WinningBid = bid;
-            }
+            if (WinningBid != null && bidAmount.Value <= WinningBid.Amount.Value)
+                throw new InvalidBidAmountException(bidAmount, WinningBid);
+
+            var bid = new Bid(user, this, bidAmount);
+            WinningBid = bid;
+            Bids.Add(bid);
         }
 
 
@@ -87,6 +84,18 @@ namespace Ebuy
 
             [Required]
             public object Owner;
+        }
+    }
+
+    public class InvalidBidAmountException : Exception
+    {
+        public Currency BidAmount { get; set; }
+        public Bid WinningBid { get; set; }
+
+        public InvalidBidAmountException(Currency bidAmount, Bid winningBid)
+        {
+            BidAmount = bidAmount;
+            WinningBid = winningBid;
         }
     }
 }

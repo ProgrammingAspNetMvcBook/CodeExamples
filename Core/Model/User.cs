@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
@@ -61,6 +60,9 @@ namespace Ebuy
 
         public class Metadata
         {
+            [InverseProperty("User")]
+            public object Bids;
+
             [StringLength(50)]
             public object DisplayName;
 

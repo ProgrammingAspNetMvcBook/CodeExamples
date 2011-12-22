@@ -87,7 +87,6 @@ namespace Ebuy
         public class Metadata
         {
             [Required]
-            [InverseProperty("Bids")]
             public object Auction;
 
             [Required]
@@ -97,7 +96,6 @@ namespace Ebuy
             public object Timestamp;
 
             [Required]
-            [InverseProperty("Bids")]
             public object User;
         }
     }

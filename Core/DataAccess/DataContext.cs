@@ -18,5 +18,32 @@ namespace Ebuy.DataAccess
             Configuration.ProxyCreationEnabled = true;
             Configuration.ValidateOnSaveEnabled = true;
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+/*
+            modelBuilder.Entity<Auction>()
+                .HasMany(x => x.Bids)
+                .WithOptional()
+                .Map(x => x.MapKey("Auction_ID"));
+*/
+
+            modelBuilder.Entity<Bid>()
+                .HasRequired(x => x.Auction)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+            
+            modelBuilder.Entity<Bid>()
+                .HasRequired(x => x.User)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+            
+/*
+            modelBuilder.Entity<User>()
+                .HasMany(x => x.Bids)
+                .WithOptional()
+                .Map(x => x.MapKey("User_ID"));
+*/
+        }
     }
 }
