@@ -40,18 +40,18 @@ namespace Ebuy.Website.Controllers
         public ActionResult Bids(string key)
         {
             var auction = _repository.Query<Auction>(x => x.Key == key);
-
+            
             if (auction == null || auction.Count() == 0)
                 return View("NotFound");
 
-            var bids = auction.FirstOrDefault().Bids.AsQueryable();
+            var bids = _repository.Query<Bid>(x => x.Auction.Key == key, "User", "Auction").ToArray();
 
             var viewModel = new BidsViewModel
                                 {
                                     Auction = Mapper.DynamicMap<AuctionViewModel>(auction),
                                     Bids = bids.Select(x => new BidViewModel()
                                     {
-                                                Amount = x.Amount.ToString(),
+                                                Amount = x.Amount,
                                                 Timestamp = x.Timestamp,
                                                 UserDisplayName = x.User.DisplayName,
                                             }).ToArray(),

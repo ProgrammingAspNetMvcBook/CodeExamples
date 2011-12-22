@@ -16,7 +16,7 @@ namespace IntegrationTests.Core.DataAccess
         [TestMethod]
         public void ShouldFindAuctionById()
         {
-            AssertCanFindById<Auction>();
+            AssertCanFindByKey<Auction>();
         }
 
         [TestMethod]
@@ -35,7 +35,7 @@ namespace IntegrationTests.Core.DataAccess
             ExecuteInNewContext(context => {
                 var savedAuction = context.Auctions.Find(auction.Id);
                 Assert.AreEqual(3, savedAuction.Bids.Count);
-                Assert.AreEqual("$30", savedAuction.WinningBid.Amount);
+                Assert.AreEqual((Currency)"$30", savedAuction.WinningBid.Amount);
 
                 var savedUser = context.Users.Find(user1.Id);
                 Assert.AreEqual(2, savedUser.Bids.Count);

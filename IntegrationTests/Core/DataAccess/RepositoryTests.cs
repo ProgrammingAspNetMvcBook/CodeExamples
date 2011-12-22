@@ -22,14 +22,14 @@ namespace IntegrationTests.Core.DataAccess
             AssertSavedEntityExists(entity);
         }
 
-        protected virtual void AssertCanFindById<T>() where T : class, IEntity
+        protected virtual void AssertCanFindByKey<T>() where T : class, IEntity
         {
             var expectedEntity = CreateAndSaveNewEntity<T>();
 
-            var saved = Repository.Single<T>(x => x.Id == expectedEntity.Id);
+            var saved = Repository.Single<T>(x => x.Key == expectedEntity.Key);
 
             Assert.IsNotNull(saved);
-            Assert.AreEqual(expectedEntity.Id, saved.Id);
+            Assert.AreEqual(expectedEntity.Key, saved.Key);
         }
     }
 }

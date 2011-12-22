@@ -8,7 +8,7 @@ using CustomExtensions.DataAnnotations;
 namespace Ebuy
 {
     [MetadataType(typeof(Auction.Metadata))]
-    public class Auction : Entity
+    public class Auction : Entity<Guid>
     {
         public virtual string Title { get; set; }
         public virtual string Description { get; set; }
@@ -67,11 +67,15 @@ namespace Ebuy
             [IsNotEmpty]
             public object Categories;
 
-            [Required, StringLength(500)]
-            public object Title;
-
             [Required]
             public object Description;
+
+            [Required]
+            public object EndTime;
+
+            [Required]
+            [InverseProperty("Selling")]
+            public object Owner;
 
             [Required]
             public object StartingPrice;
@@ -79,11 +83,8 @@ namespace Ebuy
             [Required]
             public object StartTime;
 
-            [Required]
-            public object EndTime;
-
-            [Required]
-            public object Owner;
+            [Required, StringLength(500)]
+            public object Title;
         }
     }
 

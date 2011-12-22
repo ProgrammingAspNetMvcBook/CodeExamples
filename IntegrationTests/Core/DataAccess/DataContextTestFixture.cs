@@ -31,16 +31,17 @@ namespace IntegrationTests.Core.DataAccess
         protected void AssertSavedEntityExists<TEntity>(TEntity entity)
             where TEntity : class, IEntity
         {
-            AssertSavedEntityExists<TEntity>(entity.Id);
+            AssertSavedEntityExists<TEntity>(entity.Key);
         }
 
-        protected void AssertSavedEntityExists<TEntity>(long id)
-            where TEntity : class
+        protected void AssertSavedEntityExists<TEntity>(string key)
+            where TEntity : class, IEntity
         {
-            Assert.AreNotEqual(default(long), id);
+            Assert.IsNotNull(key);
+            Assert.AreNotEqual(string.Empty, key);
 
             ExecuteInNewContext(context => {
-                var saved = context.Set<TEntity>().Find(id);
+                var saved = context.Set<TEntity>().FirstOrDefault(x => x.Key == key);
                 Assert.IsNotNull(saved);
             });
         }
@@ -62,19 +63,19 @@ namespace IntegrationTests.Core.DataAccess
         protected virtual TEntity CreateAndSaveNewEntity<TEntity>() 
             where TEntity : class, IEntity
         {
-            long entityId = 0;
+            string key = null;
 
             ExecuteInNewContext(context => {
                 var entity = TestDataGenerator.GenerateValid<TEntity>();
                 context.Set<TEntity>().Add(entity);
                 context.SaveChanges();
 
-                entityId = entity.Id;
+                key = entity.Key;
             });
 
-            Assert.AreNotEqual(0, entityId);
+            Assert.IsNotNull(key);
 
-            return DataContext.Set<TEntity>().Find(entityId);
+            return DataContext.Set<TEntity>().FirstOrDefault(x => x.Key == key);
         }
     }
 }

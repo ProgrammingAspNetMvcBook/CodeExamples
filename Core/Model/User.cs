@@ -7,8 +7,10 @@ using CustomExtensions.DataAnnotations;
 namespace Ebuy
 {
     [MetadataType(typeof(User.Metadata))]
-    public class User : Entity
+    public class User : Entity<long>
     {
+        public virtual ICollection<Auction> Selling { get; private set; }
+
         public virtual ICollection<Bid> Bids { get; private set; }
 
         public virtual string DisplayName

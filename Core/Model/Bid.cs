@@ -4,20 +4,8 @@ using System.Diagnostics.Contracts;
 
 namespace Ebuy
 {
-    public class Bid : IEquatable<Bid>
+    public class Bid : Entity<Guid>, IEquatable<Bid>
     {
-        public Guid Id
-        {
-            get
-            {
-                if (_id == null)
-                    _id = Guid.NewGuid();
-                
-                return _id.Value;
-            }
-            private set { _id = value; }
-        }
-        private Guid? _id;
 
         public virtual Auction Auction { get; private set; }
 

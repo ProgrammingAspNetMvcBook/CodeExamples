@@ -1,9 +1,10 @@
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Ebuy
 {
     [MetadataType(typeof(Review.Metadata))]
-    public class Review : Entity
+    public class Review : Entity<Guid>
     {
         public string Description { get; set; }
         public double Rating { get; set; }

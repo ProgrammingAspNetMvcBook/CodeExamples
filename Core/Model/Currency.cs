@@ -78,6 +78,11 @@ namespace Ebuy
             return new Currency(currency);
         }
 
+        public static implicit operator string(Currency currency)
+        {
+            return currency.ToString();
+        }
+
         public override int GetHashCode()
         {
             unchecked
