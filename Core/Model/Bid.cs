@@ -19,7 +19,7 @@ namespace Ebuy
         }
         private Guid? _id;
 
-        public Auction Auction { get; private set; }
+        public virtual Auction Auction { get; private set; }
 
         public bool IsWinningBid
         {
@@ -34,7 +34,7 @@ namespace Ebuy
 
         public DateTime Timestamp { get; private set; }
 
-        public User User { get; private set; }
+        public virtual User User { get; private set; }
 
 
         public Bid(User user, Auction auction, Currency price) 

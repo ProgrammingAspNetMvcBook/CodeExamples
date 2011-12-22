@@ -9,12 +9,12 @@ namespace Ebuy.Website.Extensions
 
         public static string Auction(this UrlHelper helper, Auction auction)
         {
-            return helper.RouteUrl("Auction", new { id = auction.Key, title = auction.Title });
+            return helper.RouteUrl("Auction", new { key = auction.Key, title = auction.Title });
         }
 
         public static string Auction(this UrlHelper helper, AuctionViewModel auction)
         {
-            return helper.RouteUrl("Auction", new { id = auction.Key, title = auction.Title });
+            return helper.RouteUrl("Auction", new { key = auction.Key, title = auction.Title });
         }
 
     }

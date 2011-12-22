@@ -1,16 +1,19 @@
-﻿using System.Web.Mvc;
+﻿using System.Linq;
+using System.Web.Mvc;
 using System.Web.Routing;
+using CustomExtensions.Routing;
 using Ebuy.Website.App_Start;
 
-[assembly: WebActivator.PreApplicationStartMethod(typeof(Routes), "Start")]
+[assembly: WebActivator.PostApplicationStartMethod(typeof(Routes), "InitializeRouting")]
 
 namespace Ebuy.Website.App_Start
 {
     public static class Routes
     {
-        public static void Start()
+        public static void InitializeRouting()
         {
-            Routes.RegisterRoutes(RouteTable.Routes);
+            RegisterRoutes(RouteTable.Routes);
+            RegisterRouteAttributes();
         }
 
         public static void RegisterRoutes(RouteCollection routes)
@@ -19,7 +22,7 @@ namespace Ebuy.Website.App_Start
 
             routes.MapRoute(
                 "Auction",
-                "Auctions/{id}/{title}",
+                "Auctions/{title}/{key}",
                 new { controller = "Auctions", action = "Auction" }
             );
 
@@ -28,7 +31,17 @@ namespace Ebuy.Website.App_Start
                 "{controller}/{action}/{id}", // URL with parameters
                 new { controller = "Home", action = "Index", id = UrlParameter.Optional } // Parameter defaults
             );
+        }
 
+        private static void RegisterRouteAttributes()
+        {
+            var routeGenerators = DependencyResolver.Current.GetServices<IRouteGenerator>();
+            var routes = routeGenerators.SelectMany(x => x.Generate()).ToArray();
+
+            foreach (var route in routes)
+            {
+                RouteTable.Routes.Insert(0, route);
+            }
         }
     }
 }

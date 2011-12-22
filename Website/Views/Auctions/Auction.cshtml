@@ -17,6 +17,8 @@
         <strong>Current Bid: </strong>
         <span class="current-bid-amount">@Model.WinningBidPrice</span>
         <span class="current-bidder">@Model.WinningBidUsername</span>
+
+        @Html.ActionLink("Bid History", "Bids", "Auctions", new { key = Model.Key }, null)
     </p>
     <p>
         <span><a href="StartNewAuction()">Bid Now</a></span>
