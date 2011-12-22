@@ -15,10 +15,10 @@ namespace Ebuy
         public class Metadata
         {
             [StringLength(1000)]
-            public object Description { get; set; }
+            public object Description;
 
             [Range(0, 5)] // Five-star rating system
-            public object Rating { get; set; }
+            public object Rating;
         }
     }
 }

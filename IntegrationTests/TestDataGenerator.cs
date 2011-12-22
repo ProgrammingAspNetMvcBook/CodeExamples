@@ -36,18 +36,21 @@ namespace IntegrationTests
         protected virtual object GenerateValidAuction()
         {
             var id = Random();
-            return new Auction()
+            var auction = new Auction()
                        {
                            Title = "Test Auction #" + id,
                            Description = "Description for test auction #" + id,
                            StartingPrice = "$1",
-                           StartTime = DateTime.Now,
-                           EndTime = DateTime.Now.AddDays(7),
+                           StartTime = Clock.Now,
+                           EndTime = Clock.Now.AddDays(7),
                            Owner = GenerateValid<User>(),
                            Product = GenerateValid<Product>(),
                            Categories = new[] { GenerateValid<Category>(), GenerateValid<Category>() },
-                           Images = new WebsiteImage[] { string.Format("http://www.test.com/image_{0}.png", id) },
                        };
+
+            auction.Images.Add(string.Format("http://www.test.com/image_{0}.png", id));
+
+            return auction;
         }
 
         protected virtual object GenerateValidCategory()

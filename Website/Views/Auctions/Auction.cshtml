@@ -1,10 +1,31 @@
-﻿@model Ebuy.Website.Models.AuctionViewModel
+﻿@model AuctionViewModel
 @{
     ViewBag.Title = Model.Title;
 }
 
 <h2>@ViewBag.Title</h2>
 
-<div>
-    <img src="@Url.Content(Model.Images.First().ImageUrl)"/>
+<div class="overview">
+    <div class="product-image">
+        @Html.Image(Model.Image, Model.Title)
+    </div>
+
+    <p>
+        Closing in <span class="time-remaining">@Model.RemainingTimeDisplay</span>
+    </p>
+    <p>
+        <strong>Current Bid: </strong>
+        <span class="current-bid-amount">@Model.WinningBidPrice</span>
+        <span class="current-bidder">@Model.WinningBidUsername</span>
+
+        @Html.ActionLink("Bid History", "Bids", "Auctions", new { key = Model.Key }, null)
+    </p>
+    <p>
+        <span><a href="StartNewAuction()">Bid Now</a></span>
+    </p>
+</div>
+
+<h3>Description</h3>
+<div class="description">
+    @Model.Description
 </div>

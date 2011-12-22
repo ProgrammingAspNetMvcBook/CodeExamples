@@ -8,12 +8,20 @@ namespace Ebuy
     {
         public Guid Id
         {
-            get { return _id ?? Guid.NewGuid(); }
-            set { _id = value; }
+            get
+            {
+                if (_id == null)
+                    _id = Guid.NewGuid();
+
+                return _id.Value;
+            }
+            private set { _id = value; }
         }
         private Guid? _id;
 
         public string ImageUrl { get; set; }
+
+        public string Title { get; set; }
 
         public string ThumbnailUrl { get; set; }
 
@@ -36,10 +44,13 @@ namespace Ebuy
         public class Metadata
         {
             [StringLength(2000)]
-            public object ImageUrl { get; set; }
+            public object ImageUrl;
 
             [StringLength(2000)]
-            public object ThumbnailUrl { get; set; }
+            public object ThumbnailUrl;
+
+            [StringLength(2000)]
+            public object Title;
         }
     }
 }

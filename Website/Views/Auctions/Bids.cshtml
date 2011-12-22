@@ -1,0 +1,20 @@
+﻿@model BidsViewModel
+
+@{
+    ViewBag.Title = Model.Title;
+}
+
+<h2>@Model.Title</h2>
+
+<div class="bid-history">
+
+@foreach (var bid in Model.Bids)
+{
+    <div class="bid">
+        <span class="timestamp">@bid.TimestampDisplay</span>
+        <span class="user">@bid.UserDisplayName</span>
+        <span class="amount">@bid.Amount</span>
+    </div>
+}
+
+</div>

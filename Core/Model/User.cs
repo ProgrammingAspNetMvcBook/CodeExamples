@@ -1,8 +1,7 @@
-using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Contracts;
-using System.Linq;
 using CustomExtensions.DataAnnotations;
 
 namespace Ebuy
@@ -10,7 +9,9 @@ namespace Ebuy
     [MetadataType(typeof(User.Metadata))]
     public class User : Entity
     {
-        public string DisplayName
+        public virtual ICollection<Bid> Bids { get; private set; }
+
+        public virtual string DisplayName
         {
             get { return _displayName ?? FullName; }
             set { _displayName = value; }
@@ -20,12 +21,23 @@ namespace Ebuy
         [Unique]
         public string EmailAddress { get; set; }
 
-        public string FullName { get; set; }
+        public virtual string FullName { get; set; }
 
-        public virtual ICollection<Bid> Bids { get; set; }
-        public virtual ICollection<Payment> Payments { get; set; }
-        public virtual ICollection<Review> Reviews { get; set; }
-        public virtual ICollection<Auction> WatchedAuctions { get; set; }
+        public virtual ICollection<Payment> Payments { get; private set; }
+
+        public virtual ICollection<Review> Reviews { get; private set; }
+
+        public virtual ICollection<Auction> WatchedAuctions { get; private set; }
+
+
+        public User()
+        {
+            Bids = new Collection<Bid>();
+            Payments = new Collection<Payment>();
+            Reviews = new Collection<Review>();
+            WatchedAuctions = new Collection<Auction>();
+        }
+
 
         protected override string GenerateKey()
         {
@@ -37,31 +49,28 @@ namespace Ebuy
         }
 
 
-        public void Bid(Auction auction, Currency currency)
-        {
-            Bid(auction, currency, DateTime.Now);
-        }
-
-        protected internal virtual void Bid(Auction auction, Currency currency, DateTime timestamp)
+        public void Bid(Auction auction, Currency bidAmount)
         {
             Contract.Requires(auction != null);
-            Contract.Requires(currency != null);
+            Contract.Requires(bidAmount != null);
 
-            var bid = new Bid { User = this, Price = currency, Timestamp = timestamp };
-            auction.PostBid(bid);
+            auction.PostBid(this, bidAmount);
         }
 
 
         public class Metadata
         {
+            [InverseProperty("User")]
+            public object Bids;
+
             [StringLength(50)]
-            public object DisplayName { get; set; }
+            public object DisplayName;
 
             [StringLength(100, MinimumLength = 5)]
-            public object EmailAddress { get; set; }
+            public object EmailAddress;
 
             [Required, StringLength(100, MinimumLength = 3)]
-            public object FullName { get; set; }
+            public object FullName;
         }
     }
 }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Contracts;
 using CustomExtensions.DataAnnotations;
@@ -9,23 +10,23 @@ namespace Ebuy
     [MetadataType(typeof(Auction.Metadata))]
     public class Auction : Entity
     {
-        public string Title { get; set; }
-        public string Description { get; set; }
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
-        public Currency StartingPrice { get; set; }
+        public virtual string Title { get; set; }
+        public virtual string Description { get; set; }
+        public virtual DateTime StartTime { get; set; }
+        public virtual DateTime EndTime { get; set; }
+        public virtual Currency StartingPrice { get; set; }
 
-        public virtual Bid WinningBid { get; set; }
+        [ForeignKey("WinndingBid")]
+        protected internal Guid? WinningBidId { get; set; }
+        public virtual Bid WinningBid { get; private set; }
 
         public bool IsCompleted
         {
-            get { return EndTime <= DateTime.Now; }
+            get { return EndTime <= Clock.Now; }
         }
 
-        [IsNotEmpty]
         public virtual ICollection<Category> Categories { get; set; }
 
-        [InverseProperty("Auction")]
         public virtual ICollection<Bid> Bids { get; set; }
 
         public virtual ICollection<WebsiteImage> Images { get; set; }
@@ -35,39 +36,66 @@ namespace Ebuy
         public virtual User Owner { get; set; }
 
 
-        internal void PostBid(Bid bid)
+        public Auction()
         {
-            Contract.Requires(bid != null);
+            Bids = new Collection<Bid>();
+            Categories = new Collection<Category>();
+            Images = new Collection<WebsiteImage>();
+        }
+
+
+        public void PostBid(User user, Currency bidAmount)
+        {
+            Contract.Requires(user != null);
+            Contract.Requires(bidAmount != null);
 
             // TODO: Support multiple currencies
-            if (WinningBid == null || bid.Price.Amount > WinningBid.Price.Amount)
-            {
-//                WinningBid = bid;
-            }
-            
+            if (WinningBid != null && bidAmount.Value <= WinningBid.Amount.Value)
+                throw new InvalidBidAmountException(bidAmount, WinningBid);
+
+            var bid = new Bid(user, this, bidAmount);
+            WinningBid = bid;
             Bids.Add(bid);
         }
 
 
         public class Metadata
         {
+            [InverseProperty("Auction")]
+            public object Bids;
+
+            [IsNotEmpty]
+            public object Categories;
+
             [Required, StringLength(500)]
-            public object Title { get; set; }
+            public object Title;
 
             [Required]
-            public object Description { get; set; }
+            public object Description;
 
             [Required]
-            public object StartingPrice { get; set; }
+            public object StartingPrice;
 
             [Required]
-            public object StartTime { get; set; }
+            public object StartTime;
 
             [Required]
-            public object EndTime { get; set; }
+            public object EndTime;
 
             [Required]
-            public object Owner { get; set; }
+            public object Owner;
+        }
+    }
+
+    public class InvalidBidAmountException : Exception
+    {
+        public Currency BidAmount { get; set; }
+        public Bid WinningBid { get; set; }
+
+        public InvalidBidAmountException(Currency bidAmount, Bid winningBid)
+        {
+            BidAmount = bidAmount;
+            WinningBid = winningBid;
         }
     }
 }

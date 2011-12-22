@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -46,9 +47,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAccess\DataContext.DemoDataInitializer.cs" />
     <Compile Include="DataAccess\DataContext.cs" />
     <Compile Include="DataAccess\IRepository.cs" />
     <Compile Include="DataAccess\Repository.cs" />
+    <Compile Include="Extensions\QueryableExtensions.cs" />
     <Compile Include="Model\Auction.cs" />
     <Compile Include="Model\Bid.cs" />
     <Compile Include="Model\Category.cs" />
@@ -61,6 +64,7 @@
     <Compile Include="Model\Review.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Util\Clock.cs" />
     <Compile Include="Util\KeyGenerator.cs" />
   </ItemGroup>
   <ItemGroup>

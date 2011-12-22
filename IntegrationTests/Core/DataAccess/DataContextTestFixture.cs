@@ -6,9 +6,14 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace IntegrationTests.Core.DataAccess
 {
-    public abstract class DataContextTestFixture<T> where T : class
+    public abstract class DataContextTestFixture
     {
         protected DataContext DataContext { get; set; }
+
+        protected TestDataGenerator TestDataGenerator
+        {
+            get { return TestDataGenerator.Current; }
+        }
 
         [TestInitialize]
         public virtual void TestInitialize()
@@ -16,7 +21,7 @@ namespace IntegrationTests.Core.DataAccess
             DataContext = new DataContext();
         }
 
-        protected void ImmediatelyExecute(Action<DataContext> action)
+        protected void ExecuteInNewContext(Action<DataContext> action)
         {
             using (var context = new DataContext())
                 action(context);
@@ -34,7 +39,7 @@ namespace IntegrationTests.Core.DataAccess
         {
             Assert.AreNotEqual(default(long), id);
 
-            ImmediatelyExecute(context => {
+            ExecuteInNewContext(context => {
                 var saved = context.Set<TEntity>().Find(id);
                 Assert.IsNotNull(saved);
             });
@@ -44,26 +49,32 @@ namespace IntegrationTests.Core.DataAccess
         protected void AssertNoSavedEntitiesMatching<TEntity>(Func<TEntity, bool> predicate) 
             where TEntity : class
         {
-            ImmediatelyExecute(context => 
+            ExecuteInNewContext(context => 
                 Assert.IsFalse(context.Set<TEntity>().Any(predicate)));
         }
 
 
-        protected virtual T CreateNewEntity()
+        protected virtual TEntity CreateNewEntity<TEntity>()
         {
-            return TestDataGenerator.Current.GenerateValid<T>();
+            return TestDataGenerator.GenerateValid<TEntity>();
         }
 
-        protected virtual T CreateSaveAndRetrieveNewEntity()
+        protected virtual TEntity CreateAndSaveNewEntity<TEntity>() 
+            where TEntity : class, IEntity
         {
-            var entity = TestDataGenerator.Current.GenerateValid<T>();
+            long entityId = 0;
 
-            ImmediatelyExecute(context => {
-                context.Set<T>().Add(entity);
+            ExecuteInNewContext(context => {
+                var entity = TestDataGenerator.GenerateValid<TEntity>();
+                context.Set<TEntity>().Add(entity);
                 context.SaveChanges();
+
+                entityId = entity.Id;
             });
 
-            return entity;
+            Assert.AreNotEqual(0, entityId);
+
+            return DataContext.Set<TEntity>().Find(entityId);
         }
     }
 }

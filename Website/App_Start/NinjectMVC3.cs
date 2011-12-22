@@ -1,3 +1,5 @@
+using CustomExtensions.Controllers;
+using CustomExtensions.Routing;
 using Ebuy.DataAccess;
 using Ebuy.Website.App_Start;
 using Microsoft.Web.Infrastructure.DynamicModuleHelper;
@@ -55,7 +57,15 @@ namespace Ebuy.Website.App_Start
         {
             public override void Load()
             {
-                Bind(typeof(IRepository<>)).To(typeof(Repository<>));
+                Bind<ControllerActions>().ToMethod(x => ControllerActions.DiscoverControllerActions()).InSingletonScope();
+
+                Bind<IRouteGenerator>().To<RouteGenerator>();
+
+                Bind<DataContext>().ToSelf().InRequestScope()
+                    .OnDeactivation(x => x.SaveChanges());
+
+                Bind<IRepository>().To<Repository>()
+                    .WithConstructorArgument("isSharedContext", true);
             }
         }
     }

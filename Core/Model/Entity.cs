@@ -1,3 +1,4 @@
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using CustomExtensions.DataAnnotations;
@@ -25,10 +26,10 @@ namespace Ebuy
         string Key { get; }
     }
 
-    public abstract class Entity : IEntity
+    public abstract class Entity : IEntity, IEquatable<Entity>
     {
-        [Key]
-        public long Id { get; protected set; }
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public virtual long Id { get; protected set; }
 
         [Unique, StringLength(50)]
         public virtual string Key
@@ -42,6 +43,46 @@ namespace Ebuy
         protected virtual string GenerateKey()
         {
             return KeyGenerator.Generate();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != typeof (Entity)) return false;
+            return Equals((Entity) obj);
+        }
+
+        public bool Equals(Entity other)
+        {
+            if (ReferenceEquals(null, other)) return false;
+            if (ReferenceEquals(this, other)) return true;
+
+            if (Id == 0 || other.Id == 0)
+                return Equals(other._key, _key);
+
+            return other.Id == Id;
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                if (Id == 0)
+                    return Key.GetHashCode() * 397;
+
+                return Id.GetHashCode();
+            }
+        }
+
+        public static bool operator ==(Entity left, Entity right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(Entity left, Entity right)
+        {
+            return !Equals(left, right);
         }
     }
 }

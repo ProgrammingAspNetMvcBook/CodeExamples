@@ -37,7 +37,7 @@ namespace Ebuy
         public class Metadata
         {
             [Required, StringLength(100)]
-            public object Name { get; set; }
+            public object Name;
         }
     }
 }
