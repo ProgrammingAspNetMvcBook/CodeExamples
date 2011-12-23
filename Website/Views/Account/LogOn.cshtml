@@ -1,4 +1,4 @@
-﻿@model Website.Models.LogOnModel
+﻿@model LogOnModel
 
 @{
     ViewBag.Title = "Log On";
@@ -14,7 +14,8 @@
 
 @Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
 
-@using (Html.BeginForm((string)ViewBag.FormAction, "Account")) {
+@using (Html.BeginForm((string)ViewBag.FormAction, "Account"))
+{
     <fieldset>
         <legend>Log On Form</legend>
         <ol>

@@ -77,14 +77,21 @@
   <ItemGroup>
     <Compile Include="Controllers\ControllerAction.cs" />
     <Compile Include="Controllers\ControllerActions.cs" />
-    <Compile Include="DataAnnotations\IsNotEmptyAttribute.cs" />
-    <Compile Include="DataAnnotations\UniqueAttribute.cs" />
+    <Compile Include="Extensions\HttpContextExtensions.cs" />
+    <Compile Include="ModelBinding\DependencyResolverModelBinderProvider.cs" />
+    <Compile Include="ModelBinding\UserModelBinder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Routing\RouteAttribute.cs" />
     <Compile Include="Routing\RouteGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Core\Ebuy.Core.csproj">
+      <Project>{EFD6F198-A4E8-419E-ABBC-8573B29ACC42}</Project>
+      <Name>Ebuy.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

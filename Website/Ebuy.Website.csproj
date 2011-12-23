@@ -122,6 +122,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Areas.cs" />
+    <Compile Include="App_Start\ModelBinding.cs" />
     <Compile Include="App_Start\Filters.cs" />
     <Compile Include="App_Start\DataAccess.cs" />
     <Compile Include="App_Start\NinjectMVC3.cs">
@@ -315,6 +316,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Auctions\Bids.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Auctions\SuccessfulBid.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

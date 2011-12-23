@@ -21,7 +21,14 @@
         @Html.ActionLink("Bid History", "Bids", "Auctions", new { key = Model.Key }, null)
     </p>
     <p>
-        <span><a href="StartNewAuction()">Bid Now</a></span>
+        @using (Html.BeginForm("PlaceBid", "Auctions", new { key = Model.Key }))
+        {
+            <label for="bid-amount">Amount: </label>
+            <input name="amount" type="text" value="@Model.MinimumBid.Value" required="true" autocomplete="false" autofocus="true" min="@Model.MinimumBid.Value" />
+            <span class="hint">Must be at least @Model.MinimumBid</span>
+            
+            <input type="submit" value="Bid Now" />
+        }
     </p>
 </div>
 

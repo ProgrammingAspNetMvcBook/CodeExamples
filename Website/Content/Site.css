@@ -638,3 +638,9 @@ ul#social li {
             width: auto;
         }    
 }
+
+
+.hint {
+    color: #D3D3D3;
+    font-size: 80%;
+}

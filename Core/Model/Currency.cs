@@ -7,6 +7,31 @@ using System.Linq;
 namespace Ebuy
 {
     [ComplexType]
+    public class CurrencyCode
+    {
+        private readonly string _value;
+
+        public CurrencyCode(string value) : this()
+        {
+            _value = value;
+        }
+
+        private CurrencyCode()
+        {
+        }
+
+        public static implicit operator CurrencyCode(string code)
+        {
+            return new CurrencyCode(code);
+        }
+
+        public static implicit operator string(CurrencyCode code)
+        {
+            return code == null ? null : code._value;
+        }
+    }
+
+    [ComplexType]
     public class Currency : IEquatable<Currency>
     {
         public static IDictionary<char, string> CurrencyCodesBySymbol = new Dictionary<char, string>() {
@@ -17,10 +42,10 @@ namespace Ebuy
                 };
 
         public string Code { get; private set; }
-        public decimal Value { get; private set; }
+        public double Value { get; private set; }
 
 
-        public Currency(string code, decimal value)
+        public Currency(CurrencyCode code, double value)
         {
             Code = code;
             Value = value;
@@ -32,7 +57,7 @@ namespace Ebuy
             Contract.Requires(currency.Length > 1);
 
             Code = CurrencyCodesBySymbol[currency[0]];
-            Value = decimal.Parse(currency.Substring(1));
+            Value = double.Parse(currency.Substring(1));
         }
 
         private Currency()
@@ -61,16 +86,26 @@ namespace Ebuy
             return string.Format("{0}{1}", symbol, Value);
         }
 
-        public static bool operator ==(Currency x, Currency y)
+        public static Currency operator +(Currency x, double amount)
         {
-            if(x == null || y == null) return false;
-            return x.Equals(y);
+            Contract.Requires(x != null);
+            return new Currency(x.Code, x.Value + amount);
         }
 
-        public static bool operator !=(Currency x, Currency y)
+        public static Currency operator -(Currency x, double amount)
         {
-            if (x == null || y == null) return true;
-            return !x.Equals(y);
+            Contract.Requires(x != null);
+            return new Currency(x.Code, x.Value - amount);
+        }
+
+        public static bool operator ==(Currency left, Currency right)
+        {
+            return Equals(left, right);
+        }
+
+        public static bool operator !=(Currency left, Currency right)
+        {
+            return !Equals(left, right);
         }
 
         public static implicit operator Currency(string currency)

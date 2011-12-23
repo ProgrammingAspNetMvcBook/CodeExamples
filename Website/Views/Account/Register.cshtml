@@ -1,4 +1,4 @@
-﻿@model Website.Models.RegisterModel
+﻿@model RegisterModel
 
 @{
     ViewBag.Title = "Register";
@@ -18,7 +18,8 @@
 
 @Html.ValidationSummary(true, "Account creation was unsuccessful. Please correct the errors and try again.")
 
-@using (Html.BeginForm((string)ViewBag.FormAction, "Account")) {
+@using (Html.BeginForm((string)ViewBag.FormAction, "Account"))
+{
     <fieldset>
         <legend>Registration Form</legend>
         <ol>

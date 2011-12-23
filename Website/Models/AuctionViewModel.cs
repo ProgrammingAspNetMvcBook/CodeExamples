@@ -104,5 +104,21 @@ namespace Ebuy.Website.Models
                 return null;
             }
         }
+
+        public Currency StartingPrice { get; set; }
+
+        public string CurrencyCode
+        {
+            get { return StartingPrice.Code; }
+        }
+
+        public Currency MinimumBid
+        {
+            get
+            {
+                var currentBidAmount = HasWinningBid ? WinningBid.Amount : StartingPrice;
+                return currentBidAmount + 0.01;
+            }
+        }
     }
 }
