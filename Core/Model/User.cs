@@ -11,7 +11,7 @@ namespace Ebuy
     {
         public virtual ICollection<Auction> Selling { get; private set; }
 
-        public virtual ICollection<Bid> Bids { get; private set; }
+//        public virtual ICollection<Bid> Bids { get; private set; }
 
         public virtual string DisplayName
         {
@@ -34,7 +34,7 @@ namespace Ebuy
 
         public User()
         {
-            Bids = new Collection<Bid>();
+//            Bids = new Collection<Bid>();
             Payments = new Collection<Payment>();
             Reviews = new Collection<Review>();
             WatchedAuctions = new Collection<Auction>();
@@ -62,8 +62,10 @@ namespace Ebuy
 
         public class Metadata
         {
+/*
             [InverseProperty("User")]
             public object Bids;
+*/
 
             [StringLength(50)]
             public object DisplayName;

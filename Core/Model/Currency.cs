@@ -83,7 +83,7 @@ namespace Ebuy
         public override string ToString()
         {
             var symbol = CurrencyCodesBySymbol.Single(x => x.Value == Code).Key;
-            return string.Format("{0}{1}", symbol, Value);
+            return string.Format("{0}{1:N2}", symbol, Value);
         }
 
         public static Currency operator +(Currency x, double amount)

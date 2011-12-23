@@ -11,7 +11,7 @@ namespace Ebuy.Website.Models
 
         public string Title
         {
-            get { return string.Format("Bid history for {0}", Auction.Title); }
+            get { return Auction.Title; }
         }
     }
 

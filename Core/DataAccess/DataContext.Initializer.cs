@@ -1,29 +1,43 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using CustomExtensions.DataAnnotations;
 
 namespace Ebuy.DataAccess
 {
     public partial class DataContext
     {
-        public class Initializer
-#if(DEBUG)
-            : DropCreateDatabaseAlways<DataContext>
-#else
-            : CreateDatabaseIfNotExists<DataContext>
-#endif
+        public class Initializer : IDatabaseInitializer<DataContext>
         {
-            protected override void Seed(DataContext context)
+            private readonly IDatabaseInitializer<DataContext> _initializer;
+
+            public Initializer(IDatabaseInitializer<DataContext> initializer)
+            {
+                _initializer = initializer;
+            }
+
+            public void InitializeDatabase(DataContext context)
+            {
+                _initializer.InitializeDatabase(context);
+
+                try
+                {
+                    Seed(context);
+                    context.SaveChanges();
+                }
+                catch (Exception)
+                {
+                }
+            }
+
+            protected virtual void Seed(DataContext context)
             {
                 // Apply the custom UniqueAttribute to set unique constraints
                 // on columns with the attribute defined
                 new UniqueConstraintApplier().ApplyUniqueConstraints(context);
 
-                base.Seed(context);
-
-
                 context.Users.Add(new User()
                 {
-                    DisplayName = "Uber Administrator",
+                    DisplayName = "Administrator",
                     EmailAddress = "admin@ebuy.com",
                     FullName = "Administrator",
                 });

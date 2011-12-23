@@ -648,3 +648,7 @@ ul#social li {
     color: #D3D3D3;
     font-size: 80%;
 }
+
+.successful-bid-notification {
+    font-weight: bold;
+}

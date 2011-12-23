@@ -35,6 +35,9 @@ namespace Ebuy.Website.Controllers
                 return View("NotFound");
 
             var viewModel = Mapper.DynamicMap<AuctionViewModel>(auction);
+
+            viewModel.SuccessfulBid = TempData["SuccessfulBid"] as BidViewModel;
+
             return View("Auction", viewModel);
         }
 
@@ -47,10 +50,13 @@ namespace Ebuy.Website.Controllers
             if (auction == null)
                 return View("NotFound");
 
-            var bids = _repository.Query<Bid>(x => x.Auction.Key == key, "User", "Auction").ToArray();
+            var bids = 
+                _repository
+                    .Query<Bid>(x => x.Auction.Key == key, "User", "Auction")
+                    .OrderByDescending(x => x.Timestamp)
+                    .ToArray();
 
-            var viewModel = new BidsViewModel
-                                {
+            var viewModel = new BidsViewModel {
                                     Auction = Mapper.DynamicMap<AuctionViewModel>(auction),
                                     Bids = bids.Select(x => new BidViewModel {
                                                 Amount = x.Amount,
@@ -76,9 +82,10 @@ namespace Ebuy.Website.Controllers
                 return View("NotFound");
 
             var bid = auction.PostBid(user, amount);
-            var viewModel = Mapper.DynamicMap<BidViewModel>(bid);
 
-            return View("SuccessfulBid", viewModel);
+            TempData["SuccessfulBid"] = Mapper.DynamicMap<BidViewModel>(bid);
+
+            return RedirectToAction("Auction", new { key });
         }
     }
 }

@@ -1,4 +1,6 @@
+using System.Configuration;
 using System.Data.Entity;
+using Devtalk.EF.CodeFirst;
 using Ebuy.DataAccess;
 using Ebuy.Website.App_Start;
 
@@ -8,13 +10,22 @@ namespace Ebuy.Website.App_Start
 {
     public static class DataAccess
     {
-        public static void Start() 
+        static  bool IsAppHarbor
         {
-#if(DEBUG)
-            Database.SetInitializer(new DataContext.DemoDataInitializer());
-#else
-            Database.SetInitializer(new DataContext.Initializer());
-#endif
+            get { return !string.IsNullOrWhiteSpace(ConfigurationManager.AppSettings["appharbor.commit_id"]); }
+        }
+
+        public static void Start()
+        {
+            IDatabaseInitializer<DataContext> initializer;
+
+            if (IsAppHarbor)
+                initializer = new DontDropDbJustCreateTablesIfModelChanged<DataContext>();
+            else
+//                    databaseInitializer = new DropCreateDatabaseIfModelChanges<DataContext>();
+                initializer = new DropCreateDatabaseAlways<DataContext>();
+
+            Database.SetInitializer(new DataContext.DemoDataInitializer(initializer));
         }
     }
 }

@@ -77,6 +77,11 @@ namespace Ebuy
             }
         }
 
+        public override string ToString()
+        {
+            return Key;
+        }
+
         public static bool operator ==(Entity<TId> left, Entity<TId> right)
         {
             return Equals(left, right);

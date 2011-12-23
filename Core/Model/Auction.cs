@@ -16,7 +16,6 @@ namespace Ebuy
         public virtual DateTime EndTime { get; set; }
         public virtual Currency StartingPrice { get; set; }
 
-        [ForeignKey("WinndingBid")]
         protected internal Guid? WinningBidId { get; set; }
         public virtual Bid WinningBid { get; private set; }
 

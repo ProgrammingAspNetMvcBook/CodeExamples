@@ -26,7 +26,7 @@ namespace Ebuy.DataAccess
             modelBuilder.Entity<Auction>()
                 .HasMany(x => x.Bids)
                 .WithOptional()
-                .Map(x => x.MapKey("Auction_ID"));
+                .Map(x => x.MapKey("Auction_Id"));
 */
 
             modelBuilder.Entity<Bid>()
@@ -43,7 +43,7 @@ namespace Ebuy.DataAccess
             modelBuilder.Entity<User>()
                 .HasMany(x => x.Bids)
                 .WithOptional()
-                .Map(x => x.MapKey("User_ID"));
+                .Map(x => x.MapKey("User_Id"));
 */
         }
     }

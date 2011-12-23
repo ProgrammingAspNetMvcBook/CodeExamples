@@ -10,7 +10,8 @@ namespace IntegrationTests.Core.DataAccess
         [AssemblyInitialize]
         public static void InitializeDatabase(TestContext context)
         {
-            Database.SetInitializer(new DataContext.DemoDataInitializer());
+            var initializer = new DataContext.DemoDataInitializer(new DropCreateDatabaseAlways<DataContext>());
+            Database.SetInitializer(initializer);
         }
     }
 }

@@ -6,6 +6,11 @@ namespace Ebuy.Website.Models
 {
     public class AuctionViewModel
     {
+        public string CurrencyCode
+        {
+            get { return StartingPrice.Code; }
+        }
+
         public string Description { get; set; }
 
         public DateTime? EndTime { get; set; }
@@ -30,6 +35,11 @@ namespace Ebuy.Website.Models
             get { return WinningBid != null; }
         }
 
+        public bool HasSuccessfulBid
+        {
+            get { return SuccessfulBid != null; }
+        }
+
         public WebsiteImage Image
         {
             get
@@ -42,6 +52,20 @@ namespace Ebuy.Website.Models
         public IEnumerable<WebsiteImage> Images { get; set; }
 
         public string Key { get; set; }
+
+        public Currency MinimumBid
+        {
+            get
+            {
+                var currentBidAmount = HasWinningBid ? WinningBid.Amount : StartingPrice;
+                return currentBidAmount + 0.1;
+            }
+        }
+
+        public string MinimumBidValue
+        {
+            get { return MinimumBid.Value.ToString("N2"); }
+        }
 
         public string ProductKey { get; set; }
 
@@ -79,20 +103,13 @@ namespace Ebuy.Website.Models
             }
         }
 
+        public Currency StartingPrice { get; set; }
+
+        public BidViewModel SuccessfulBid { get; set; }
+
         public string Title { get; set; }
 
         public Bid WinningBid { get; set; }
-
-        public string WinningBidUsername
-        {
-            get
-            {
-                if (HasWinningBid)
-                    return WinningBid.User.DisplayName;
-
-                return string.Empty;
-            }
-        }
 
         public Currency WinningBidPrice
         {
@@ -105,19 +122,14 @@ namespace Ebuy.Website.Models
             }
         }
 
-        public Currency StartingPrice { get; set; }
-
-        public string CurrencyCode
-        {
-            get { return StartingPrice.Code; }
-        }
-
-        public Currency MinimumBid
+        public string WinningBidUsername
         {
             get
             {
-                var currentBidAmount = HasWinningBid ? WinningBid.Amount : StartingPrice;
-                return currentBidAmount + 0.01;
+                if (HasWinningBid && WinningBid.User != null)
+                    return WinningBid.User.DisplayName;
+
+                return string.Empty;
             }
         }
     }

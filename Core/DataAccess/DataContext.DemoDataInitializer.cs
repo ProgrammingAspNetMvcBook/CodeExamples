@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Data.Entity;
 using System.Linq;
 
 namespace Ebuy.DataAccess
@@ -8,6 +9,11 @@ namespace Ebuy.DataAccess
     {
         public class DemoDataInitializer : Initializer
         {
+            public DemoDataInitializer(IDatabaseInitializer<DataContext> initializer) 
+                : base(initializer)
+            {
+            }
+
             protected override void Seed(DataContext context)
             {
                 base.Seed(context);
@@ -141,7 +147,6 @@ namespace Ebuy.DataAccess
 
                     var auction = new Auction()
                     {
-                        Bids = new Collection<Bid>(),
                         Categories = product.Categories.ToArray(),
                         Description = product.Description,
                         EndTime = startTime.AddDays(rand.Next(3, 14)),
@@ -154,28 +159,6 @@ namespace Ebuy.DataAccess
                     };
 
                     context.Auctions.Add(auction);
-                }
-
-
-                foreach (var auction in context.Auctions.Local)
-                {
-                    var nonOwners = users.Except(new[] { auction.Owner }).ToArray();
-                    var lastBid = new Bid(auction.Owner, auction, auction.StartingPrice);
-
-                    for (int x = 0; x < rand.Next(4, 20); x++)
-                    {
-                        var user = nonOwners[rand.Next(nonOwners.Length)];
-                        var amount = new Currency(String.Format("${0}", lastBid.Amount.Value + rand.Next(1, 20)));
-
-                        using (Clock.ModifiedTime(lastBid.Timestamp.AddMinutes(rand.Next(1, 1200))))
-                        {
-                            lastBid = new Bid(user, auction, amount);
-                        }
-
-                        context.Bids.Add(lastBid);
-                    }
-
-                    auction.WinningBidId = lastBid.Id;
                 }
             }
         }
