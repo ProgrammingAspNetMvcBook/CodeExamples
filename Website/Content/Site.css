@@ -640,6 +640,10 @@ ul#social li {
 }
 
 
+.hidden {
+    display: none;
+}
+
 .hint {
     color: #D3D3D3;
     font-size: 80%;

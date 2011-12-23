@@ -13,13 +13,15 @@
     <p>
         Closing in <span class="time-remaining">@Model.RemainingTimeDisplay</span>
     </p>
+    <div>
+        @Html.ActionLink("Bid History", "Bids", "Auctions", new { key = Model.Key }, new { @class = "show-bid-history" })
+    </div>
     <p>
         <strong>Current Bid: </strong>
         <span class="current-bid-amount">@Model.WinningBidPrice</span>
         <span class="current-bidder">@Model.WinningBidUsername</span>
-
-        @Html.ActionLink("Bid History", "Bids", "Auctions", new { key = Model.Key }, null)
     </p>
+
     <p>
         @using (Html.BeginForm("PlaceBid", "Auctions", new { key = Model.Key }))
         {
@@ -36,3 +38,5 @@
 <div class="description">
     @Model.Description
 </div>
+
+<script type="text/javascript" src="@Url.Content("~/scripts/auction.js")"></script>

@@ -4,11 +4,11 @@ using System.Web.Routing;
 using CustomExtensions.Routing;
 using Ebuy.Website.App_Start;
 
-[assembly: WebActivator.PostApplicationStartMethod(typeof(Routes), "InitializeRouting")]
+[assembly: WebActivator.PostApplicationStartMethod(typeof(Routing), "InitializeRouting")]
 
 namespace Ebuy.Website.App_Start
 {
-    public static class Routes
+    public static class Routing
     {
         public static void InitializeRouting()
         {
@@ -19,12 +19,6 @@ namespace Ebuy.Website.App_Start
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
-
-            routes.MapRoute(
-                "Auction",
-                "Auctions/{title}/{key}",
-                new { controller = "Auctions", action = "Auction" }
-            );
 
             routes.MapRoute(
                 "Default", // Route name

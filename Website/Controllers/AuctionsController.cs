@@ -25,6 +25,8 @@ namespace Ebuy.Website.Controllers
             return View("Auctions", viewModel);
         }
 
+        [Route("auctions/{key}-{title}")]
+        [Route("auctions/{key}")]
         public ActionResult Auction(string key)
         {
             var auction = _repository.Single<Auction>(key);
@@ -36,7 +38,8 @@ namespace Ebuy.Website.Controllers
             return View("Auction", viewModel);
         }
 
-        [Route("auctions/{title}/{key}/bids")]
+        [Route("auctions/{key}-{title}/bids")]
+        [Route("auctions/{key}/bids")]
         public ActionResult Bids(string key)
         {
             var auction = _repository.Single<Auction>(key);
@@ -49,18 +52,21 @@ namespace Ebuy.Website.Controllers
             var viewModel = new BidsViewModel
                                 {
                                     Auction = Mapper.DynamicMap<AuctionViewModel>(auction),
-                                    Bids = bids.Select(x => new BidViewModel()
-                                    {
+                                    Bids = bids.Select(x => new BidViewModel {
                                                 Amount = x.Amount,
                                                 Timestamp = x.Timestamp,
                                                 UserDisplayName = x.User.DisplayName,
                                             }).ToArray(),
                                 };
 
+            if (Request.IsAjaxRequest())
+                return PartialView("Bids", viewModel);
+
             return View("Bids", viewModel);
         }
 
         [Authorize]
+        [Route("auctions/{key}-{title}/bid")]
         [Route("auctions/{key}/bid")]
         public ActionResult PlaceBid(string key, User user, double amount)
         {
