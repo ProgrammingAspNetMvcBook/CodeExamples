@@ -64,8 +64,14 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Web.Mvc, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mvc3Futures.3.0.20105.0\lib\Microsoft.Web.Mvc.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Optimization">
       <HintPath>..\packages\Microsoft.Web.Optimization.0.1\lib\net40\Microsoft.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="MvcContrib, Version=3.0.94.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MvcContrib.Mvc3-ci.3.0.94.0\lib\MvcContrib.dll</HintPath>
     </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Full\Ninject.dll</HintPath>
@@ -132,6 +138,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="App_Start\Routing.cs" />
+    <Compile Include="App_Start\ViewEngines.cs" />
     <Compile Include="Areas\Admin\AdminAreaRegistration.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Areas\Admin\Models\UserViewModel.cs" />
@@ -276,6 +283,10 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\AdminArea\EBuy.AdminArea.csproj">
+      <Project>{C7EFCA67-0025-4F1A-8982-394BF567A591}</Project>
+      <Name>EBuy.AdminArea</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Core\Ebuy.Core.csproj">
       <Project>{EFD6F198-A4E8-419E-ABBC-8573B29ACC42}</Project>
       <Name>Ebuy.Core</Name>
@@ -327,6 +338,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Auctions\SuccessfulBid.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Web.config" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
