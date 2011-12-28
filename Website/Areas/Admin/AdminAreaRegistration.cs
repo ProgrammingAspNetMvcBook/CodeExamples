@@ -17,7 +17,7 @@ namespace Ebuy.Website.Areas.Admin
             context.MapRoute(
                 "Admin_default",
                 "Admin/{controller}/{action}/{id}",
-                new { action = "Index", id = UrlParameter.Optional }
+                new { controller = "Users", action = "Index", id = UrlParameter.Optional }
             );
         }
     }

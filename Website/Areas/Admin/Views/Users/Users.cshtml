@@ -15,6 +15,7 @@
             @foreach (var user in Model)
             {
                 <li class="listitem">
+                    @user.DisplayName
                     @*@Html.Partial("_AuctionTile", user)*@
                 </li>
             }
