@@ -77,8 +77,8 @@ namespace IntegrationTests
 
             return new User()
             {
+                DisplayName = "Test User #" + id,
                 EmailAddress = String.Format("user_{0}@email.com", id),
-                FullName = "Test User #" + id,
             };
         }
 

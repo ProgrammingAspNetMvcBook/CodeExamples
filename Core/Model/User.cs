@@ -15,7 +15,7 @@ namespace Ebuy
 
         public virtual string DisplayName
         {
-            get { return _displayName ?? FullName; }
+            get { return _displayName ?? Username; }
             set { _displayName = value; }
         }
         private string _displayName;
@@ -23,11 +23,12 @@ namespace Ebuy
         [Unique]
         public string EmailAddress { get; set; }
 
-        public virtual string FullName { get; set; }
-
         public virtual ICollection<Payment> Payments { get; private set; }
 
         public virtual ICollection<Review> Reviews { get; private set; }
+
+        [Unique]
+        public string Username { get; set; }
 
         public virtual ICollection<Auction> WatchedAuctions { get; private set; }
 
@@ -67,14 +68,14 @@ namespace Ebuy
             public object Bids;
 */
 
-            [StringLength(50)]
+            [Required, StringLength(50)]
             public object DisplayName;
 
-            [StringLength(100, MinimumLength = 5)]
+            [Required, StringLength(100, MinimumLength = 5)]
             public object EmailAddress;
 
             [Required, StringLength(100, MinimumLength = 3)]
-            public object FullName;
+            public object Username;
         }
     }
 }

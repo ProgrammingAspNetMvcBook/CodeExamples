@@ -20,25 +20,22 @@ namespace Ebuy.DataAccess
 
                 var frankSinatra = new User()
                 {
-                    DisplayName = "Old Blue Eyes",
+                    Username = "Frank Sinatra",
                     EmailAddress = "frank@theratpack.com",
-                    FullName = "Frank Sinatra",
                 };
                 context.Users.Add(frankSinatra);
 
                 var freddieMercury = new User()
                 {
-                    DisplayName = "Freddie Mercury",
+                    Username = "Freddie Mercury",
                     EmailAddress = "freddie@queenband.com",
-                    FullName = "Farrokh Bulsara",
                 };
                 context.Users.Add(freddieMercury);
 
                 var johnLennon = new User()
                 {
-                    DisplayName = "The Reverend Fred Gherkin",
+                    Username = "John Lennon",
                     EmailAddress = "lenny@thebeatles.com",
-                    FullName = "John Lennon",
                 };
                 context.Users.Add(johnLennon);
 

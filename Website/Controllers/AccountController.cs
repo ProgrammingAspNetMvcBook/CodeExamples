@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using System.Web.Security;
+using Ebuy.DataAccess;
 using Ebuy.Website.Models;
 
 namespace Ebuy.Website.Controllers
@@ -11,6 +12,12 @@ namespace Ebuy.Website.Controllers
     [Authorize]
     public class AccountController : Controller
     {
+        private readonly IRepository _repository;
+
+        public AccountController(IRepository repository)
+        {
+            _repository = repository;
+        }
 
         //
         // GET: /Account/LogOn
@@ -138,6 +145,8 @@ namespace Ebuy.Website.Controllers
 
                 if (createStatus == MembershipCreateStatus.Success)
                 {
+                    _repository.Add(new User { EmailAddress = model.Email, Username = model.UserName });
+
                     FormsAuthentication.SetAuthCookie(model.UserName, createPersistentCookie: false);
                     return RedirectToAction("Index", "Home");
                 }
