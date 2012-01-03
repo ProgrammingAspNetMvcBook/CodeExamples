@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using CustomExtensions.DataAnnotations;
 
 namespace Ebuy
 {
@@ -20,7 +19,6 @@ namespace Ebuy
 
         public virtual ICollection<Auction> Auctions { get; set; }
         
-        [IsNotEmpty]
         public virtual ICollection<Category> Categories { get; set; }
 
         public virtual ICollection<WebsiteImage> Images { get; set; }
@@ -43,7 +41,7 @@ namespace Ebuy
 
         public class Metadata
         {
-            [Required, IsNotEmpty]
+            [Required]
             public object Categories;
 
             [Required]

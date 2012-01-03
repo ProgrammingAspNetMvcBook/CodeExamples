@@ -1,6 +1,3 @@
-using System;
-using System.Configuration;
-using System.Data.Entity;
 using CustomExtensions.Controllers;
 using CustomExtensions.Routing;
 using Ebuy.DataAccess;

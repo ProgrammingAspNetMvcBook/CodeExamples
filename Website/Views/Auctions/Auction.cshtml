@@ -17,8 +17,8 @@
         @Html.ActionLink("Bid History", "Bids", "Auctions", new { key = Model.Key }, new { @class = "show-bid-history" })
     </div>
     <p>
-        <strong>Current Bid: </strong>
-        <span class="current-bid-amount">@Model.WinningBidPrice</span>
+        <strong>Current Price: </strong>
+        <span class="current-bid-amount">@Model.CurrentPrice</span>
         <span class="current-bidder">@Model.WinningBidUsername</span>
     </p>
     

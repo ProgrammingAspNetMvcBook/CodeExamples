@@ -148,9 +148,13 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\AuctionViewModel.cs" />
     <Compile Include="Models\BidsViewModel.cs" />
+    <Compile Include="Models\CategoryViewModel.cs" />
+    <Compile Include="Models\FeaturedAuctionsViewModel.cs" />
+    <Compile Include="Models\HomepageViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\homepage.css" />
     <Content Include="Content\images\ajax-loader.png" />
     <Content Include="Content\images\icon-search-black.png" />
     <Content Include="Content\images\icons-18-black.png" />
@@ -338,6 +342,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Homepage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Auctions\FeaturedAuctions.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

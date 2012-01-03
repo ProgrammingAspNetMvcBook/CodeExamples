@@ -44,11 +44,11 @@ namespace Ebuy
 
         protected override string GenerateKey()
         {
-            if(string.IsNullOrWhiteSpace(DisplayName))
+            if(string.IsNullOrWhiteSpace(Username))
                 // TODO: Localize
-                throw new EntityKeyGenerationException(GetType(), "DisplayName is empty");
+                throw new EntityKeyGenerationException(GetType(), "Username is empty");
 
-            return KeyGenerator.Generate(DisplayName);
+            return KeyGenerator.Generate(Username);
         }
 
 

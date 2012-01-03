@@ -15,7 +15,7 @@ namespace Ebuy
         {
             Contract.Requires(!string.IsNullOrWhiteSpace(input));
 
-            return HttpUtility.UrlEncode(input.Replace(" ", "_").Replace("-", "_"));
+            return HttpUtility.UrlEncode(input.Replace(" ", "_").Replace("-", "_").Replace("&", "and"));
         }
     }
 }

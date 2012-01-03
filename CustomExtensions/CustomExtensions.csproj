@@ -71,6 +71,7 @@
   <ItemGroup>
     <Compile Include="Controllers\ControllerAction.cs" />
     <Compile Include="Controllers\ControllerActions.cs" />
+    <Compile Include="Extensions\ControllerExtensions.cs" />
     <Compile Include="Extensions\HttpContextExtensions.cs" />
     <Compile Include="ModelBinding\DependencyResolverModelBinderProvider.cs" />
     <Compile Include="ModelBinding\UserModelBinder.cs" />

@@ -7,6 +7,11 @@ namespace Ebuy.Website.Extensions
     public static class UrlHelperExtensions
     {
 
+        public static string Category(this UrlHelper helper, CategoryViewModel category)
+        {
+            return helper.Action("Category", "Auctions", new { key = category.Key });
+        }
+
         public static string Auction(this UrlHelper helper, Auction auction)
         {
             return helper.Action("Auction", "Auctions", new { key = auction.Key, title = auction.Title });

@@ -25,7 +25,6 @@ namespace Ebuy.Website.App_Start
             if (IsAppHarbor)
                 initializer = new DontDropDbJustCreateTablesIfModelChanged<DataContext>();
             else
-                //                    databaseInitializer = new DropCreateDatabaseIfModelChanges<DataContext>();
                 initializer = new DropCreateDatabaseAlways<DataContext>();
 
             Database.SetInitializer(new DataContext.DemoDataInitializer(initializer));
@@ -40,9 +39,14 @@ namespace Ebuy.Website.App_Start
         {
             using (var context = new DataContext())
             {
-                if (!context.Users.Any(x => x.EmailAddress == "admin@ebuy.com"))
+                var admin = new User {
+                    DisplayName = "Administrator",
+                    EmailAddress = "admin@ebuy.com",
+                    Username = "admin",
+                };
+
+                if (!context.Users.Any(x => x.Key == admin.Key))
                 {
-                    var admin = new User { DisplayName = "Administrator", EmailAddress = "admin@ebuy.com", Username = "admin" };
                     context.Users.Add(admin);
                     context.SaveChanges();
 

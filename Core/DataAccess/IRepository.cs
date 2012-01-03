@@ -10,7 +10,7 @@ namespace Ebuy.DataAccess
         void Add<TModel>(TModel instance) where TModel : class, IEntity;
         void Add<TModel>(IEnumerable<TModel> instances) where TModel : class, IEntity;
         
-        IQueryable<TModel> All<TModel>(int pageIndex = 0, int pageSize = 25, params string[] includePaths) where TModel : class, IEntity;
+        IQueryable<TModel> All<TModel>(params string[] includePaths) where TModel : class, IEntity;
 
         void Delete<TModel>(string key) where TModel : class, IEntity;
         void Delete<TModel>(TModel instance) where TModel : class, IEntity;

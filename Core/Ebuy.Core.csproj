@@ -52,9 +52,8 @@
     <Compile Include="DataAccess\DataContext.cs" />
     <Compile Include="DataAccess\IRepository.cs" />
     <Compile Include="DataAccess\Repository.cs" />
-    <Compile Include="DataAnnotations\IsNotEmptyAttribute.cs" />
     <Compile Include="DataAnnotations\UniqueAttribute.cs" />
-    <Compile Include="Extensions\QueryableExtensions.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Model\Auction.cs" />
     <Compile Include="Model\Bid.cs" />
     <Compile Include="Model\Category.cs" />

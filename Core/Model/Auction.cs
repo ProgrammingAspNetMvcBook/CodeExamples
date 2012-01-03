@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.Contracts;
-using CustomExtensions.DataAnnotations;
+using System.Linq;
 
 namespace Ebuy
 {
@@ -14,15 +14,17 @@ namespace Ebuy
         public virtual string Description { get; set; }
         public virtual DateTime StartTime { get; set; }
         public virtual DateTime EndTime { get; set; }
-        public virtual Currency StartingPrice { get; set; }
+        public virtual Currency CurrentPrice { get; set; }
 
-        protected internal Guid? WinningBidId { get; set; }
+        public Guid? WinningBidId { get; set; }
         public virtual Bid WinningBid { get; private set; }
 
         public bool IsCompleted
         {
             get { return EndTime <= Clock.Now; }
         }
+
+        public virtual bool IsFeaturedAuction { get; private set; }
 
         public virtual ICollection<Category> Categories { get; set; }
 
@@ -32,13 +34,14 @@ namespace Ebuy
 
         public virtual Product Product { get; set; }
 
+        public long OwnerId { get; set; }
         public virtual User Owner { get; set; }
 
         public virtual CurrencyCode CurrencyCode
         {
             get
             {
-                return (StartingPrice != null) ? StartingPrice.Code : null;
+                return (CurrentPrice != null) ? CurrentPrice.Code : null;
             }
         }
 
@@ -49,6 +52,10 @@ namespace Ebuy
             Images = new Collection<WebsiteImage>();
         }
 
+        public void FeatureAuction()
+        {
+            IsFeaturedAuction = true;
+        }
 
         public Bid PostBid(User user, double bidAmount)
         {
@@ -62,12 +69,13 @@ namespace Ebuy
             if (bidAmount.Code != CurrencyCode)
                 throw new InvalidBidException(bidAmount, WinningBid);
 
-            if (WinningBid != null && bidAmount.Value <= WinningBid.Amount.Value)
+            if (bidAmount.Value <= CurrentPrice.Value)
                 throw new InvalidBidException(bidAmount, WinningBid);
 
             var bid = new Bid(user, this, bidAmount);
-            
-            WinningBid = bid;
+
+            CurrentPrice = bidAmount;
+            WinningBidId = bid.Id;
             
             Bids.Add(bid);
 
@@ -80,8 +88,10 @@ namespace Ebuy
             [InverseProperty("Auction")]
             public object Bids;
 
-            [IsNotEmpty]
             public object Categories;
+
+            [Required]
+            public object CurrentPrice;
 
             [Required]
             public object Description;
@@ -89,18 +99,21 @@ namespace Ebuy
             [Required]
             public object EndTime;
 
-            [Required]
             [InverseProperty("Selling")]
             public object Owner;
 
             [Required]
-            public object StartingPrice;
+            [ForeignKey("Owner")]
+            public object OwnerId;
 
             [Required]
             public object StartTime;
 
             [Required, StringLength(500)]
             public object Title;
+
+            [ForeignKey("WinningBid")]
+            public object WinningBidId;
         }
     }
 
@@ -115,4 +128,21 @@ namespace Ebuy
             WinningBid = winningBid;
         }
     }
+
+
+    public static class AuctionListExtensions
+    {
+
+        public static IEnumerable<Auction> Active(this IEnumerable<Auction> auctions)
+        {
+            return auctions.Where(x => x.IsCompleted == false);
+        }
+
+        public static IEnumerable<Auction> Featured(this IEnumerable<Auction> auctions)
+        {
+            return auctions.Where(x => x.IsFeaturedAuction);
+        }
+
+    }
+
 }

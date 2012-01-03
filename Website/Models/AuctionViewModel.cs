@@ -8,7 +8,7 @@ namespace Ebuy.Website.Models
     {
         public string CurrencyCode
         {
-            get { return StartingPrice.Code; }
+            get { return CurrentPrice.Code; }
         }
 
         public string Description { get; set; }
@@ -57,7 +57,7 @@ namespace Ebuy.Website.Models
         {
             get
             {
-                var currentBidAmount = HasWinningBid ? WinningBid.Amount : StartingPrice;
+                var currentBidAmount = HasWinningBid ? WinningBid.Amount : CurrentPrice;
                 return currentBidAmount + 0.1;
             }
         }
@@ -103,24 +103,13 @@ namespace Ebuy.Website.Models
             }
         }
 
-        public Currency StartingPrice { get; set; }
+        public Currency CurrentPrice { get; set; }
 
         public BidViewModel SuccessfulBid { get; set; }
 
         public string Title { get; set; }
 
         public Bid WinningBid { get; set; }
-
-        public Currency WinningBidPrice
-        {
-            get
-            {
-                if (HasWinningBid)
-                    return WinningBid.Amount;
-
-                return null;
-            }
-        }
 
         public string WinningBidUsername
         {

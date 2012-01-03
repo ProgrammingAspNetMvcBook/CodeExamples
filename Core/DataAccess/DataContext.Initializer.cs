@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.SqlClient;
 using System.Web.Management;
 using CustomExtensions.DataAnnotations;
@@ -21,14 +20,8 @@ namespace Ebuy.DataAccess
             {
                 _initializer.InitializeDatabase(context);
 
-                try
-                {
-                    Seed(context);
-                    context.SaveChanges();
-                }
-                catch (Exception)
-                {
-                }
+                Seed(context);
+                context.SaveChanges();
             }
 
             protected virtual void Seed(DataContext context)

@@ -40,7 +40,7 @@ namespace IntegrationTests
                        {
                            Title = "Test Auction #" + id,
                            Description = "Description for test auction #" + id,
-                           StartingPrice = "$1",
+                           CurrentPrice = "$1",
                            StartTime = Clock.Now,
                            EndTime = Clock.Now.AddDays(7),
                            Owner = GenerateValid<User>(),

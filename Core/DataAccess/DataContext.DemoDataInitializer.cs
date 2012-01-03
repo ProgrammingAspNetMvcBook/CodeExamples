@@ -133,6 +133,7 @@ namespace Ebuy.DataAccess
 
                 var rand = new Random();
                 var users = context.Users.Local.ToArray();
+                int featured = 0;
 
                 foreach (var product in context.Products.Local)
                 {
@@ -150,10 +151,13 @@ namespace Ebuy.DataAccess
                         Images = product.Images.ToArray(),
                         Owner = users[rand.Next(users.Length)],
                         Product = product,
-                        StartingPrice = "$1",
+                        CurrentPrice = "$1",
                         StartTime = startTime,
                         Title = product.Name,
                     };
+
+                    if (featured < 3)
+                        auction.FeatureAuction();
 
                     context.Auctions.Add(auction);
                 }

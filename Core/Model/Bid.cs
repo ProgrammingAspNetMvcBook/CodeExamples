@@ -14,7 +14,7 @@ namespace Ebuy
             get
             {
                 return Auction != null 
-                    && this == Auction.WinningBid;
+                    && Id == Auction.WinningBidId;
             }
         }
 
@@ -78,7 +78,7 @@ namespace Ebuy
             public object Auction;
 
             [Required]
-            public object Price;
+            public object Amount;
 
             [Required]
             public object Timestamp;

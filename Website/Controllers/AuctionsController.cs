@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
 using CustomExtensions.Routing;
@@ -16,9 +17,10 @@ namespace Ebuy.Website.Controllers
             _repository = repository;
         }
 
+        [Route("auctions")]
         public ActionResult Index(int page = 0, int pageSize = 25)
         {
-            var auctions = _repository.All<Auction>(page, pageSize);
+            var auctions = this.ApplyPaging(_repository.All<Auction>().Active());
 
             var viewModel = auctions.Select(Mapper.DynamicMap<AuctionViewModel>);
 
@@ -86,6 +88,29 @@ namespace Ebuy.Website.Controllers
             TempData["SuccessfulBid"] = Mapper.DynamicMap<BidViewModel>(bid);
 
             return RedirectToAction("Auction", new { key });
+        }
+
+        [Route("featured")]
+        public ActionResult FeaturedAuctions()
+        {
+            var featuredAuctions = _repository.All<Auction>().Active().Featured();
+            featuredAuctions = this.ApplyPaging(featuredAuctions, 5);
+
+            var viewModel = new FeaturedAuctionsViewModel {
+                    Auctions = featuredAuctions.Select(Mapper.DynamicMap<AuctionViewModel>)
+                };
+
+            if (Request.IsAjaxRequest() || ControllerContext.IsChildAction)
+                return PartialView("FeaturedAuctions", viewModel);
+
+            return View("FeaturedAuctions", viewModel);
+            
+        }
+
+        [Route("categories/{key}")]
+        public ActionResult Category(string key, int pageIndex, int pageSize)
+        {
+            throw new NotImplementedException();
         }
     }
 }

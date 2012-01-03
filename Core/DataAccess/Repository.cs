@@ -50,10 +50,10 @@ namespace Ebuy.DataAccess
         }
 
 
-        public IQueryable<TModel> All<TModel>(int pageIndex = 0, int pageSize = 25, params string[] includePaths)
+        public IQueryable<TModel> All<TModel>(params string[] includePaths)
             where TModel : class, IEntity
         {
-            return Query<TModel>(x => true, includePaths).Page(pageIndex, pageSize);
+            return Query<TModel>(x => true, includePaths);
         }
 
 

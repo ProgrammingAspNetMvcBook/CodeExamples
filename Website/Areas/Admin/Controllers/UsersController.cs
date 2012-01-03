@@ -20,7 +20,7 @@ namespace Ebuy.Website.Areas.Admin.Controllers
 
         public ActionResult Index(int page = 0, int pageSize = 25)
         {
-            var users = _repository.All<User>(page, pageSize);
+            var users = this.ApplyPaging(_repository.All<User>());
 
             var viewModel = users.Select(Mapper.DynamicMap<UserViewModel>);
 
