@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Areas.cs" />
+    <Compile Include="App_Start\InitializeMembership.cs" />
     <Compile Include="App_Start\ModelBinding.cs" />
     <Compile Include="App_Start\Filters.cs" />
     <Compile Include="App_Start\DataAccess.cs" />

@@ -46,7 +46,7 @@
                     <ul id="categories" class="content-wrapper">
                         @foreach (var category in Model.Categories)
                         {
-                            <li class="category"><a href="@Url.Category(category)">@category.Name</a></li>
+                            <li class="category"><a href="@Url.Category(category)">@category.Name</a> (@category.AuctionsCount)</li>
                         }
                     </ul>
                 </div>
