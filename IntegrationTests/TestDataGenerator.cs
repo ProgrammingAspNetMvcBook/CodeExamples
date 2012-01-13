@@ -24,9 +24,6 @@ namespace IntegrationTests
             if (type == typeof(Category))
                 return (T)GenerateValidCategory();
 
-            if (type == typeof(Product))
-                return (T)GenerateValidProduct();
-
             if (type == typeof(User))
                 return (T)GenerateValidUser();
 
@@ -36,15 +33,13 @@ namespace IntegrationTests
         protected virtual object GenerateValidAuction()
         {
             var id = Random();
-            var auction = new Auction()
-                       {
+            var auction = new Auction {
                            Title = "Test Auction #" + id,
                            Description = "Description for test auction #" + id,
                            CurrentPrice = "$1",
                            StartTime = Clock.Now,
                            EndTime = Clock.Now.AddDays(7),
                            Owner = GenerateValid<User>(),
-                           Product = GenerateValid<Product>(),
                            Categories = new[] { GenerateValid<Category>(), GenerateValid<Category>() },
                        };
 
@@ -59,26 +54,14 @@ namespace IntegrationTests
             return new Category { Name = "Test Category #" + id };
         }
 
-        protected virtual object GenerateValidProduct()
-        {
-            var id = Random();
-            return new Product()
-            {
-                Categories = new[] { GenerateValid<Category>(), GenerateValid<Category>() },
-                Name = "Test product " + id,
-                Description = "Test product " + id,
-                Images = new WebsiteImage[] { "http://www.test.com/image.png" },
-            };
-        }
-
         protected virtual object GenerateValidUser()
         {
             var id = Random();
 
-            return new User()
-            {
+            return new User {
                 DisplayName = "Test User #" + id,
                 EmailAddress = String.Format("user_{0}@email.com", id),
+                Username = "User"+id,
             };
         }
 

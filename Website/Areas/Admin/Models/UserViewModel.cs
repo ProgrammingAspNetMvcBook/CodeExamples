@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
 namespace Ebuy.Website.Areas.Admin.Models
 {
@@ -23,8 +20,6 @@ namespace Ebuy.Website.Areas.Admin.Models
         public virtual string FullName { get; set; }
 
         public virtual ICollection<Payment> Payments { get; private set; }
-
-        public virtual ICollection<Review> Reviews { get; private set; }
 
         public virtual ICollection<Auction> WatchedAuctions { get; private set; }
     }

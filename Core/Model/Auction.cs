@@ -32,8 +32,6 @@ namespace Ebuy
 
         public virtual ICollection<WebsiteImage> Images { get; set; }
 
-        public virtual Product Product { get; set; }
-
         public long OwnerId { get; set; }
         public virtual User Owner { get; set; }
 

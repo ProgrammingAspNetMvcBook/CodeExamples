@@ -71,7 +71,6 @@
     <Compile Include="Core\DataAccess\AuctionPersistenceTests.cs" />
     <Compile Include="Core\DataAccess\CategoryPersistenceTests.cs" />
     <Compile Include="Core\DataAccess\DataContextTestFixture.cs" />
-    <Compile Include="Core\DataAccess\ProductPersistenceTests.cs" />
     <Compile Include="Core\DataAccess\RepositoryTests.cs" />
     <Compile Include="Core\DataAccess\UserPersistenceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

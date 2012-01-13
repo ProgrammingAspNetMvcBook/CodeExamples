@@ -1,6 +1,4 @@
 ﻿using System.Data.Entity;
-using System.Data.SqlClient;
-using System.Web.Management;
 using CustomExtensions.DataAnnotations;
 
 namespace Ebuy.DataAccess
@@ -26,9 +24,6 @@ namespace Ebuy.DataAccess
 
             protected virtual void Seed(DataContext context)
             {
-                var conn = new SqlConnectionStringBuilder(context.Database.Connection.ConnectionString);
-                SqlServices.Install(conn.InitialCatalog, SqlFeatures.Membership | SqlFeatures.RoleManager, conn.ConnectionString);
-
                 // Apply the custom UniqueAttribute to set unique constraints
                 // on columns with the attribute defined
                 new UniqueConstraintApplier().ApplyUniqueConstraints(context);

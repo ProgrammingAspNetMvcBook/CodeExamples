@@ -1,6 +1,8 @@
 using System.Configuration;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Web.Management;
 using System.Web.Security;
 using Devtalk.EF.CodeFirst;
 using Ebuy.DataAccess;
@@ -49,6 +51,9 @@ namespace Ebuy.Website.App_Start
                 {
                     context.Users.Add(admin);
                     context.SaveChanges();
+
+                    var conn = new SqlConnectionStringBuilder(context.Database.Connection.ConnectionString);
+                    SqlServices.Install(conn.InitialCatalog, SqlFeatures.Membership | SqlFeatures.RoleManager, conn.ConnectionString);
 
                     MembershipCreateStatus status;
                     Membership.CreateUser(admin.Username, "Password!", admin.EmailAddress, null, null, true, null, out status);
