@@ -61,9 +61,7 @@
     <Compile Include="Model\Entity.cs" />
     <Compile Include="Model\EntityKeyGenerationException.cs" />
     <Compile Include="Model\Payment.cs" />
-    <Compile Include="Model\Product.cs" />
     <Compile Include="Model\WebsiteImage.cs" />
-    <Compile Include="Model\Review.cs" />
     <Compile Include="Model\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Util\Clock.cs" />

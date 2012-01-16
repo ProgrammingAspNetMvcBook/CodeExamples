@@ -12,8 +12,6 @@ namespace Ebuy
 
         public virtual ICollection<Category> SubCategories { get; set; }
 
-        public virtual ICollection<Product> Products { get; set; }
-
 
         public Category()
         {

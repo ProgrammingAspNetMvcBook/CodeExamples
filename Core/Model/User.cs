@@ -25,8 +25,6 @@ namespace Ebuy
 
         public virtual ICollection<Payment> Payments { get; private set; }
 
-        public virtual ICollection<Review> Reviews { get; private set; }
-
         [Unique]
         public string Username { get; set; }
 
@@ -37,7 +35,6 @@ namespace Ebuy
         {
 //            Bids = new Collection<Bid>();
             Payments = new Collection<Payment>();
-            Reviews = new Collection<Review>();
             WatchedAuctions = new Collection<Auction>();
         }
 

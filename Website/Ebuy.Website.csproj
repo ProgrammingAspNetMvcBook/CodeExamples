@@ -128,6 +128,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\Areas.cs" />
+    <Compile Include="App_Start\InitializeMembership.cs" />
     <Compile Include="App_Start\ModelBinding.cs" />
     <Compile Include="App_Start\Filters.cs" />
     <Compile Include="App_Start\DataAccess.cs" />
@@ -284,10 +285,6 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\AdminArea\EBuy.AdminArea.csproj">
-      <Project>{C7EFCA67-0025-4F1A-8982-394BF567A591}</Project>
-      <Name>EBuy.AdminArea</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Core\Ebuy.Core.csproj">
       <Project>{EFD6F198-A4E8-419E-ABBC-8573B29ACC42}</Project>
       <Name>Ebuy.Core</Name>

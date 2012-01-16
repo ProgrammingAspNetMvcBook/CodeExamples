@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using AutoMapper;
@@ -18,13 +18,10 @@ namespace Ebuy.Website.Controllers
         }
 
         [Route("auctions")]
-        public ActionResult Index(int page = 0, int pageSize = 25)
+        public ActionResult Index()
         {
-            var auctions = this.ApplyPaging(_repository.All<Auction>().Active());
-
-            var viewModel = auctions.Select(Mapper.DynamicMap<AuctionViewModel>);
-
-            return View("Auctions", viewModel);
+            var auctions = _repository.All<Auction>();
+            return ActiveAuctionsResult(auctions);
         }
 
         [Route("auctions/{key}-{title}")]
@@ -108,9 +105,17 @@ namespace Ebuy.Website.Controllers
         }
 
         [Route("categories/{key}")]
-        public ActionResult Category(string key, int pageIndex, int pageSize)
+        public ActionResult Category(string key, int pageIndex = 0, int pageSize = 25)
         {
-            throw new NotImplementedException();
+            var auctions = _repository.Query<Auction>(x => x.Categories.Any(cat => cat.Key == key));
+            return ActiveAuctionsResult(auctions);
+        }
+
+        private ActionResult ActiveAuctionsResult(IEnumerable<Auction> auctions)
+        {
+            var viewModel = this.ApplyPaging(auctions.Active()).Select(Mapper.DynamicMap<AuctionViewModel>);
+
+            return View("Auctions", viewModel);
         }
     }
 }

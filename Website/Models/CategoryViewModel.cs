@@ -5,6 +5,8 @@ namespace Ebuy.Website.Models
         public string Key { get; set; }
 
         public string Name { get; set; }
+
+        public int AuctionsCount { get; set; }
     }
 
 }
