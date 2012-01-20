@@ -2,21 +2,8 @@ using System;
 
 namespace Ebuy
 {
-    public class Payment
+    public class Payment : Entity<Guid>
     {
-        public Guid Id
-        {
-            get
-            {
-                if (_id == null)
-                    _id = Guid.NewGuid();
-
-                return _id.Value;
-            }
-            private set { _id = value; }
-        }
-        private Guid? _id;
-
         public Currency Amount { get; private set; }
 
         public Auction Auction { get; private set; }
