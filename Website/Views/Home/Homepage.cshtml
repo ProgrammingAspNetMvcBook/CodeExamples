@@ -31,14 +31,16 @@
                     </section>
                     <nav>
                         <ul id="menu">
-                            <li>@Html.ActionLink("Auctions", "Index", "Auctions")</li>
+                            @foreach (CategoryViewModel category in ViewBag.Categories) { 
+                                <li><a href="@Url.Category(category.Key)">@category.Name</a></li>
+                            }
                         </ul>
                     </nav>
                 </div>
             </div>
         </header>
         <div id="body">
-            
+            <h1>@ViewBag.TestValue</h1>
             <section class="welcome-banner">
                 
                 <div id="categories-container">

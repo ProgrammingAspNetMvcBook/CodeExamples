@@ -6,9 +6,18 @@ namespace Ebuy
     [MetadataType(typeof(Category.Metadata))]
     public class Category : Entity<long>
     {
+        public virtual ICollection<Auction> Auctions { get; set; }
+
+        public bool IsTopLevelCategory
+        {
+            get { return ParentId == null; }
+        }
+
         public string Name { get; set; }
 
-        public virtual ICollection<Auction> Auctions { get; set; }
+        public long? ParentId { get; set; }
+
+        public virtual Category Parent { get; set; }
 
         public virtual ICollection<Category> SubCategories { get; set; }
 
@@ -36,6 +45,9 @@ namespace Ebuy
         {
             [Required, StringLength(100)]
             public object Name;
+
+            [ForeignKey("Parent")]
+            public object ParentId;
         }
     }
 }

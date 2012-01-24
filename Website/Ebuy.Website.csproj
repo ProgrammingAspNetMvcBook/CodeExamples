@@ -127,6 +127,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActionFilters\CategoriesActionFilter.cs" />
     <Compile Include="App_Start\Areas.cs" />
     <Compile Include="App_Start\InitializeMembership.cs" />
     <Compile Include="App_Start\ModelBinding.cs" />

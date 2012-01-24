@@ -32,7 +32,9 @@
                     </section>
                     <nav>
                         <ul id="menu">
-                            <li>@Html.ActionLink("Auctions", "Index", "Auctions")</li>
+                            @foreach (CategoryViewModel category in ViewBag.Categories) { 
+                                <li><a href="@Url.Category(category.Key)">@category.Name</a></li>
+                            }
                         </ul>
                     </nav>
                 </div>

@@ -57,14 +57,16 @@ namespace Ebuy.Website.App_Start
         {
             public override void Load()
             {
-                Bind<ControllerActions>().ToMethod(x => ControllerActions.DiscoverControllerActions()).InSingletonScope();
+                Bind<ControllerActions>()
+                    .ToMethod(x => ControllerActions.DiscoverControllerActions())
+                    .InSingletonScope();
 
-                Bind<IRouteGenerator>().To<RouteGenerator>();
+                Bind<IRouteGenerator>().To<RouteGenerator>().InSingletonScope();
 
                 Bind<DataContext>().ToSelf().InRequestScope()
                     .OnDeactivation(x => x.SaveChanges());
 
-                Bind<IRepository>().To<Repository>()
+                Bind<IRepository>().To<Repository>().InRequestScope()
                     .WithConstructorArgument("isSharedContext", true);
             }
         }

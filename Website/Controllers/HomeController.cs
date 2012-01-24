@@ -17,11 +17,13 @@ namespace Ebuy.Website.Controllers
 
         public ActionResult Index()
         {
-            var categories = _repository.All<Category>();
+            ViewBag.TestValue = "Test value!";
+
+            var categories = _repository.Query<Category>(cat => cat.ParentId == null);
 
             var viewModel = new HomepageViewModel {
-                    Categories = categories.Select(Mapper.DynamicMap<CategoryViewModel>),
-                };
+                Categories = categories.Select(Mapper.DynamicMap<CategoryViewModel>),
+            };
 
             return View("Homepage", viewModel);
         }
