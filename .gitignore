@@ -1,3 +1,11 @@
+_ReSharper.*
+**.ReSharper
+bin
+obj
+**.user
+**.suo
 TestResults
-Build
-/*.user
+_UpgradeReport_Files
+UpgradeLog*.XML
+packages
+Thumbs.db
