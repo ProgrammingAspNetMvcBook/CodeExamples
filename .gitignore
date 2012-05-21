@@ -4,8 +4,12 @@ bin
 obj
 **.user
 **.suo
+**.cache
 TestResults
 _UpgradeReport_Files
 UpgradeLog*.XML
-packages
+*.stackdump
+**.ncrunch*
 Thumbs.db
+
+packages
