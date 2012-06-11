@@ -1,4 +1,6 @@
-﻿/*!
+﻿/// <reference path="jquery-1.5.1.js" />
+
+/*!
 ** Unobtrusive Ajax support library for jQuery
 ** Copyright (C) Microsoft Corporation. All rights reserved.
 */
