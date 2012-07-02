@@ -3,22 +3,15 @@
 @{
     ViewBag.Title = "Auctions";
 }
-<h2>
-    Auctions</h2>
-<div class="container">
-    <header>
-        <h3>
-            Recent Auctions</h3>
-        <hr />
-    </header>
-    <div class="container clear-fix">
-        <ul id="auctions" class="list" data-role="listview" data-filter="true">
-            @foreach (var auction in Model)
-            {
-                <li class="listitem">
-                    @Html.Partial("_AuctionTile", auction); 
-                </li>
-            }
-        </ul>
-    </div>
-</div>
+
+<header>
+    <h3>Mobile Auctions</h3>
+</header>
+<ul id="auctions" data-role="listview" data-filter="true" data-theme="c">
+    @foreach (var auction in Model)
+    {
+        <li>
+            @Html.Partial("_AuctionTileMobile", auction)
+        </li>
+    }
+</ul>

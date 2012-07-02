@@ -17,8 +17,6 @@ namespace Ebuy.Website.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.TestValue = "Test value!";
-
             var categories = _repository.Query<Category>(cat => cat.ParentId == null);
 
             var viewModel = new HomepageViewModel {
