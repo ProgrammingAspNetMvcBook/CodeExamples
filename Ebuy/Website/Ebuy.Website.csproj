@@ -293,6 +293,7 @@
     <Content Include="Views\Auctions\Auctions.mobile.cshtml" />
     <Content Include="Views\Auctions\_AuctionTileMobile.cshtml" />
     <Content Include="Views\Auctions\Auctions.iPhone.cshtml" />
+    <Content Include="Views\Auctions\Auctions.WindowsPhone.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Auctions\Auctions.cshtml" />
