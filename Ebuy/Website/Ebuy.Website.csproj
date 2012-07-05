@@ -45,6 +45,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\WebGrease.1.0.0\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
     <Reference Include="AutoMapper">
       <HintPath>..\packages\AutoMapper.2.0.0\lib\net40-client\AutoMapper.dll</HintPath>
     </Reference>
@@ -68,9 +71,6 @@
     </Reference>
     <Reference Include="Microsoft.Web.Mvc, Version=3.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Mvc3Futures.3.0.20105.0\lib\Microsoft.Web.Mvc.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Web.Optimization">
-      <HintPath>..\packages\Microsoft.Web.Optimization.0.1\lib\net40\Microsoft.Web.Optimization.dll</HintPath>
     </Reference>
     <Reference Include="MvcContrib, Version=3.0.94.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MvcContrib.Mvc3-ci.3.0.94.0\lib\MvcContrib.dll</HintPath>
@@ -98,6 +98,9 @@
     <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.Mvc.4.0.20505.0\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.0.0-beta3\lib\net40\System.Web.Optimization.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Razor, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
@@ -127,10 +130,14 @@
     <Reference Include="WebActivator">
       <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
     </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.0.0\lib\WebGrease.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionFilters\CategoriesActionFilter.cs" />
     <Compile Include="App_Start\Areas.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\InitializeMembership.cs" />
     <Compile Include="App_Start\ModelBinding.cs" />
     <Compile Include="App_Start\Filters.cs" />
@@ -294,6 +301,7 @@
     <Content Include="Views\Auctions\_AuctionTileMobile.cshtml" />
     <Content Include="Views\Auctions\Auctions.iPhone.cshtml" />
     <Content Include="Views\Auctions\Auctions.WindowsPhone.cshtml" />
+    <Content Include="Views\Auctions\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Auctions\Auctions.cshtml" />

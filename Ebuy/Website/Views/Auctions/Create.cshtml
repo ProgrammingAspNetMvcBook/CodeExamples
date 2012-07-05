@@ -1,0 +1,40 @@
+﻿@using System.Web.Optimization
+@model Ebuy.Website.Models.AuctionViewModel
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary()
+
+    <p>
+        @Html.LabelFor(model => model.Title)
+        @Html.EditorFor(model => model.Title)
+    </p>
+    <p>
+        @Html.LabelFor(model => model.Description)
+        @Html.EditorFor(model => model.Description)
+    </p>
+    <p>
+        @Html.LabelFor(model => model.StartPrice)
+        @Html.TextBoxFor(model => model.StartPrice)
+    </p>
+    <p>
+        @Html.LabelFor(model => model.EndTime)
+        @Html.TextBoxFor(model => model.EndTime)
+    </p>
+    <p>
+        <input type="submit" value="Create" />
+    </p>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

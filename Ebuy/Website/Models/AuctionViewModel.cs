@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace Ebuy.Website.Models
@@ -11,6 +12,7 @@ namespace Ebuy.Website.Models
             get { return CurrentPrice.Code; }
         }
 
+		[Required]
         public string Description { get; set; }
 
         public DateTime? EndTime { get; set; }
@@ -107,6 +109,8 @@ namespace Ebuy.Website.Models
 
         public BidViewModel SuccessfulBid { get; set; }
 
+		[Required]
+		[StringLength(50, ErrorMessage = "Titles cannot be longer than {0} characters")]
         public string Title { get; set; }
 
         public Bid WinningBid { get; set; }
@@ -121,5 +125,10 @@ namespace Ebuy.Website.Models
                 return string.Empty;
             }
         }
+
+		[Range(1, 10000,
+		   ErrorMessage = "The auction's starting price must be at least {0}")]
+		public decimal StartPrice { get; set; }
+
     }
 }
