@@ -118,6 +118,14 @@ namespace Ebuy.Website.Controllers
 			return View("Auctions", viewModel);
 		}
 
+        [HttpGet]
+        [Route("auctions/Create/")]
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
 		[Route("auctions/Create/{auction}")]
 		public ActionResult Create(AuctionViewModel auction)
 		{
