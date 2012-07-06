@@ -110,7 +110,7 @@ namespace Ebuy.Website.Models
         public BidViewModel SuccessfulBid { get; set; }
 
 		[Required]
-		[StringLength(50, ErrorMessage = "Titles cannot be longer than {0} characters")]
+		[StringLength(50, ErrorMessage = "Titles cannot be longer than 50 characters")]
         public string Title { get; set; }
 
         public Bid WinningBid { get; set; }
@@ -127,7 +127,7 @@ namespace Ebuy.Website.Models
         }
 
 		[Range(1, 10000,
-		   ErrorMessage = "The auction's starting price must be at least {0}")]
+		   ErrorMessage = "The auction's starting price must be at least 1")]
 		public decimal StartPrice { get; set; }
 
     }
