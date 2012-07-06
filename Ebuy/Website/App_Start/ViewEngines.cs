@@ -10,7 +10,7 @@ namespace Ebuy.Website.App_Start
     {
         public static void Start()
         {
-            PortableAreaRegistration.RegisterEmbeddedViewEngine();
+            //PortableAreaRegistration.RegisterEmbeddedViewEngine();
         }
     }
 }
