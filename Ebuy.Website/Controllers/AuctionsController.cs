@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using Ebuy.Website.Models;
 
 namespace Ebuy.Website.Controllers
 {
@@ -28,15 +26,16 @@ namespace Ebuy.Website.Controllers
                 Description = "This is a brand new version 2.0 Widget!",
                 StartPrice = 1.00m,
                 CurrentPrice = 13.40m,
-                StartTime = DateTime.Parse("6-15-2012 12:34 PM"),
                 EndTime = DateTime.Parse("6-23-2012 12:34 PM"),
             };
 
             return View(auction);
         }
+
         //
         // GET: /Auctions/Create
 
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -46,18 +45,18 @@ namespace Ebuy.Website.Controllers
         // POST: /Auctions/Create
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(Auction auction)
         {
-            try
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                var db = new EbuyDataContext();
+                db.Auctions.Add(auction);
+                db.SaveChanges();
 
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", new { id = auction.Id });
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(auction);
         }
 
         //
