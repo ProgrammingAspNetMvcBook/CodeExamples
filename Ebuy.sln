@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ebuy.Website", "Ebuy.Website\Ebuy.Website.csproj", "{F778C906-A3F6-4282-BDC8-D2692C021E8F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ebuy.Website.Tests", "Ebuy.Website.Tests\Ebuy.Website.Tests.csproj", "{BBFACE92-3CDB-4FF8-BFD9-9464D6EAE965}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F778C906-A3F6-4282-BDC8-D2692C021E8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F778C906-A3F6-4282-BDC8-D2692C021E8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F778C906-A3F6-4282-BDC8-D2692C021E8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F778C906-A3F6-4282-BDC8-D2692C021E8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BBFACE92-3CDB-4FF8-BFD9-9464D6EAE965}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BBFACE92-3CDB-4FF8-BFD9-9464D6EAE965}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BBFACE92-3CDB-4FF8-BFD9-9464D6EAE965}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BBFACE92-3CDB-4FF8-BFD9-9464D6EAE965}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
