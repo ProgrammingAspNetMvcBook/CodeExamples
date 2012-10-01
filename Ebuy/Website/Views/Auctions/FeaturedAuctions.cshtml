@@ -1,9 +1,0 @@
-﻿@model FeaturedAuctionsViewModel
-
-<section class="featured-auctions">
-    
-    @foreach(var auction in Model.Auctions) {
-        @Html.Partial("_AuctionTile", auction)
-    }
-
-</section>
