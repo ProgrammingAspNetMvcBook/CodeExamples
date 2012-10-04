@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ebuy.Website", "Ebuy.Websit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ebuy.Website.Tests", "Ebuy.Website.Tests\Ebuy.Website.Tests.csproj", "{BBFACE92-3CDB-4FF8-BFD9-9464D6EAE965}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ebuy.Mvc", "Ebuy.Mvc\Ebuy.Mvc.csproj", "{3FFE7A82-7E7D-42EB-A439-DEAACBCFBFC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +21,10 @@ Global
 		{BBFACE92-3CDB-4FF8-BFD9-9464D6EAE965}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBFACE92-3CDB-4FF8-BFD9-9464D6EAE965}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBFACE92-3CDB-4FF8-BFD9-9464D6EAE965}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3FFE7A82-7E7D-42EB-A439-DEAACBCFBFC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3FFE7A82-7E7D-42EB-A439-DEAACBCFBFC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3FFE7A82-7E7D-42EB-A439-DEAACBCFBFC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3FFE7A82-7E7D-42EB-A439-DEAACBCFBFC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

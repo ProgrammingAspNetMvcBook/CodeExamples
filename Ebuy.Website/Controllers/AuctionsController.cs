@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Ebuy.Website.Models;
 
@@ -6,16 +7,48 @@ namespace Ebuy.Website.Controllers
 {
     public class AuctionsController : Controller
     {
-        //
-        // GET: /Auctions/
-
-        public ActionResult Index()
+        [MultipleResponseFormats]
+        public ActionResult Index(int page = 0, int size = 25)
         {
-            return View();
+            var db = new EbuyDataContext();
+            var auctions = db.Auctions.OrderByDescending(x => x.EndTime).Skip(page * 25).Take(size);
+            return View("Auctions", auctions);
         }
 
-        //
-        // GET: /Auctions/Details/5
+        [MultipleResponseFormats]
+        public ActionResult Auction(long id)
+        {
+            var db = new EbuyDataContext();
+            var auction = db.Auctions.Find(id);
+
+            // The following moved to MultipleResponseFormatsAttribute:
+            /*
+            // Respond to AJAX requests
+            if (Request.IsAjaxRequest())
+                return PartialView("Auction", auction);
+
+            // Respond to JSON requests
+            if (Request.IsJsonRequest())
+                return Json(auction);
+            */
+
+            // Default to a "normal" view with layout
+            return View("Auction", auction);
+        }
+
+        public ActionResult JsonAuction(long id)
+        {
+            var db = new EbuyDataContext();
+            var auction = db.Auctions.Find(id);
+            return Json(auction, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult PartialAuction(long id)
+        {
+            var db = new EbuyDataContext();
+            var auction = db.Auctions.Find(id);
+            return PartialView("Auction", auction);
+        }
 
         public ActionResult Details(long id = 0)
         {

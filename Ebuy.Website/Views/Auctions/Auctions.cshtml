@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Ebuy.Website.Models.Auction>
+<h2>Auctions</h2>
+
+<ul class="auctions">
+    @foreach (var auction in Model)
+    {
+        <li class="auction" data-key="@auction.Id">
+            <a href="#">
+                <span>@auction.Title</span>
+            </a>
+        </li>
+    }
+</ul>
+
+<section id="auction-details">
+    @* Render the first Auction using the Partial View on the server *@
+    @Html.Partial("Auction", Model.First())
+</section>
+
+<script id="auction-template" type="text/x-template">
+<div class="title">{{Title}}</div>
+<div class="overview">
+<p>
+<strong>Current Price: </strong>
+<span class="current-bid">{{CurrentPrice}}</span>
+</p>
+</div>
+<h3>Description</h3>
+<div class="description">
+{{Description}}
+</div>
+</script>
+
+@section scripts {
+    
+<script type="text/javascript" src="~/scripts/mustache.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+        var templateSource = $('#auction-template').html();
+        var template = Mustache.compile(templateSource);
+        $('.auction').click(function () {
+            var auctionId = $(this).data("key");
+            $.ajax({
+                url: '@Url.Action("JsonAuction", "Auctions")/' + auctionId,
+                success: function (auction) {
+                    var html = template(auction);
+                    $('#auction-details').html(html);
+                }
+            });
+        });
+    });
+</script>
+}

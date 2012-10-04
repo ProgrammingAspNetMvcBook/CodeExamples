@@ -244,6 +244,7 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\mustache.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -285,12 +286,20 @@
     <Content Include="Views\Web.config" />
     <Content Include="Views\Auctions\Details.cshtml" />
     <Content Include="Views\Auctions\Create.cshtml" />
+    <Content Include="Views\Auctions\Auction.cshtml" />
+    <Content Include="Views\Auctions\Auctions.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ebuy.Mvc\Ebuy.Mvc.csproj">
+      <Project>{3ffe7a82-7e7d-42eb-a439-deaacbcfbfc6}</Project>
+      <Name>Ebuy.Mvc</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
