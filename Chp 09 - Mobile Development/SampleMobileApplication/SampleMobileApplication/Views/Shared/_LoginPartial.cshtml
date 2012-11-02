@@ -1,6 +1,0 @@
-﻿@if(Request.IsAuthenticated) {
-    @Html.ActionLink(User.Identity.Name, "Index", "Account", routeValues: null, htmlAttributes: new { data_icon = "gear" })
-}
-else {
-    @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { data_icon = "gear" })
-}
