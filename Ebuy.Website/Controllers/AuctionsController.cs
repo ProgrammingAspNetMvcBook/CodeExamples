@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Mvc;
-using Ebuy.Website.Models;
+using Ebuy.DataAccess;
 
 namespace Ebuy.Website.Controllers
 {
@@ -12,7 +12,7 @@ namespace Ebuy.Website.Controllers
         {
             var db = new EbuyDataContext();
             var auctions = db.Auctions.OrderByDescending(x => x.EndTime).Skip(page * 25).Take(size);
-            return View("Auctions", auctions);
+            return View("Auctions", auctions.ToArray());
         }
 
         [MultipleResponseFormats]
@@ -52,7 +52,7 @@ namespace Ebuy.Website.Controllers
 
         public ActionResult Details(long id = 0)
         {
-            var auction = new Ebuy.Website.Models.Auction
+            var auction = new Auction
             {
                 Id = id,
                 Title = "Brand new Widget 2.0",

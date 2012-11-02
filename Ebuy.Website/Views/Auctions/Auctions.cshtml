@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Ebuy.Website.Models.Auction>
+﻿@model IEnumerable<Ebuy.Auction>
 <h2>Auctions</h2>
 
 <ul class="auctions">
@@ -14,7 +14,7 @@
 
 <section id="auction-details">
     @* Render the first Auction using the Partial View on the server *@
-    @Html.Partial("Auction", Model.First())
+    @Html.Partial("Auction", Model.FirstOrDefault())
 </section>
 
 <script id="auction-template" type="text/x-template">

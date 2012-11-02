@@ -1,20 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Ebuy.Website.Models
+namespace Ebuy
 {
-    using System.Data.Entity;
-
-    public class EbuyDataContext : DbContext
-    {
-        public DbSet<Auction> Auctions { get; set; }
-
-        public EbuyDataContext()
-        {
-            Database.SetInitializer(new DropCreateDatabaseIfModelChanges<EbuyDataContext>());
-        }
-    }
-
     public class Auction
     {
         public long Id { get; set; }
