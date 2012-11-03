@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Ebuy
 {
-    public class Auction
+    public class Auction : IEntity
     {
         public long Id { get; set; }
 
