@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Web.Mvc;
 using Ebuy.DataAccess;
 
@@ -48,21 +47,6 @@ namespace Ebuy.Website.Controllers
             var db = new EbuyDataContext();
             var auction = db.Auctions.Find(id);
             return PartialView("Auction", auction);
-        }
-
-        public ActionResult Details(long id = 0)
-        {
-            var auction = new Auction
-            {
-                Id = id,
-                Title = "Brand new Widget 2.0",
-                Description = "This is a brand new version 2.0 Widget!",
-                StartPrice = 1.00m,
-                CurrentPrice = 13.40m,
-                EndTime = DateTime.Parse("6-23-2012 12:34 PM"),
-            };
-
-            return View(auction);
         }
 
         //

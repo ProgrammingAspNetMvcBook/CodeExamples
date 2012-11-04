@@ -41,6 +41,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -50,9 +51,17 @@
   <ItemGroup>
     <Compile Include="DataAccess\IRepository.cs" />
     <Compile Include="DataAccess\Repository.cs" />
+    <Compile Include="Entities\Annotations\UniqueAttribute.cs" />
     <Compile Include="Entities\Auction.cs" />
     <Compile Include="DataAccess\EbuyDataContext.cs" />
+    <Compile Include="Entities\Bid.cs" />
+    <Compile Include="Entities\Category.cs" />
+    <Compile Include="Entities\Currency.cs" />
     <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\EntityKeyGenerationException.cs" />
+    <Compile Include="Entities\Payment.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\WebsiteImage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,0 +1,90 @@
+﻿@model SearchViewModel
+@{
+    ViewBag.Title = "Search";
+}
+
+@section scripts
+{
+<script type="text/javascript">
+    $(function () {
+        $("#SortByField").change(function () {
+            $("#CurrentPage").val(0);
+            SubmitForm();
+        });
+        $("#PagingSize").change(function () {
+            $("#CurrentPage").val(0);
+            SubmitForm();
+        });
+        $("#Previous").click(function () {
+            var currentPage = $("#CurrentPage").val();
+            if (currentPage != null && currentPage > 0) {
+                currentPage--;
+                $("#CurrentPage").val(currentPage);
+            }
+            SubmitForm();
+        });
+        $("#Next").click(function () {
+            var currentPage = $("#CurrentPage").val();
+            if (currentPage) {
+                currentPage++;
+                $("#CurrentPage").val(currentPage);
+            }
+            SubmitForm();
+        });
+    });
+    function SubmitForm() {
+        document.forms["SearchForm"].submit();
+    }
+</script>
+}
+
+@using (Html.BeginForm("Index", "Search", FormMethod.Post, new { id = "SearchForm" }))
+{
+    <div class="SearchKeyword">
+        @Html.TextBoxFor(m => m.SearchKeyword, new {@class="SearchBox"})
+        <input id="Search" type="submit" value=" " class="SearchButton" />
+    </div>
+    <h2>Search Result</h2>
+    <div>
+        <div class="SearchHeader">
+            @Html.Hidden("CurrentPage", @Model.CurrentPage)
+            <div class="PagingContainer">
+                <span class="CurrentPage">Page @Model.CurrentPage of @Model.MaxPages</span>
+                <img id="Previous" src="@Url.Content("~/Content/Images/PagingPrevious.png")" class="PagingButton" />
+                <img id="Next" src="@Url.Content("~/Content/Images/PagingNext.png")" class="PagingButton" />
+                <div class="PageSize">
+                    @Html.DropDownListFor(m => m.PagingSize, new SelectList(Model.PagingSizeList))
+                </div>
+            </div>
+            <div class="SortingContainer">
+                <span>Sort By:</span>
+                @Html.DropDownListFor(m => m.SortByField, new SelectList(Model.SortByFieldList))
+            </div>
+        </div>
+        <div class="SearchResultContainer">
+            <table>
+                @foreach (var item in @Model.SearchResult)
+                {
+                    var auctionUrl = Url.Action("Auction", "Auctions", new { id = item.Id });
+                    <tr>
+                        <td class="searchDescription">
+                            <div class="fieldContainer">
+                                <a href="@auctionUrl">
+                                    <img src="@item.Image" title="@item.Title"/>
+                                </a>
+                            </div>
+                            <div class="fieldContainer">
+                                <div class="fieldTitle">@item.Title</div>
+                                <div class="fieldDescription">
+                                    @item.Description
+                                </div>
+                            </div>
+                        </td>
+                        <td class="centered-field">@item.CurrentPrice</td>
+                        <td class="centered-field">@item.RemainingTimeDisplay</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+}

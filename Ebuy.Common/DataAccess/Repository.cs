@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Diagnostics.Contracts;
 using System.Linq;
@@ -9,16 +10,10 @@ namespace Ebuy.DataAccess
 {
     public class Repository : IRepository
     {
-        private readonly EbuyDataContext _context;
+        private readonly DbContext _context;
         private readonly bool _isSharedContext;
 
-
-        public Repository()
-            : this(new EbuyDataContext(), false)
-        {
-        }
-
-        public Repository(EbuyDataContext context, bool isSharedContext = true)
+        public Repository(DbContext context, bool isSharedContext = true)
         {
             Contract.Requires(context != null);
 

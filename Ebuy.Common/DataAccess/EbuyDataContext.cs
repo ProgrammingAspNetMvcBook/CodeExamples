@@ -13,5 +13,13 @@ namespace Ebuy.DataAccess
             Database.SetInitializer(initializer);
 #endif
         }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Bid>()
+                .HasRequired(x => x.Auction)
+                .WithMany()
+                .WillCascadeOnDelete(false);
+        }
     }
 }

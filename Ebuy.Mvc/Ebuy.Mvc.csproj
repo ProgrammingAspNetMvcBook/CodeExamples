@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActionResults\JsonpActionResult.cs" />
+    <Compile Include="Extensions\CollectionExtensions.cs" />
     <Compile Include="Extensions\JsonRequestExtensions.cs" />
     <Compile Include="Filters\MultipleResponseFormatsAttribute.cs" />
     <Compile Include="ModelBinders\JsonModelBinder.cs" />
