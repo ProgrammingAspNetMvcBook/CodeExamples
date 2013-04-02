@@ -1,4 +1,5 @@
 using System.Data.Entity;
+using Ebuy.Mappings;
 
 namespace Ebuy.DataAccess
 {
@@ -16,10 +17,7 @@ namespace Ebuy.DataAccess
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Bid>()
-                .HasRequired(x => x.Auction)
-                .WithMany()
-                .WillCascadeOnDelete(false);
+			modelBuilder.Configurations.Add(new BidConfiguration());
         }
     }
 }

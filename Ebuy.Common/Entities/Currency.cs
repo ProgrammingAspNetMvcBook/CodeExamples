@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics.Contracts;
 using System.Linq;
@@ -41,8 +42,11 @@ namespace Ebuy
                     { '$', "USD" },
                 };
 
+		[Required]
         public string Code { get; private set; }
-        public double Value { get; private set; }
+		
+		[Required]
+		public double Value { get; private set; }
 
 
         public Currency(CurrencyCode code, double value)

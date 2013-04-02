@@ -8,16 +8,25 @@ using System.Linq;
 
 namespace Ebuy
 {
-    [MetadataType(typeof(Auction.Metadata))]
     public class Auction : Entity<Guid>
     {
+		[Required, StringLength(500)]
         public virtual string Title { get; set; }
+
+		[Required]
         public virtual string Description { get; set; }
+
+		[Required]
         public virtual DateTime StartTime { get; set; }
+
+		[Required]
         public virtual DateTime EndTime { get; set; }
+		
         public virtual Currency StartPrice { get; set; }
+		
         public virtual Currency CurrentPrice { get; set; }
 
+		[ForeignKey("WinningBid")]
         public Guid? WinningBidId { get; set; }
         public virtual Bid WinningBid { get; private set; }
 
@@ -34,6 +43,7 @@ namespace Ebuy
 
         public virtual ICollection<WebsiteImage> Images { get; set; }
 
+		[ForeignKey("Owner")]
         public long OwnerId { get; set; }
         public virtual User Owner { get; set; }
 
@@ -82,39 +92,6 @@ namespace Ebuy
             return bid;
         }
 
-
-        public class Metadata
-        {
-            [InverseProperty("Auction")]
-            public object Bids;
-
-            public object Categories;
-
-            [Required]
-            public object CurrentPrice;
-
-            [Required]
-            public object Description;
-
-            [Required]
-            public object EndTime;
-
-            [InverseProperty("Selling")]
-            public object Owner;
-
-            [Required]
-            [ForeignKey("Owner")]
-            public object OwnerId;
-
-            [Required]
-            public object StartTime;
-
-            [Required, StringLength(500)]
-            public object Title;
-
-            [ForeignKey("WinningBid")]
-            public object WinningBidId;
-        }
     }
 
     public class InvalidBidException : Exception
