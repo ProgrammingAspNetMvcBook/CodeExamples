@@ -16,7 +16,7 @@ namespace Ebuy
             _value = value;
         }
 
-        private CurrencyCode()
+        public CurrencyCode()
         {
         }
 
@@ -60,7 +60,7 @@ namespace Ebuy
             Value = double.Parse(currency.Substring(1));
         }
 
-        private Currency()
+        public Currency()
         {
         }
 

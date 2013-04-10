@@ -16,6 +16,7 @@
     @* Render the first Auction using the Partial View on the server *@
     @if (Model.Any())
     {
+        <h3>Auction Details</h3>
         @Html.Partial("Auction", Model.First())
     }
     else

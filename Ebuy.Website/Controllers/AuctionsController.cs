@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Web.Mvc;
 using Ebuy.DataAccess;
 
@@ -67,6 +68,7 @@ namespace Ebuy.Website.Controllers
             if (ModelState.IsValid)
             {
                 var db = new EbuyDataContext();
+				auction.CurrentPrice = auction.StartPrice;
                 db.Auctions.Add(auction);
                 db.SaveChanges();
 
@@ -75,6 +77,22 @@ namespace Ebuy.Website.Controllers
 
             return View(auction);
         }
+
+
+		//
+		// GET: /Test/Details/{guid}
+
+		public ActionResult Details(Guid id)
+		{
+			var db = new EbuyDataContext();
+			var auction = db.Auctions.Find(id);
+			if (auction == null)
+			{
+				return HttpNotFound();
+			}
+			return View(auction);
+		}
+
 
         //
         // GET: /Auctions/Edit/5

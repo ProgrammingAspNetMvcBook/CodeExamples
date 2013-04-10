@@ -5,6 +5,9 @@ namespace Ebuy.DataAccess
     public class EbuyDataContext : DbContext
     {
         public DbSet<Auction> Auctions { get; set; }
+		public DbSet<Bid> Bids { get; set; }
+		public DbSet<Category> Categories { get; set; }
+		public DbSet<User> User { get; set; }
 
         public EbuyDataContext()
         {
@@ -21,5 +24,7 @@ namespace Ebuy.DataAccess
                 .WithMany()
                 .WillCascadeOnDelete(false);
         }
+
+		
     }
 }

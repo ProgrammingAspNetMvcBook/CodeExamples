@@ -36,7 +36,7 @@ namespace Ebuy
             Timestamp = DateTime.Now;
         }
 
-        private Bid()
+        public Bid()
         {
         }
 

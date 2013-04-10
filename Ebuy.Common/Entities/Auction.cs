@@ -22,9 +22,9 @@ namespace Ebuy
 		[Required]
 		public virtual DateTime EndTime { get; set; }
 
-		public Currency StartPrice { get; set; }
+		public virtual Currency StartPrice { get; set; }
 
-		public Currency CurrentPrice { get; set; }
+		public virtual Currency CurrentPrice { get; set; }
 
 		[ForeignKey("WinningBid")]
 		public Guid? WinningBidId { get; set; }
@@ -59,6 +59,7 @@ namespace Ebuy
             Bids = new Collection<Bid>();
             Categories = new Collection<Category>();
             Images = new Collection<WebsiteImage>();
+	        StartTime = DateTime.UtcNow;
         }
 
         public void FeatureAuction()
