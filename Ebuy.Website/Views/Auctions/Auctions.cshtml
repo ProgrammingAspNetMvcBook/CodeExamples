@@ -14,7 +14,14 @@
 
 <section id="auction-details">
     @* Render the first Auction using the Partial View on the server *@
-    @Html.Partial("Auction", Model.FirstOrDefault())
+    @if (Model.Any())
+    {
+        @Html.Partial("Auction", Model.First())
+    }
+    else
+    {
+        <p>There are no auctions running right now. Try creating @Html.ActionLink("few", "Create").</p>
+    }
 </section>
 
 <script id="auction-template" type="text/x-template">
