@@ -7,13 +7,12 @@ namespace Ebuy.DataAccess
         public DbSet<Auction> Auctions { get; set; }
 		public DbSet<Bid> Bids { get; set; }
 		public DbSet<Category> Categories { get; set; }
-		public DbSet<User> User { get; set; }
+		public DbSet<User> Users { get; set; }
 
         public EbuyDataContext()
         {
 #if(DEBUG)
-            var initializer = new DropCreateDatabaseIfModelChanges<EbuyDataContext>();
-            Database.SetInitializer(initializer);
+			Database.SetInitializer(new EbuyInitializer());
 #endif
         }
 
