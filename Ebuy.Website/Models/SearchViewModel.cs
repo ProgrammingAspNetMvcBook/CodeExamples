@@ -17,19 +17,4 @@ namespace Ebuy.Website.Models
 
         public IEnumerable<AuctionViewModel> SearchResult { get; set; }
     }
-
-    public class AuctionViewModel
-    {
-        public string Image { get; set; }
-
-        public long Id { get; set; }
-
-        public string Title { get; set; }
-
-        public string Description { get; set; }
-
-        public string CurrentPrice { get; set; }
-
-        public string RemainingTimeDisplay { get; set; }
-    }
 }

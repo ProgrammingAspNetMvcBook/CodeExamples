@@ -65,7 +65,7 @@
             <table>
                 @foreach (var item in @Model.SearchResult)
                 {
-                    var auctionUrl = Url.Action("Auction", "Auctions", new { id = item.Id });
+                    var auctionUrl = Url.Action("Auction", "Auctions", new { id = item.Key });
                     <tr>
                         <td class="searchDescription">
                             <div class="fieldContainer">

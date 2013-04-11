@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Ebuy.Auction>
+﻿@model IEnumerable<AuctionViewModel>
 <h2>Auctions</h2>
 
 <ul class="auctions">
     @foreach (var auction in Model)
     {
-        <li class="auction" data-key="@auction.Id">
+        <li class="auction" data-key="@auction.Key">
             <a href="#">
                 <span>@auction.Title</span>
             </a>

@@ -1,91 +1,94 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using AutoMapper;
 using Ebuy.DataAccess;
+using Ebuy.Website.Models;
 
 namespace Ebuy.Website.Controllers
 {
-    public class AuctionsController : Controller
-    {
-        [MultipleResponseFormats]
-        public ActionResult Index(int page = 0, int size = 25)
-        {
-            var db = new EbuyDataContext();
-            var auctions = db.Auctions.OrderByDescending(x => x.EndTime).Skip(page * 25).Take(size);
-            return View("Auctions", auctions.ToArray());
-        }
+	public class AuctionsController : Controller
+	{
+		[MultipleResponseFormats]
+		public ActionResult Index(int page = 0, int size = 25)
+		{
+			var db = new EbuyDataContext();
+			var auctions = db.Auctions.OrderByDescending(x => x.EndTime).Skip(page * 25).Take(size);
+			return View("Auctions", Mapper.Map<IEnumerable<AuctionViewModel>>(auctions).ToArray());
+		}
 
-        [MultipleResponseFormats]
-        public ActionResult Auction(long id)
-        {
-            var db = new EbuyDataContext();
-            var auction = db.Auctions.Find(id);
+		[MultipleResponseFormats]
+		public ActionResult Auction(string id)
+		{
+			var db = new EbuyDataContext();
+			var auction = db.Auctions.FirstOrDefault(x => x.Key == id);
 
-            // The following moved to MultipleResponseFormatsAttribute:
-            /*
-            // Respond to AJAX requests
-            if (Request.IsAjaxRequest())
-                return PartialView("Auction", auction);
+			// The following moved to MultipleResponseFormatsAttribute:
+			/*
+			// Respond to AJAX requests
+			if (Request.IsAjaxRequest())
+				return PartialView("Auction", auction);
 
-            // Respond to JSON requests
-            if (Request.IsJsonRequest())
-                return Json(auction);
-            */
+			// Respond to JSON requests
+			if (Request.IsJsonRequest())
+				return Json(auction);
+			*/
 
-            // Default to a "normal" view with layout
-            return View("Auction", auction);
-        }
+			// Default to a "normal" view with layout
+			return View("Auction", auction);
+		}
 
-        public ActionResult JsonAuction(long id)
-        {
-            var db = new EbuyDataContext();
-            var auction = db.Auctions.Find(id);
-            return Json(auction, JsonRequestBehavior.AllowGet);
-        }
+		public ActionResult JsonAuction(string id)
+		{
+			var db = new EbuyDataContext();
+			var auction = db.Auctions.FirstOrDefault(x => x.Key == id);
+			return Json(Mapper.Map<AuctionViewModel>(auction), JsonRequestBehavior.AllowGet);
+		}
 
-        public ActionResult PartialAuction(long id)
-        {
-            var db = new EbuyDataContext();
-            var auction = db.Auctions.Find(id);
-            return PartialView("Auction", auction);
-        }
+		public ActionResult PartialAuction(string id)
+		{
+			var db = new EbuyDataContext();
+			var auction = db.Auctions.FirstOrDefault(x => x.Key == id);
+			return PartialView("Auction", auction);
+		}
 
-        //
-        // GET: /Auctions/Create
+		//
+		// GET: /Auctions/Create
 
-        [HttpGet]
-        public ActionResult Create()
-        {
-            return View();
-        }
+		[HttpGet]
+		public ActionResult Create()
+		{
+			return View();
+		}
 
-        //
-        // POST: /Auctions/Create
+		//
+		// POST: /Auctions/Create
 
-        [HttpPost]
-        public ActionResult Create(Auction auction)
-        {
-            if (ModelState.IsValid)
-            {
-                var db = new EbuyDataContext();
+		[HttpPost]
+		public ActionResult Create(Auction auction)
+		{
+			if (ModelState.IsValid)
+			{
+				var db = new EbuyDataContext();
 				auction.CurrentPrice = auction.StartPrice;
-                db.Auctions.Add(auction);
-                db.SaveChanges();
+				db.Auctions.Add(auction);
+				db.SaveChanges();
 
-                return RedirectToAction("Details", new { id = auction.Id });
-            }
+				return RedirectToAction("Details", new { id = auction.Key });
+			}
 
-            return View(auction);
-        }
+			return View(auction);
+		}
 
 
 		//
 		// GET: /Test/Details/{guid}
 
-		public ActionResult Details(Guid id)
+		public ActionResult Details(string id)
 		{
 			var db = new EbuyDataContext();
-			var auction = db.Auctions.Find(id);
+			var auction = db.Auctions.FirstOrDefault(x => x.Key == id);
 			if (auction == null)
 			{
 				return HttpNotFound();
@@ -94,56 +97,56 @@ namespace Ebuy.Website.Controllers
 		}
 
 
-        //
-        // GET: /Auctions/Edit/5
+		//
+		// GET: /Auctions/Edit/5
 
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
+		public ActionResult Edit(int id)
+		{
+			return View();
+		}
 
-        //
-        // POST: /Auctions/Edit/5
+		//
+		// POST: /Auctions/Edit/5
 
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
+		[HttpPost]
+		public ActionResult Edit(int id, FormCollection collection)
+		{
+			try
+			{
+				// TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+				return RedirectToAction("Index");
+			}
+			catch
+			{
+				return View();
+			}
+		}
 
-        //
-        // GET: /Auctions/Delete/5
+		//
+		// GET: /Auctions/Delete/5
 
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+		public ActionResult Delete(int id)
+		{
+			return View();
+		}
 
-        //
-        // POST: /Auctions/Delete/5
+		//
+		// POST: /Auctions/Delete/5
 
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
+		[HttpPost]
+		public ActionResult Delete(int id, FormCollection collection)
+		{
+			try
+			{
+				// TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-    }
+				return RedirectToAction("Index");
+			}
+			catch
+			{
+				return View();
+			}
+		}
+	}
 }
