@@ -11,6 +11,7 @@ namespace Ebuy.DataAccess
 
         public EbuyDataContext()
         {
+	        Configuration.ProxyCreationEnabled = false;
 #if(DEBUG)
 			Database.SetInitializer(new EbuyInitializer());
 #endif

@@ -15,7 +15,7 @@ namespace Ebuy.Website.Controllers
 		{
 			var db = new EbuyDataContext();
 			var auctions = db.Auctions.OrderByDescending(x => x.EndTime).Skip(page * 25).Take(size);
-			return View("Auctions", Mapper.Map<IEnumerable<AuctionViewModel>>(auctions).ToArray());
+			return View("Auctions", auctions.ToArray());
 		}
 
 		[MultipleResponseFormats]
@@ -43,7 +43,7 @@ namespace Ebuy.Website.Controllers
 		{
 			var db = new EbuyDataContext();
 			var auction = db.Auctions.FirstOrDefault(x => x.Key == id);
-			return Json(Mapper.Map<AuctionViewModel>(auction), JsonRequestBehavior.AllowGet);
+			return Json(auction, JsonRequestBehavior.AllowGet);
 		}
 
 		public ActionResult PartialAuction(string id)

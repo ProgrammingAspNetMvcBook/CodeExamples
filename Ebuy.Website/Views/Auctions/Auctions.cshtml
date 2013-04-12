@@ -1,4 +1,4 @@
-﻿@model IEnumerable<AuctionViewModel>
+﻿@model IEnumerable<Ebuy.Auction>
 <h2>Auctions</h2>
 
 <ul class="auctions">
@@ -30,7 +30,7 @@
 <div class="overview">
 <p>
 <strong>Current Price: </strong>
-<span class="current-bid">{{CurrentPrice}}</span>
+<span class="current-bid">{{CurrentPrice.Code}} {{CurrentPrice.Value}}</span>
 </p>
 </div>
 <h3>Description</h3>

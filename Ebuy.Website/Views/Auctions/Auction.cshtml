@@ -1,10 +1,10 @@
-﻿@model AuctionViewModel
+﻿@model Ebuy.Auction
 
 <div class="title">@Model.Title</div>
 <div class="overview">
 <p>
 <strong>Current Price: </strong>
-<span class="current-price">@Model.CurrentPrice</span>
+<span class="current-price">@Model.CurrentPrice.Code @Model.CurrentPrice.Value</span>
 </p>
 </div>
 <h3>Description</h3>
