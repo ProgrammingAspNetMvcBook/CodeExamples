@@ -1,3 +1,6 @@
+using System.Data.Entity;
+using Ebuy.DataAccess;
+
 [assembly: WebActivator.PreApplicationStartMethod(typeof(Ebuy.Website.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivator.ApplicationShutdownMethodAttribute(typeof(Ebuy.Website.App_Start.NinjectWebCommon), "Stop")]
 
@@ -53,6 +56,9 @@ namespace Ebuy.Website.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
+	        kernel.Bind<DbContext>().To<EbuyDataContext>();
+	        kernel.Bind<IRepository>().To<Repository>();
+
         }        
     }
 }
