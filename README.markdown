@@ -1,7 +1,7 @@
 Please Note:
 =======================
 
-The package assemblies are not commited to source control so **you must enable NuGet Package Restore** to build this solution.
+The package assemblies are not committed to source control so **you must enable NuGet Package Restore** to build this solution.
 To do so, go to `Tools > Options > Package Manager` and enable the `Allow NuGet to download missing packages` option.
 
 
